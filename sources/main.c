@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/05/28 11:23:53 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/06/01 01:27:49 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	main(int argc, char **argv, char **env)
 {
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **env)
 	(void)env;
 	while (1)
 	{
-		printf("minishell$");
+		printf("choupishell <3 ");
 		readline(argv[1]);
 	}
 }

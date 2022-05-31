@@ -4,8 +4,8 @@ CSAN	:=	-fsanitize=address -g3
 
 CC	:= gcc
 CFLAGS	:=	-Wall -Wextra -Werror
-RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib
-RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include
+RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #home
+RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #home
 
 DIR_SRCS	:=	sources
 DIR_INCS	:=	includes
@@ -13,7 +13,7 @@ DIR_OBJS	:=	.objs
 
 DIR_LIBFT	:=	libft
 
-LST_SRCS	:=	main/main.c
+LST_SRCS	:=	main.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 
@@ -36,9 +36,6 @@ $(AR_LIBFT)	:
 
 $(DIR_OBJS)	:
 				mkdir -p $(DIR_OBJS)
-				mkdir -p $(DIR_OBJS)/main
-				mkdir -p $(DIR_OBJS)/lexer
-				mkdir -p $(DIR_OBJS)/parsing
 
 make_libft	:
 				$(MAKE) -C $(DIR_LIBFT)
