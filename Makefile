@@ -4,8 +4,10 @@ CSAN	:=	-fsanitize=address -g3
 
 CC	:= gcc
 CFLAGS	:=	-Wall -Wextra -Werror
-RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #home
-RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #home
+#RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #home
+#RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #home
+RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #42
+RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #42
 
 DIR_SRCS	:=	sources
 DIR_INCS	:=	includes
@@ -28,7 +30,7 @@ all	:	make_libft $(NAME)
 $(NAME)	:	$(AR_LIBFT) $(OBJS)
 			$(CC) $(CFLAGS) $(RDFLAGS) $(RLFLAGS) $^ -o $@ -lreadline
 
-$(LST_OBJS)/%.o	:	$(LST_SRCS)/%.c $(INCS) Makefile | $(DIR_OBJS)
+$(DIR_OBJS)/%.o	:	$(DIR_SRCS)/%.c $(INCS) Makefile | $(DIR_OBJS)
 					$(CC) $(CFLAGS) $(RDFLAGS) -I $(LST_INCS) -c $< -o $@
 
 $(AR_LIBFT)	:
