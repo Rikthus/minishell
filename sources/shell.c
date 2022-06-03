@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/06/03 19:12:50 by maxperei         ###   ########lyon.fr   */
+/*   Created: 2022/06/03 19:09:25 by maxperei          #+#    #+#             */
+/*   Updated: 2022/06/03 19:27:45 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-
-int	main(int argc, char **argv, char **envp)
+int	shell(char *line, char **envp)
 {
-	(void)argv;
-	if (argc > 1)
+	t_token	*tokens;
+
+	tokens = NULL;
+	if (tokenizer(&tokens, line, envp) == BAD_SYNTAX)
 	{
-		printf("Usage: ./minishell\n");
-		return (g_status);
+		free_tokens(tokens);
+		return (RET_PROMPT);
 	}
-	while (1)
-	{
-		if (shell(readline("choupishell <3 "), envp) == STOP_SHELL);
-			break ;
-	}
-	return (g_status);
+	return (RET_PROMPT);
 }
