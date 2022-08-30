@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/08/30 19:20:30 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/08/30 19:40:17 by tulipe            #+#    #+#             */
+/*   Updated: 2022/08/30 19:57:18 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-
-
-int	main(int argc, char **argv, char **envp)
+void	expand_line(char *raw_line, char **expanded_line)
 {
-	(void)argv;
-	(void)envp;
-	if (argc != 1)
+	int	mono_quote;
+	int	i;
+
+	mono_quote = 0;
+	i = 0;
+	while (raw_line[i])
 	{
-		printf("Usage: ./minishell\n");
-		return (g_status);
+		
 	}
-	while (1)
-	{
-		if (controler(readline("Maxine <3 ") == 0))
-			return (g_status);
-	}
-	return (g_status);
 }

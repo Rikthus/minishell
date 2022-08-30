@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/08/30 16:59:15 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/08/30 19:46:53 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,26 @@
 # include <term.h>
 
 int	g_status = 0;
+
+typedef struct s_base_token
+{
+	char				*full_cmd;
+	struct s_base_token	*next;
+}	t_base_token;
+
+typedef	struct s_token
+{
+	char			*cmd;
+	int				redir;
+	char			*target;
+	struct s_token	*next;
+}	t_token;
+
+/////////////////////////////////////
+//////////   PARSING   //////////////
+/////////////////////////////////////
+
+// EXPANDER
+void	expand_line(char *raw_line, char **expanded_line);
 
 #endif
