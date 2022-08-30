@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/06/03 19:27:21 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/06/05 01:14:55 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,22 @@ int	g_status = 0;
 
 // }	t_error;
 
-typedef enum e_tok
+typedef enum e_elem
+{
+	operator = 0,
+	word = 1,
+}	t_elem;
+
+typedef enum e_type
 {
 	cmd = 0,
 	arg = 1,
-	single_q = 2,
-	double_q = 3,
-}	t_tok;
+	redir = 2,
+}	t_type;
 
 typedef enum e_redir
 {
+	nothing = -1,
 	red_in = 0,
 	red_out = 1,
 	append_in = 2,
@@ -69,12 +75,19 @@ typedef enum e_builtin
 	cmd_exit = 6,
 }	t_builtin;
 
+typedef struct s_pre_token
+{
+	char			*literal;
+	t_elem			elem;
+	struct	s_token	*next;
+}	t_pre_token;
+
 typedef struct s_token
 {
 	char			*literal;
-	t_redir			redir_type;
+	t_type			type;
+	t_redir			redir;
 	char			*redir_file;
-	int				expand;
 	struct	s_token	*next;
 }	t_token;
 

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:19:07 by maxperei          #+#    #+#             */
-/*   Updated: 2022/06/03 19:33:45 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/06/05 01:01:54 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_token(t_tokens **tokens, char *start, int end, char **envp)
+int	make_token(t_pre_token **tokens, char *start, int end, char **envp)
 {
-	t_tokens	*new_tok;
+	t_pre_token	*new_tok;
 
 	new_tok= *tokens;
 	while (new_tok->next)
@@ -23,7 +23,7 @@ int	make_token(t_tokens **tokens, char *start, int end, char **envp)
 
 }
 
-int	tokenizer(t_tokens **tokens, char *line, char **envp)
+int	tokenizer(t_pre_token **tokens, char *line, char **envp)
 {
 
 }

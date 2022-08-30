@@ -4,12 +4,14 @@ CSAN	:=	-fsanitize=address -g3
 
 CC	:= gcc
 CFLAGS	:=	-Wall -Wextra -Werror
-#RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #max_home
-#RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #max_ho0me
-RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
-RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
-#RLFLAGS	=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
-#RDFLAGS	=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
+RLFLAGS		:=	-L /opt/homebrew/opt/readline/lib #max_home
+RDFLAGS		:=	-I /opt/homebrew/opt/readline/include #max_home
+#RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
+#RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
+#RLFLAGS	:=	-L /usr/local/opt/readline/lib #cha_home
+#RDFLAGS	:=	-I /usr/local/opt/readline/include #cha_home
+#RLFLAGS	:=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
+#RDFLAGS	:=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
 
 DIR_SRCS	:=	sources
 DIR_INCS	:=	includes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:09:25 by maxperei          #+#    #+#             */
-/*   Updated: 2022/06/03 19:27:45 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/06/05 01:06:16 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	shell(char *line, char **envp)
 {
-	t_token	*tokens;
-
 	tokens = NULL;
 	if (tokenizer(&tokens, line, envp) == BAD_SYNTAX)
 	{
