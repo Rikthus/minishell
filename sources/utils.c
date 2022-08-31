@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/08/31 18:53:30 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
+/*   Updated: 2022/08/31 18:41:29 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	change_quote_state(char quote, t_state *state)
 {
-	(void)argv;
-	g_status = 0;
-	if (argc != 1)
+	if (quote == '\'' && state->dq == OFF)
 	{
-		printf("Usage: ./minishell\n");
-		return (g_status);
+		if (state->sq == OFF)
+			state->sq = ON;
+		else
+			state->sq = OFF;
 	}
-	while (1)
+	else if (quote == '\"' && state->sq == OFF)
 	{
-		controler(readline("Maxine <3 "), envp);
+		if (state->dq == OFF)
+			state->dq = ON;
+		else
+			state->dq = ON;
 	}
-	return (g_status);
 }

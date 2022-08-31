@@ -6,8 +6,8 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:40:25 by tulipe            #+#    #+#             */
-/*   Updated: 2022/08/30 19:40:40 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/08/31 18:41:42 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"

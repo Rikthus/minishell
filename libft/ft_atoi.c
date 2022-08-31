@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 17:36:40 by maxperei          #+#    #+#             */
-/*   Updated: 2021/11/14 16:13:38 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/08/31 18:12:29 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static	int	ft_isspace(int c)
-{
-	if (c == 32 || (c <= 13 && c >= 9))
-		return (1);
-	else
-		return (0);
-}
 
 int	ft_atoi(const char *str)
 {

@@ -6,21 +6,27 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:40:22 by tulipe            #+#    #+#             */
-/*   Updated: 2022/08/30 19:44:35 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/08/31 18:42:16 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-int	controler(char *raw_line)
+int	controler(char *raw_line, char **envp)
 {
-	t_base_token	*basic_token;
-	t_token			*token;
-	char			*expanded_line;
-
-	expand_line(raw_line, &expanded_line);
-	if (!expanded_line)
+	//t_base_token	*basic_token;
+	//t_token			*token;
+	//char			*expanded_line;
+	(void)envp;
+	
+	if (!pre_parsing(raw_line))
+	{
+		printf("ERROR\n");
 		return (0);
+	}
+	// expand_line(raw_line, &expanded_line, envp);
+	// if (!expanded_line)
+	// 	return (0);
 	// if (!valid_char(expanded_line)
 	//	{
 	//		free(expanded_line);

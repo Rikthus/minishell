@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:46:26 by maxperei          #+#    #+#             */
-/*   Updated: 2022/04/16 21:34:53 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/08/31 16:58:09 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int		ft_print_bighex(va_list ap);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
 int		ft_nbrlen(int nbr);
+int		ft_isspace(int c);
 
 #endif

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/08/31 18:53:30 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/08/31 16:53:54 by tulipe            #+#    #+#             */
+/*   Updated: 2022/08/31 16:56:45 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	main(int argc, char **argv, char **envp)
+int	ft_isspace(int c)
 {
-	(void)argv;
-	g_status = 0;
-	if (argc != 1)
-	{
-		printf("Usage: ./minishell\n");
-		return (g_status);
-	}
-	while (1)
-	{
-		controler(readline("Maxine <3 "), envp);
-	}
-	return (g_status);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return (1);
+	return (0);
 }

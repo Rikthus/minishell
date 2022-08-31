@@ -66,6 +66,7 @@ SRCS =	ft_atoi.c			\
 		ft_putchar.c		\
 		ft_putstr.c			\
 		ft_nbrlen.c			\
+		ft_isspace.c		\
 
 OBJS = $(SRCS:.c=.o)
 
