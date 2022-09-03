@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/08/31 18:51:32 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/03 22:45:05 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,27 @@ typedef	struct s_state
 //////////   PARSING   //////////////
 /////////////////////////////////////
 
-// CONTROLER
-int		controler(char *raw_line, char **envp);
-
 // PRE_PARSING
 int		pre_parsing(char *raw_line);
 
+// TOKENIZER
+void	basic_tokenizer(char *raw_line, t_base_token **basic_token);
+
+// LEXER
+
 // EXPANDER
-void	expand_line(char *raw_line, char **expanded_line, char **envp);
+char	*expand_line(char *raw_line, char **envp);
 
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
+void	*free_split_error(char **array, int nb_pointer);
+void	free_2d_array(char **array);
 void	change_quote_state(char quote, t_state *state);
+
+// PIPE_SPLIT
+char	**pipe_split(char *str);
 
 #endif

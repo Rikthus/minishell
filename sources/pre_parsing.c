@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/08/31 18:44:17 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/03 17:56:36 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	pre_parsing(char *raw_line)
 		i++;
 	}
 	if (state.sq == ON || state.dq == ON)
+		return (0);
+	if (!redir_parse(raw_line))
 		return (0);
 	return (1);
 }

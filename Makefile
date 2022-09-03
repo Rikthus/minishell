@@ -19,9 +19,10 @@ DIR_OBJS	:=	.objs
 
 DIR_LIBFT	:=	libft
 
-LST_SRCS	:=	main.c			\
-				utils.c			\
-				controler.c		\
+LST_SRCS	:=	main.c				\
+				utils.c				\
+				pipe_split.c		\
+				controler.c			\
 				pre_parsing.c	
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
