@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/08 14:38:43 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/08 15:28:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef	struct s_state
 int		pre_parsing(char *raw_line);
 
 // TOKENIZER
-void	basic_tokenizer(char *raw_line, t_base **basic_token);
+t_base	*tokenizer(char *raw_line);
 
 // LEXER
 
@@ -77,9 +77,12 @@ char	*expand_line(char *raw_line, char **envp);
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
-void	*free_split_error(char **array, int nb_pointer);
-void	free_2d_array(char **array);
 void	change_quote_state(char quote, t_state *state);
+
+// FREE_MEMORY
+void	*free_split_error(char **array, int nb_pointer);
+void	*free_2d_array(char **array);
+void	free_basic_token(t_base *basic_token);
 
 // PIPE_SPLIT
 char	**pipe_split(char *str);

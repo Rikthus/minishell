@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/08 14:55:34 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/08 16:18:01 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static	int	check_char(char c)
 {
-	if (!ft_isalnum(c) && !ft_isspace(c) && c != '\'' && c != '\"' && c != '$'
-		&& c != '<' && c != '>' && c != '|')
+	if (!ft_isalnum(c) && !ft_isspace(c) && c != '-' && c != '\'' && c != '\"'
+		&& c != '$' && c != '<' && c != '>' && c != '|')
 		return (0);
 	return (1);	
 }
