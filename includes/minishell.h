@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/03 22:45:05 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/08 14:38:43 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 
 int	g_status;
 
-typedef struct s_base_token
+typedef struct s_base
 {
-	char				*full_cmd;
-	struct s_base_token	*next;
-}	t_base_token;
+	char			*full_cmd;
+	struct s_base	*next;
+}	t_base;
 
 typedef	struct s_token
 {
@@ -65,7 +65,7 @@ typedef	struct s_state
 int		pre_parsing(char *raw_line);
 
 // TOKENIZER
-void	basic_tokenizer(char *raw_line, t_base_token **basic_token);
+void	basic_tokenizer(char *raw_line, t_base **basic_token);
 
 // LEXER
 

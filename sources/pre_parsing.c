@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/04 01:38:57 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/08 14:55:34 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ static	int	is_redir(char *redir)
 	return (1);
 }
 
+static	int	is_pipe_first(char *raw_line)
+{
+	int	i;
+
+	i = 0;
+	while (raw_line[i] && ft_isspace(raw_line[i]))
+		i++;
+	if (raw_line[i] == '|')
+		return (0);
+	return (1);
+}
+
 int	pre_parsing(char *raw_line)
 {
 	t_state	state;
@@ -89,7 +101,7 @@ int	pre_parsing(char *raw_line)
 				return (0);
 		i++;
 	}
-	if (state.sq == ON || state.dq == ON)
+	if (state.sq == ON || state.dq == ON || !is_pipe_first(raw_line))
 		return (0);
 	return (1);
 }

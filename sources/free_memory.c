@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/08 14:37:17 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/09/08 14:37:21 by tulipe            #+#    #+#             */
+/*   Updated: 2022/09/08 14:39:08 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	change_quote_state(char quote, t_state *state)
+void	*free_split_error(char **array, int nb_pointer)
 {
-	if (quote == '\'' && state->dq == OFF)
+	while (nb_pointer > -1)
 	{
-		if (state->sq == OFF)
-			state->sq = ON;
-		else
-			state->sq = OFF;
+		free(array[nb_pointer]);
+		nb_pointer--;
 	}
-	else if (quote == '\"' && state->sq == OFF)
+	free(array);
+	return (NULL);
+}
+
+void	free_2d_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
 	{
-		if (state->dq == OFF)
-			state->dq = ON;
-		else
-			state->dq = OFF;
+		free(array[i]);
+		i++;	
 	}
+	free (array);
 }
