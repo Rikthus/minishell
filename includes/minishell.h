@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/08 15:28:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/09 02:50:18 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # define OFF 0
 # define ON 1
 
+# define NO_REDIR -1
+# define INFILE 0
+# define APPEND 1
+# define OUTFILE 2
+# define HEREDOC 3
+
 int	g_status;
 
 typedef struct s_base
@@ -45,8 +51,8 @@ typedef struct s_base
 typedef	struct s_token
 {
 	char			*cmd;
-	int				redir;
-	char			*target;
+	int				*redir;
+	char			**target;
 	struct s_token	*next;
 }	t_token;
 
@@ -68,6 +74,7 @@ int		pre_parsing(char *raw_line);
 t_base	*tokenizer(char *raw_line);
 
 // LEXER
+t_token	*lexer(t_base *basic_token);
 
 // EXPANDER
 char	*expand_line(char *raw_line, char **envp);
@@ -83,6 +90,7 @@ void	change_quote_state(char quote, t_state *state);
 void	*free_split_error(char **array, int nb_pointer);
 void	*free_2d_array(char **array);
 void	free_basic_token(t_base *basic_token);
+void	*free_token(t_token *token);
 
 // PIPE_SPLIT
 char	**pipe_split(char *str);

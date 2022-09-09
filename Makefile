@@ -24,7 +24,8 @@ LST_SRCS	:=	main.c				\
 				free_memory.c		\
 				pipe_split.c		\
 				pre_parsing.c		\
-				tokenizer.c
+				tokenizer.c			\
+				lexer.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 

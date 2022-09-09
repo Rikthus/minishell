@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/08 16:19:25 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/09 01:18:09 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	print_list(t_base *list)
 static	int	controler(char *raw_line, char **envp)
 {
 	t_base	*basic_token;
-	//t_token	*token;
+	t_token	*token;
 	(void)envp;
 	
 	if (!pre_parsing(raw_line))
@@ -36,13 +36,14 @@ static	int	controler(char *raw_line, char **envp)
 	if (!basic_token)
 		return (0);
 	print_list(basic_token);
-	// lexer(&basic_token, &token);
+	token = lexer(basic_token);
 	free_basic_token(basic_token);
-	// if (!token)
-	// 	return (0);
+	if (!token)
+		return (0);
 	// expander(&token);
 	return (1);
 }
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argv;

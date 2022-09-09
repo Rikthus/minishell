@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:37:21 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/08 15:28:29 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/09 02:47:31 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*free_2d_array(char **array)
 		free(array[i]);
 		i++;	
 	}
-	free (array);
+	free(array);
 	return (NULL);
 }
 
@@ -48,4 +48,20 @@ void	free_basic_token(t_base *basic_token)
 		free(previous->full_cmd);
 		free(previous);
 	}
+}
+
+void	*free_token(t_token *token)
+{
+	t_token	*previous;
+
+	while (token)
+	{
+		previous = token;
+		token = token->next;
+		free(previous->cmd);
+		free(token->redir);
+		free_2d_array(previous->target);
+		free(previous);
+	}
+	return (NULL);	
 }
