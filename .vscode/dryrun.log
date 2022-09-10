@@ -1,137 +1,14 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/maxperei/Desktop/repos/42work/minishell'
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C libft
  
 make[1]: Entering directory `/Users/maxperei/Desktop/repos/42work/minishell/libft'
-clang -Wall -Werror -Wextra -c -o ft_atoi.o ft_atoi.c
+make[1]: Nothing to be done for `all'.
  
-clang -Wall -Werror -Wextra -c -o ft_bzero.o ft_bzero.c
-clang -Wall -Werror -Wextra -c -o ft_calloc.o ft_calloc.c
-clang -Wall -Werror -Wextra -c -o ft_isalnum.o ft_isalnum.c
-clang -Wall -Werror -Wextra -c -o ft_isalpha.o ft_isalpha.c
- 
-clang -Wall -Werror -Wextra -c -o ft_isascii.o ft_isascii.c
-clang -Wall -Werror -Wextra -c -o ft_isdigit.o ft_isdigit.c
-clang -Wall -Werror -Wextra -c -o ft_isprint.o ft_isprint.c
-clang -Wall -Werror -Wextra -c -o ft_itoa.o ft_itoa.c
-clang -Wall -Werror -Wextra -c -o ft_lstadd_back.o ft_lstadd_back.c
-clang -Wall -Werror -Wextra -c -o ft_lstadd_front.o ft_lstadd_front.c
-clang -Wall -Werror -Wextra -c -o ft_lstclear.o ft_lstclear.c
-clang -Wall -Werror -Wextra -c -o ft_lstdelone.o ft_lstdelone.c
-clang -Wall -Werror -Wextra -c -o ft_lstiter.o ft_lstiter.c
-clang -Wall -Werror -Wextra -c -o ft_lstlast.o ft_lstlast.c
-clang -Wall -Werror -Wextra -c -o ft_lstmap.o ft_lstmap.c
-clang -Wall -Werror -Wextra -c -o ft_lstnew.o ft_lstnew.c
-clang -Wall -Werror -Wextra -c -o ft_lstsize.o ft_lstsize.c
-clang -Wall -Werror -Wextra -c -o ft_memchr.o ft_memchr.c
-clang -Wall -Werror -Wextra -c -o ft_memcmp.o ft_memcmp.c
-clang -Wall -Werror -Wextra -c -o ft_memcpy.o ft_memcpy.c
-clang -Wall -Werror -Wextra -c -o ft_memmove.o ft_memmove.c
-clang -Wall -Werror -Wextra -c -o ft_memset.o ft_memset.c
-clang -Wall -Werror -Wextra -c -o ft_putchar_fd.o ft_putchar_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putendl_fd.o ft_putendl_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putstr_fd.o ft_putstr_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putnbr_fd.o ft_putnbr_fd.c
-clang -Wall -Werror -Wextra -c -o ft_split.o ft_split.c
-clang -Wall -Werror -Wextra -c -o ft_strchr.o ft_strchr.c
-clang -Wall -Werror -Wextra -c -o ft_strdup.o ft_strdup.c
-clang -Wall -Werror -Wextra -c -o ft_strjoin.o ft_strjoin.c
-clang -Wall -Werror -Wextra -c -o ft_strlcat.o ft_strlcat.c
-clang -Wall -Werror -Wextra -c -o ft_strlcpy.o ft_strlcpy.c
-clang -Wall -Werror -Wextra -c -o ft_strlen.o ft_strlen.c
-clang -Wall -Werror -Wextra -c -o ft_strmapi.o ft_strmapi.c
-clang -Wall -Werror -Wextra -c -o ft_strcmp.o ft_strcmp.c
-clang -Wall -Werror -Wextra -c -o ft_strncmp.o ft_strncmp.c
-clang -Wall -Werror -Wextra -c -o ft_strnstr.o ft_strnstr.c
-clang -Wall -Werror -Wextra -c -o ft_strrchr.o ft_strrchr.c
-clang -Wall -Werror -Wextra -c -o ft_strtrim.o ft_strtrim.c
-clang -Wall -Werror -Wextra -c -o ft_substr.o ft_substr.c
-clang -Wall -Werror -Wextra -c -o ft_tolower.o ft_tolower.c
-clang -Wall -Werror -Wextra -c -o ft_toupper.o ft_toupper.c
-clang -Wall -Werror -Wextra -c -o ft_striteri.o ft_striteri.c
-clang -Wall -Werror -Wextra -c -o get_next_line.o get_next_line.c
-clang -Wall -Werror -Wextra -c -o get_next_line_utils.o get_next_line_utils.c
-clang -Wall -Werror -Wextra -c -o ft_printf.o ft_printf.c
-clang -Wall -Werror -Wextra -c -o ft_printf_search_type.o ft_printf_search_type.c
-clang -Wall -Werror -Wextra -c -o ft_print_bighex.o ft_print_bighex.c
-clang -Wall -Werror -Wextra -c -o ft_print_char.o ft_print_char.c
-clang -Wall -Werror -Wextra -c -o ft_print_decimal.o ft_print_decimal.c
-clang -Wall -Werror -Wextra -c -o ft_print_integer.o ft_print_integer.c
-clang -Wall -Werror -Wextra -c -o ft_print_pointer.o ft_print_pointer.c
-clang -Wall -Werror -Wextra -c -o ft_print_smallhex.o ft_print_smallhex.c
-clang -Wall -Werror -Wextra -c -o ft_print_string.o ft_print_string.c
-clang -Wall -Werror -Wextra -c -o ft_print_unsigned.o ft_print_unsigned.c
-clang -Wall -Werror -Wextra -c -o ft_putchar.o ft_putchar.c
-clang -Wall -Werror -Wextra -c -o ft_putstr.o ft_putstr.c
-clang -Wall -Werror -Wextra -c -o ft_nbrlen.o ft_nbrlen.c
-ar rcs libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memchr.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putstr_fd.o ft_putnbr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strcmp.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_striteri.o get_next_line.o get_next_line_utils.o ft_printf.o ft_printf_search_type.o ft_print_bighex.o ft_print_char.o ft_print_decimal.o ft_print_integer.o ft_print_pointer.o ft_print_smallhex.o ft_print_string.o ft_print_unsigned.o ft_putchar.o ft_putstr.o ft_nbrlen.o
 make[1]: Leaving directory `/Users/maxperei/Desktop/repos/42work/minishell/libft'
-/Applications/Xcode.app/Contents/Developer/usr/bin/make -C libft
-make[1]: Entering directory `/Users/maxperei/Desktop/repos/42work/minishell/libft'
-clang -Wall -Werror -Wextra -c -o ft_atoi.o ft_atoi.c
-clang -Wall -Werror -Wextra -c -o ft_bzero.o ft_bzero.c
-clang -Wall -Werror -Wextra -c -o ft_calloc.o ft_calloc.c
-clang -Wall -Werror -Wextra -c -o ft_isalnum.o ft_isalnum.c
-clang -Wall -Werror -Wextra -c -o ft_isalpha.o ft_isalpha.c
-clang -Wall -Werror -Wextra -c -o ft_isascii.o ft_isascii.c
-clang -Wall -Werror -Wextra -c -o ft_isdigit.o ft_isdigit.c
-clang -Wall -Werror -Wextra -c -o ft_isprint.o ft_isprint.c
-clang -Wall -Werror -Wextra -c -o ft_itoa.o ft_itoa.c
-clang -Wall -Werror -Wextra -c -o ft_lstadd_back.o ft_lstadd_back.c
-clang -Wall -Werror -Wextra -c -o ft_lstadd_front.o ft_lstadd_front.c
-clang -Wall -Werror -Wextra -c -o ft_lstclear.o ft_lstclear.c
-clang -Wall -Werror -Wextra -c -o ft_lstdelone.o ft_lstdelone.c
-clang -Wall -Werror -Wextra -c -o ft_lstiter.o ft_lstiter.c
-clang -Wall -Werror -Wextra -c -o ft_lstlast.o ft_lstlast.c
-clang -Wall -Werror -Wextra -c -o ft_lstmap.o ft_lstmap.c
-clang -Wall -Werror -Wextra -c -o ft_lstnew.o ft_lstnew.c
-clang -Wall -Werror -Wextra -c -o ft_lstsize.o ft_lstsize.c
-clang -Wall -Werror -Wextra -c -o ft_memchr.o ft_memchr.c
-clang -Wall -Werror -Wextra -c -o ft_memcmp.o ft_memcmp.c
-clang -Wall -Werror -Wextra -c -o ft_memcpy.o ft_memcpy.c
-clang -Wall -Werror -Wextra -c -o ft_memmove.o ft_memmove.c
-clang -Wall -Werror -Wextra -c -o ft_memset.o ft_memset.c
-clang -Wall -Werror -Wextra -c -o ft_putchar_fd.o ft_putchar_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putendl_fd.o ft_putendl_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putstr_fd.o ft_putstr_fd.c
-clang -Wall -Werror -Wextra -c -o ft_putnbr_fd.o ft_putnbr_fd.c
-clang -Wall -Werror -Wextra -c -o ft_split.o ft_split.c
-clang -Wall -Werror -Wextra -c -o ft_strchr.o ft_strchr.c
-clang -Wall -Werror -Wextra -c -o ft_strdup.o ft_strdup.c
-clang -Wall -Werror -Wextra -c -o ft_strjoin.o ft_strjoin.c
-clang -Wall -Werror -Wextra -c -o ft_strlcat.o ft_strlcat.c
-clang -Wall -Werror -Wextra -c -o ft_strlcpy.o ft_strlcpy.c
-clang -Wall -Werror -Wextra -c -o ft_strlen.o ft_strlen.c
-clang -Wall -Werror -Wextra -c -o ft_strmapi.o ft_strmapi.c
-clang -Wall -Werror -Wextra -c -o ft_strcmp.o ft_strcmp.c
-clang -Wall -Werror -Wextra -c -o ft_strncmp.o ft_strncmp.c
-clang -Wall -Werror -Wextra -c -o ft_strnstr.o ft_strnstr.c
-clang -Wall -Werror -Wextra -c -o ft_strrchr.o ft_strrchr.c
-clang -Wall -Werror -Wextra -c -o ft_strtrim.o ft_strtrim.c
-clang -Wall -Werror -Wextra -c -o ft_substr.o ft_substr.c
-clang -Wall -Werror -Wextra -c -o ft_tolower.o ft_tolower.c
-clang -Wall -Werror -Wextra -c -o ft_toupper.o ft_toupper.c
-clang -Wall -Werror -Wextra -c -o ft_striteri.o ft_striteri.c
-clang -Wall -Werror -Wextra -c -o get_next_line.o get_next_line.c
-clang -Wall -Werror -Wextra -c -o get_next_line_utils.o get_next_line_utils.c
-clang -Wall -Werror -Wextra -c -o ft_printf.o ft_printf.c
-clang -Wall -Werror -Wextra -c -o ft_printf_search_type.o ft_printf_search_type.c
-clang -Wall -Werror -Wextra -c -o ft_print_bighex.o ft_print_bighex.c
-clang -Wall -Werror -Wextra -c -o ft_print_char.o ft_print_char.c
-clang -Wall -Werror -Wextra -c -o ft_print_decimal.o ft_print_decimal.c
-clang -Wall -Werror -Wextra -c -o ft_print_integer.o ft_print_integer.c
-clang -Wall -Werror -Wextra -c -o ft_print_pointer.o ft_print_pointer.c
-clang -Wall -Werror -Wextra -c -o ft_print_smallhex.o ft_print_smallhex.c
-clang -Wall -Werror -Wextra -c -o ft_print_string.o ft_print_string.c
-clang -Wall -Werror -Wextra -c -o ft_print_unsigned.o ft_print_unsigned.c
-clang -Wall -Werror -Wextra -c -o ft_putchar.o ft_putchar.c
-clang -Wall -Werror -Wextra -c -o ft_putstr.o ft_putstr.c
-clang -Wall -Werror -Wextra -c -o ft_nbrlen.o ft_nbrlen.c
  
-ar rcs libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memchr.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putstr_fd.o ft_putnbr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strcmp.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_striteri.o get_next_line.o get_next_line_utils.o ft_printf.o ft_printf_search_type.o ft_print_bighex.o ft_print_char.o ft_print_decimal.o ft_print_integer.o ft_print_pointer.o ft_print_smallhex.o ft_print_string.o ft_print_unsigned.o ft_putchar.o ft_putstr.o ft_nbrlen.o
-make[1]: Leaving directory `/Users/maxperei/Desktop/repos/42work/minishell/libft'
 mkdir -p .objs
-gcc -Wall -Wextra -Werror -I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include  -I minishell.h -c sources/main.c -o .objs/main.o
-gcc -Wall -Wextra -Werror -I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include  -L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib  libft/libft.a .objs/main.o -o minishell -lreadline
+gcc -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include  -I minishell.h -c sources/main.c -o .objs/main.o
+gcc -Wall -Wextra -Werror -I /opt/homebrew/opt/readline/include  -L /opt/homebrew/opt/readline/lib  libft/libft.a .objs/main.o -o minishell -lreadline
 make: Leaving directory `/Users/maxperei/Desktop/repos/42work/minishell'
  
