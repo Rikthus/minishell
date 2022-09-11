@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/11 16:29:18 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 21:24:58 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,70 +20,28 @@ static	int	check_char(char c)
 	return (1);	
 }
 
-static	int	check_valid_redir(char *redir)
-{
-	int		i;
-	int		same_count;
-	char	redir_char;
-
-	i = 1;
-	same_count = 0;
-	redir_char = redir[0];
-	while (redir[i] && i < 3)
-	{
-		if (redir[i] == redir_char)
-			same_count++;
-		if ((redir_char == '<' && redir[i] == '>')
-			|| (redir_char == '>' && redir[i] == '<'))
-			return (0);
-		i++;
-	}
-	if (same_count > 1)
-		return (0);
-	while (redir[i] && ft_isspace(redir[i]))
-		i++;
-	if (redir[i] == '\0' || redir[i] == '<' || redir[i] == '>')
-		return (0);
-	return (1);
-}
-
 static	int	is_redir(char *redir)
 {
 	int		i;
-	int		valid_char;
-	t_state	state;
-	
+	char	redir_char;
+
+	redir_char = redir[0];
 	i = 1;
-	valid_char = 0;
-	state.sq = OFF;
-	state.dq = OFF;
-	if (!check_valid_redir(redir))
-		return (0);
-	while (redir[i] && !(redir[i] == '|' && state.sq == OFF && state.dq == OFF))
+	if (redir_char == '|')
 	{
-		if (redir[i] == '\'' || redir[i] == '\"')
-			change_quote_state(redir[i], &state);
-		if (redir[i] != '<' && redir[i] != '>' && redir[i] != '\''
-			&& redir[i] != '\"' && !ft_isspace(redir[i]))
-			valid_char++;
-		if ((state.sq == ON && redir[i] != '\'')
-			|| (state.dq == ON && redir[i] != '\"'))
-			valid_char++;
-		i++;
+		if (redir[i] == '|')
+			return (0);
 	}
-	if (valid_char == 0)
-		return (0);
-	return (1);
-}
-
-static	int	is_pipe_first(char *raw_line)
-{
-	int	i;
-
-	i = 0;
-	while (raw_line[i] && ft_isspace(raw_line[i]))
+	else if (redir_char == '<' || redir_char == '>')
+	{
+		if ((redir_char == '<' && redir[i] == '>')
+			|| (redir_char == '>' && redir[i] == '<'))
+			return (0);
+	}
+	i++;
+	while (redir[i] && ft_isspace(redir[i]))
 		i++;
-	if (raw_line[i] == '|')
+	if (redir[i] == '|' || redir[i] == '<' || redir[i] == '>')
 		return (0);
 	return (1);
 }
@@ -96,6 +54,10 @@ int	pre_parsing(char *raw_line)
 	state.sq = OFF;
 	state.dq = OFF;
 	i = 0;
+	while (raw_line[i] && ft_isspace(raw_line[i]))
+		i++;
+	if (raw_line[i] == '|')
+		return (0);
 	while (raw_line[i])
 	{
 		if (raw_line[i] == '\'' || raw_line[i] == '\"')
@@ -108,7 +70,7 @@ int	pre_parsing(char *raw_line)
 				return (0);
 		i++;
 	}
-	if (state.sq == ON || state.dq == ON || !is_pipe_first(raw_line))
+	if (state.sq == ON || state.dq == ON)
 		return (0);
 	return (1);
 }
