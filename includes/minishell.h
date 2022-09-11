@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/10 17:15:10 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 15:54:13 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,40 @@
 
 # include "../libft/libft.h"
 
+// STATE MACHINE
 # define OFF 0
 # define ON 1
 
+// REDIRECTION TYPES
 # define NO_REDIR -1
 # define INFILE 0
 # define APPEND 1
 # define OUTFILE 2
 # define HEREDOC 3
 
+// LEN TYPE
+# define WORD 0
+# define REDIR 1
+# define QUOTE 2
+
 int	g_status;
 
+
+// TOKENIZER STRUCT
 typedef struct s_base
 {
 	char			*full_cmd;
 	struct s_base	*next;
 }	t_base;
 
+// PRE_LEXING STRUCT
+typedef	struct s_elem
+{
+	char			*element;
+	struct s_elem	*next;
+}	t_elem;
+
+// LEXER STRUCT
 typedef	struct s_token
 {
 	char			**cmd;
@@ -56,6 +73,7 @@ typedef	struct s_token
 	struct s_token	*next;
 }	t_token;
 
+// STATE MACHINE STRUCT
 typedef	struct s_state
 {
 	int	sq;
@@ -75,6 +93,7 @@ t_base	*tokenizer(char *raw_line);
 
 // LEXER
 t_token	*lexer(t_base *basic_token);
+t_elem	*break_cmd(char *full_cmd);
 
 // EXPANDER
 char	*expand_line(char *raw_line, char **envp);
@@ -84,6 +103,8 @@ char	*expand_line(char *raw_line, char **envp);
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
+int		cmd_part_len(int *i, char *cmd, int type);
+int		free_rd_line(char *line, int ret);
 void	change_quote_state(char quote, t_state *state);
 
 // FREE_MEMORY
@@ -91,6 +112,7 @@ void	*free_split_error(char **array, int nb_pointer);
 void	*free_2d_array(char **array);
 void	free_basic_token(t_base *basic_token);
 void	*free_token(t_token *token);
+void	*free_elem(t_elem *elems);
 
 // PIPE_SPLIT
 char	**pipe_split(char *str);

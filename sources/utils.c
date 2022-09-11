@@ -6,11 +6,45 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/08 14:37:17 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 15:47:25 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	cmd_part_len(int *i, char *cmd, int type)
+{
+	int		len;
+	char	quote;
+
+	len = *i;
+	if (type == QUOTE)
+	{
+		quote = cmd[len];
+		len++;
+		while (cmd[len] != quote)
+			len++;
+		len++;
+	}
+	else if (type == REDIR)
+	{
+		while (cmd[len] == '<' || cmd[len] == '>')
+			len++;
+	}
+	else
+	{
+		while (cmd[len] && !ft_isspace(cmd[len]) && cmd[len] != '\''
+			&& cmd[len] != '\"' && cmd[len] != '<' && cmd[len] != '>')
+			len++;
+	}
+	return (len - *i);
+}
+
+int	free_rd_line(char *line, int ret)
+{
+	free(line);
+	return (ret);
+}
 
 void	change_quote_state(char quote, t_state *state)
 {

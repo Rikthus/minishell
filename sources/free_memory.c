@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:37:21 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/10 17:16:29 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 14:35:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ void	*free_token(t_token *token)
 		free_2d_array(previous->cmd);
 		free(token->redir);
 		free_2d_array(previous->target);
+		free(previous);
+	}
+	return (NULL);
+}
+
+void	*free_elem(t_elem *elems)
+{
+	t_elem	*previous;
+
+	while (elems)
+	{
+		previous = elems;
+		elems = elems->next;
+		free(previous->element);
 		free(previous);
 	}
 	return (NULL);
