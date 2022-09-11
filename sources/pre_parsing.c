@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/11 15:29:52 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 16:29:18 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	int	check_char(char c)
 	return (1);	
 }
 
-static	int	check_too_many(char *redir)
+static	int	check_valid_redir(char *redir)
 {
 	int		i;
 	int		same_count;
@@ -33,9 +33,16 @@ static	int	check_too_many(char *redir)
 	{
 		if (redir[i] == redir_char)
 			same_count++;
+		if ((redir_char == '<' && redir[i] == '>')
+			|| (redir_char == '>' && redir[i] == '<'))
+			return (0);
 		i++;
 	}
 	if (same_count > 1)
+		return (0);
+	while (redir[i] && ft_isspace(redir[i]))
+		i++;
+	if (redir[i] == '\0' || redir[i] == '<' || redir[i] == '>')
 		return (0);
 	return (1);
 }
@@ -50,7 +57,7 @@ static	int	is_redir(char *redir)
 	valid_char = 0;
 	state.sq = OFF;
 	state.dq = OFF;
-	if (!check_too_many(redir))
+	if (!check_valid_redir(redir))
 		return (0);
 	while (redir[i] && !(redir[i] == '|' && state.sq == OFF && state.dq == OFF))
 	{

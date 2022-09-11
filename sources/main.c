@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/11 15:37:35 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 16:31:31 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		////////////////// PARSING '/' char
-		///////////////// PARSING check > next to <
+		///////////////// PARSING redir parsing
 		controler(readline("Maxine <3 "), envp);
 	}
 	return (g_status);
