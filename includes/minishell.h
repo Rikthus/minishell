@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/11 15:54:13 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 22:52:24 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,18 @@
 
 // REDIRECTION TYPES
 # define NO_REDIR -1
-# define INFILE 0
-# define APPEND 1
-# define OUTFILE 2
-# define HEREDOC 3
+# define OUTFILE 0 // >
+# define APPEND 1  // >>
+# define INFILE 2  // <
+# define HEREDOC 3 // <<
 
 // LEN TYPE
 # define WORD 0
 # define REDIR 1
 # define QUOTE 2
+
+// VAR TYPE
+# define POINTER 8
 
 int	g_status;
 
@@ -63,6 +66,15 @@ typedef	struct s_elem
 	char			*element;
 	struct s_elem	*next;
 }	t_elem;
+
+// TOKEN INDEX STRUCT
+typedef struct s_index
+{
+	int	cmd_i;
+	int	redir_i;
+	int	target_i;
+	int	is_target;
+}	t_index;
 
 // LEXER STRUCT
 typedef	struct s_token
@@ -107,12 +119,15 @@ int		cmd_part_len(int *i, char *cmd, int type);
 int		free_rd_line(char *line, int ret);
 void	change_quote_state(char quote, t_state *state);
 
-// FREE_MEMORY
-void	*free_split_error(char **array, int nb_pointer);
-void	*free_2d_array(char **array);
+// FREE_STRUCT
 void	free_basic_token(t_base *basic_token);
 void	*free_token(t_token *token);
 void	*free_elem(t_elem *elems);
+void	free_elem_struct(t_elem *elems);
+
+// FREE_MEMORY
+void	*free_split_error(char **array, int nb_pointer);
+void	*free_2d_array(char **array);
 
 // PIPE_SPLIT
 char	**pipe_split(char *str);

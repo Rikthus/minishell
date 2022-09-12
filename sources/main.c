@@ -6,18 +6,43 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/11 16:31:31 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/11 22:58:36 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void	print_list(t_base *list)
+// static	void	print_list(t_base *list)
+// {
+// 	while (list)
+// 	{
+// 		printf("%s\n\n", list->full_cmd);
+// 		list = list->next;
+// 	}
+// }
+
+static	void	print_tokens(t_token *token)
 {
-	while (list)
+	int	i;
+	int	j;
+	
+	while (token)
 	{
-		printf("%s\n\n", list->full_cmd);
-		list = list->next;
+		i = 0;
+		j = 0;
+		while (token->cmd[i])
+		{
+			printf("%s\n", token->cmd[i]);
+			i++;
+		}
+		printf("\n");
+		while (token->target[j])
+		{
+			printf("%d   %s\n", token->redir[j], token->target[j]);
+			j++;
+		}
+		printf("\n\n\n");
+		token = token->next;
 	}
 }
 
@@ -32,11 +57,12 @@ static	int	controler(char *raw_line, char **envp)
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
 		return (free_rd_line(raw_line, 0));
-	print_list(basic_token);
 	token = lexer(basic_token);
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
+	print_tokens(token);
+	// free_token
 	// expander(&token, envp);
 	return (free_rd_line(raw_line, 1));
 }

@@ -21,6 +21,7 @@ DIR_LIBFT	:=	libft
 
 LST_SRCS	:=	main.c				\
 				utils.c				\
+				free_struct.c		\
 				free_memory.c		\
 				pipe_split.c		\
 				pre_parsing.c		\
