@@ -6,20 +6,11 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/13 00:51:37 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 01:32:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// static	void	print_list(t_base *list)
-// {
-// 	while (list)
-// 	{
-// 		printf("%s\n\n", list->full_cmd);
-// 		list = list->next;
-// 	}
-// }
 
 // static	void	print_tokens(t_token *token)
 // {
@@ -62,8 +53,8 @@ static	int	controler(char *raw_line, char **envp)
 	if (!token)
 		return (0);
 	// print_tokens(token);
-	// free_token
 	// expander(&token, envp);
+	// free_token (and free token if fail exec too)
 	return (free_rd_line(raw_line, 1));
 }
 
