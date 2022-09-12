@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/11 22:58:36 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 00:51:37 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@
 // 	}
 // }
 
-static	void	print_tokens(t_token *token)
-{
-	int	i;
-	int	j;
+// static	void	print_tokens(t_token *token)
+// {
+// 	int	i;
+// 	int	j;
 	
-	while (token)
-	{
-		i = 0;
-		j = 0;
-		while (token->cmd[i])
-		{
-			printf("%s\n", token->cmd[i]);
-			i++;
-		}
-		printf("\n");
-		while (token->target[j])
-		{
-			printf("%d   %s\n", token->redir[j], token->target[j]);
-			j++;
-		}
-		printf("\n\n\n");
-		token = token->next;
-	}
-}
+// 	while (token)
+// 	{
+// 		i = 0;
+// 		j = 0;
+// 		while (token->cmd[i])
+// 		{
+// 			printf("%s\n", token->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("\n");
+// 		while (token->target[j])
+// 		{
+// 			printf("%d   %s\n", token->redir[j], token->target[j]);
+// 			j++;
+// 		}
+// 		printf("\n\n\n");
+// 		token = token->next;
+// 	}
+// }
 
 static	int	controler(char *raw_line, char **envp)
 {
@@ -61,7 +61,7 @@ static	int	controler(char *raw_line, char **envp)
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
-	print_tokens(token);
+	// print_tokens(token);
 	// free_token
 	// expander(&token, envp);
 	return (free_rd_line(raw_line, 1));

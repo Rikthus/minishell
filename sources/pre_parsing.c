@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/12 18:46:37 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 01:10:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ static	int	is_redir(char *redir)
 			|| (redir_char == '>' && redir[i] == '<'))
 			return (0);
 	}
+	if (redir[i] != redir_char && redir[i] != '|' && !ft_isspace(redir[i]
+		&& redir[i]))
+		return (1);
 	i++;
 	while (redir[i] && ft_isspace(redir[i]))
 		i++;
