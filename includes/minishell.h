@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/11 22:52:24 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 00:03:36 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@
 # define WORD 0
 # define REDIR 1
 # define QUOTE 2
-
-// VAR TYPE
-# define POINTER 8
 
 int	g_status;
 
@@ -106,6 +103,7 @@ t_base	*tokenizer(char *raw_line);
 // LEXER
 t_token	*lexer(t_base *basic_token);
 t_elem	*break_cmd(char *full_cmd);
+int		fill_token(t_token **token, t_elem *elems);
 
 // EXPANDER
 char	*expand_line(char *raw_line, char **envp);

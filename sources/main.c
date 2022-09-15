@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/13 01:32:06 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 00:23:53 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static	int	controler(char *raw_line, char **envp)
 		return (0);
 	// print_tokens(token);
 	// expander(&token, envp);
-	// free_token (and free token if fail exec too)
+	// redir & exec
+	// free_token(token); // free tokens before return segfault when free redir ?
 	return (free_rd_line(raw_line, 1));
 }
 
@@ -69,8 +70,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (1)
 	{
-		////////////////// PARSING '/' char
-		///////////////// PARSING redir parsing
 		controler(readline("Maxine <3 "), envp);
 	}
 	return (g_status);
