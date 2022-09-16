@@ -6,13 +6,14 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/16 00:03:36 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 02:38:24 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+// SYSTEM LIBRARY
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -29,6 +30,7 @@
 # include <curses.h>
 # include <term.h>
 
+// CUSTOM LIBRARY
 # include "../libft/libft.h"
 
 // STATE MACHINE
@@ -46,6 +48,10 @@
 # define WORD 0
 # define REDIR 1
 # define QUOTE 2
+
+// ELEM TO EXPAND
+# define CMD 0
+# define TARGET 1
 
 int	g_status;
 
@@ -105,8 +111,8 @@ t_token	*lexer(t_base *basic_token);
 t_elem	*break_cmd(char *full_cmd);
 int		fill_token(t_token **token, t_elem *elems);
 
-// EXPANDER
-char	*expand_line(char *raw_line, char **envp);
+// EXPANSION
+void	*expansion(t_token **token, char **envp);
 
 
 /////////////////////////////////////

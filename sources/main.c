@@ -6,36 +6,36 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/16 00:23:53 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 02:16:53 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// static	void	print_tokens(t_token *token)
-// {
-// 	int	i;
-// 	int	j;
+static	void	print_tokens(t_token *token)
+{
+	int	i;
+	int	j;
 	
-// 	while (token)
-// 	{
-// 		i = 0;
-// 		j = 0;
-// 		while (token->cmd[i])
-// 		{
-// 			printf("%s\n", token->cmd[i]);
-// 			i++;
-// 		}
-// 		printf("\n");
-// 		while (token->target[j])
-// 		{
-// 			printf("%d   %s\n", token->redir[j], token->target[j]);
-// 			j++;
-// 		}
-// 		printf("\n\n\n");
-// 		token = token->next;
-// 	}
-// }
+	while (token)
+	{
+		i = 0;
+		j = 0;
+		while (token->cmd[i])
+		{
+			printf("%s\n", token->cmd[i]);
+			i++;
+		}
+		printf("\n");
+		while (token->target[j])
+		{
+			printf("%d   %s\n", token->redir[j], token->target[j]);
+			j++;
+		}
+		printf("\n\n\n");
+		token = token->next;
+	}
+}
 
 static	int	controler(char *raw_line, char **envp)
 {
@@ -52,7 +52,7 @@ static	int	controler(char *raw_line, char **envp)
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
-	// print_tokens(token);
+	print_tokens(token);
 	// expander(&token, envp);
 	// redir & exec
 	// free_token(token); // free tokens before return segfault when free redir ?
