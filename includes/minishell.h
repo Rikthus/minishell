@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 17:52:58 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 18:00:40 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@
 # define CMD 0
 # define TARGET 1
 
+// PIPE POSITION
+# define NO_PIPE -1
+# define FIRST_CMD 0
+# define LAST_CMD 1
+# define INTER_CMD 2
+
 int	g_status;
 
 //CUSTOM ENVP
@@ -88,6 +94,7 @@ typedef struct s_index
 // LEXER STRUCT
 typedef struct s_token
 {
+	int				pipe_pos;
 	char			**cmd;
 	int				*redir;
 	char			**target;

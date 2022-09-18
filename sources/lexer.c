@@ -6,13 +6,15 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 01:18:54 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/18 14:37:50 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 18:12:42 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	t_token	*add_token(char *full_cmd)
+static
+
+static	t_token	*add_token(char *full_cmd, int pipe_pos)
 {
 	t_token	*token;
 	t_elem	*elems;
@@ -41,7 +43,7 @@ t_token	*lexer(t_base *basic_token)
 	t_token	*token;
 	t_token	*tmp;
 
-	token = add_token(basic_token->full_cmd);
+	token = add_token(basic_token->full_cmd, );
 	if (!token)
 		return (NULL);
 	basic_token = basic_token->next;
@@ -54,5 +56,6 @@ t_token	*lexer(t_base *basic_token)
 		tmp = tmp->next;
 		basic_token = basic_token->next;
 	}
+	
 	return (token);
 }
