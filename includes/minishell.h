@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 14:56:53 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 17:52:58 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@
 
 int	g_status;
 
+//CUSTOM ENVP
+typedef struct s_envlist
+{
+	char				*env_var;
+	struct s_envlist	*next;
+}	t_envlist;
+
 // TOKENIZER STRUCT
 typedef struct s_base
 {
@@ -94,43 +101,50 @@ typedef struct s_state
 	int	dq;
 }	t_state;
 
+////////////////////////////////////////////////////////////////
+//////////    FUNCTION    //////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+t_envlist	*make_env(char **envp);
+
 /////////////////////////////////////
 //////////   PARSING   //////////////
 /////////////////////////////////////
 
 // PRE_PARSING
-int		pre_parsing(char *raw_line);
+int			pre_parsing(char *raw_line);
 
 // TOKENIZER
-t_base	*tokenizer(char *raw_line);
+t_base		*tokenizer(char *raw_line);
 
 // LEXER
-t_token	*lexer(t_base *basic_token);
-t_elem	*break_cmd(char *full_cmd);
-int		fill_token(t_token **token, t_elem *elems);
+t_token		*lexer(t_base *basic_token);
+t_elem		*break_cmd(char *full_cmd);
+int			fill_token(t_token **token, t_elem *elems);
 
 // EXPANSION
-void	*expansion(t_token **token, char **envp);
+void		*expansion(t_token **token, char **envp);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
-int		cmd_part_len(int *i, char *cmd, int type);
-int		free_rd_line(char *line, int ret);
-void	change_quote_state(char quote, t_state *state);
+int			cmd_part_len(int *i, char *cmd, int type);
+int			free_rd_line(char *line, int ret);
+void		change_quote_state(char quote, t_state *state);
 
 // FREE_STRUCT
-void	free_basic_token(t_base *basic_token);
-void	*free_token(t_token *token);
-void	*free_elem(t_elem *elems);
-void	free_elem_struct(t_elem *elems);
+void		free_basic_token(t_base *basic_token);
+void		*free_token(t_token *token);
+void		*free_elem(t_elem *elems);
+void		free_elem_struct(t_elem *elems);
+void		free_env(t_envlist *envlist);
 
 // FREE_MEMORY
-void	*free_split_error(char **array, int nb_pointer);
-void	*free_2d_array(char **array);
+void		*free_split_error(char **array, int nb_pointer);
+void		*free_2d_array(char **array);
 
 // PIPE_SPLIT
-char	**pipe_split(char *str);
+char		**pipe_split(char *str);
 
 #endif

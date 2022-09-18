@@ -20,6 +20,7 @@ DIR_OBJS	:=	.objs
 DIR_LIBFT	:=	libft
 
 LST_SRCS	:=	main.c				\
+				make_env.c			\
 				utils.c				\
 				free_struct.c		\
 				free_memory.c		\
