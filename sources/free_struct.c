@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/16 00:04:13 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 14:40:33 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*free_token(t_token *token)
 		previous = token;
 		token = token->next;
 		free_2d_array(previous->cmd);
-		free(token->redir);
+		free(previous->redir);
 		free_2d_array(previous->target);
 		free(previous);
 	}

@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 13:12:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/11 15:57:25 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/16 13:51:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static	char	*dup_quoted(int *i, char *cmd)
 	char	quote;
 	int		j;
 
+	if (cmd[*i] == '$')
+		*i += 1;
 	dup = malloc(sizeof(char) * (cmd_part_len(i, cmd, QUOTE) + 1));
 	if (!dup)
 		return (NULL);
@@ -66,6 +68,8 @@ static	char	*cmd_part_dup(int *i, char *cmd)
 	if (cmd[*i] == '<' || cmd[*i] == '>')
 		return (dup_redir(i, cmd));
 	else if (cmd[*i] == '\'' || cmd[*i] == '\"')
+		return (dup_quoted(i, cmd));
+	else if (cmd[*i] == '$' && (cmd[*i + 1] == '\'' || cmd[*i + 1] == '\"'))
 		return (dup_quoted(i, cmd));
 	else
 	{

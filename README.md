@@ -10,6 +10,6 @@
 
 ### BUGS:
 
-- **Segfault if free(token->redir)**
+**DONE**- **Segfault if free(token->redir)**
 - (optional : checker si le terminal est un tty valid)
-- (optional : $"lol")
+**DONE**- (optional : $"lol") 
