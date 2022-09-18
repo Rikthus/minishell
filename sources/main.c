@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 12:15:02 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 14:58:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static	int	controler(char *raw_line, char **envp)
 {
 	t_base	*basic_token;
 	t_token	*token;
-	(void)envp;
 
+	(void)envp;
 	if (!raw_line || raw_line[0] == '\0' || !pre_parsing(raw_line))
 		return (free_rd_line(raw_line, 0));
 	basic_token = tokenizer(raw_line);

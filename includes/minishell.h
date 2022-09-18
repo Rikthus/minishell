@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/16 02:38:24 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 14:56:53 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@
 
 int	g_status;
 
-
 // TOKENIZER STRUCT
 typedef struct s_base
 {
@@ -64,7 +63,7 @@ typedef struct s_base
 }	t_base;
 
 // PRE_LEXING STRUCT
-typedef	struct s_elem
+typedef struct s_elem
 {
 	char			*element;
 	struct s_elem	*next;
@@ -80,7 +79,7 @@ typedef struct s_index
 }	t_index;
 
 // LEXER STRUCT
-typedef	struct s_token
+typedef struct s_token
 {
 	char			**cmd;
 	int				*redir;
@@ -89,12 +88,11 @@ typedef	struct s_token
 }	t_token;
 
 // STATE MACHINE STRUCT
-typedef	struct s_state
+typedef struct s_state
 {
 	int	sq;
 	int	dq;
 }	t_state;
-
 
 /////////////////////////////////////
 //////////   PARSING   //////////////
@@ -113,7 +111,6 @@ int		fill_token(t_token **token, t_elem *elems);
 
 // EXPANSION
 void	*expansion(t_token **token, char **envp);
-
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

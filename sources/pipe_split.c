@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:48:55 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/03 22:44:53 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 14:59:12 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 static	int	part_len(char *str)
 {
 	t_state	state;
-	int	i;
+	int		i;
 
 	state.sq = OFF;
 	state.dq = OFF;
 	i = 0;
-	
 	while (str[i] && !(str[i] == '|' && state.sq == OFF && state.dq == OFF))
 	{
 		if (str[i] == '\'' || str[i] == '\"')
@@ -35,7 +34,7 @@ static	int	part_counter(char *str)
 	t_state	state;
 	int		nb_parts;
 	int		i;
-	
+
 	state.sq = OFF;
 	state.dq = OFF;
 	nb_parts = 1;
@@ -80,7 +79,7 @@ static	int	find_next_part(char *str)
 {
 	t_state	state;
 	int		j;
-	
+
 	state.sq = OFF;
 	state.dq = OFF;
 	j = 0;
@@ -101,7 +100,7 @@ char	**pipe_split(char *str)
 	int		j;
 	int		nb_parts;
 	char	**split;
-	
+
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -115,7 +114,7 @@ char	**pipe_split(char *str)
 		split[i] = part_dup(&str[j]);
 		if (!split[i])
 			return (free_split_error(split, i - 1));
-		j += find_next_part(&str[j]);		
+		j += find_next_part(&str[j]);
 		i++;
 	}
 	split[i] = NULL;

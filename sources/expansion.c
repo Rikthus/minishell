@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/16 02:46:38 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 14:57:51 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	int	check_var(char *str)
 static	int	expander(t_token *tmp, int i, char **envp, int type)
 {
 	int	is_var;
-	
+
 	is_var = 0;
 	while (is_var != -1)
 	{
@@ -88,3 +88,4 @@ void	*expansion(t_token **token, char **envp)
 	}
 	return (1);
 }
+

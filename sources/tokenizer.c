@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:40:25 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/08 15:41:24 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/18 15:01:43 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static	t_base	*add_btoken(char *cmd)
 		return (NULL);
 	new->full_cmd = cmd;
 	new->next = NULL;
-	return (new);	
+	return (new);
 }
 
 static	void	*error_case(char **splitted_line, t_base *basic_token)
 {
 	t_base	*previous;
-	
+
 	while (basic_token)
 	{
 		previous = basic_token;
