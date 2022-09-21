@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/21 18:18:06 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 19:05:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,24 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	t_base	*basic_token;
 	t_token	*token;
 
-	(void)env_list;
 	if (!raw_line || raw_line[0] == '\0' || !pre_parsing(raw_line))
-		return (free_rd_line(raw_line, 0));
+		return (free_rd_line(raw_line, BAD_EXIT));
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
-		return (free_rd_line(raw_line, 0));
+		return (free_rd_line(raw_line, BAD_EXIT));
 	token = lexer(basic_token);
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
 	// print_tokens(token);
-	// expander(&token, env_list);
+	if (!expander(&token, env_list))
+	{
+		free_token(token);
+		return (free_rd_line(raw_line, BAD_EXIT));
+	}
 	// redir & exec
 	free_token(token);
-	return (free_rd_line(raw_line, 1));
+	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
 int	main(int argc, char **argv, char **envp)

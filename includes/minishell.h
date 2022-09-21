@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/21 18:17:49 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 18:33:35 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 
 // CUSTOM LIBRARY
 # include "../libft/libft.h"
+
+// EXIT CASES
+# define BAD_EXIT 0
+# define GOOD_EXIT 1
 
 // STATE MACHINE
 # define OFF 0
@@ -94,7 +98,7 @@ typedef struct s_index
 // LEXER STRUCT
 typedef struct s_token
 {
-	int				pipe_pos;
+	int				exec_pos;
 	char			**cmd;
 	int				*redir;
 	char			**target;
@@ -130,7 +134,7 @@ t_elem		*break_cmd(char *full_cmd);
 int			fill_token(t_token **token, t_elem *elems);
 
 // EXPANSION
-int		*expander(t_token **token, t_envlist *env_list);
+int			expander(t_token **token, t_envlist *env_list);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
