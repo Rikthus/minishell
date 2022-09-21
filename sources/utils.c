@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/18 15:02:05 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 17:48:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,23 @@ void	change_quote_state(char quote, t_state *state)
 		else
 			state->dq = OFF;
 	}
+}
+
+char	*custom_strdup(char *str, int start, int end)
+{
+	char	*dup;
+	int		i;
+
+	dup = malloc(sizeof(char) * ((end - start) + 2));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (start <= end)
+	{
+		dup[i] = str[start];
+		start++;
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

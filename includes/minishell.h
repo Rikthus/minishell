@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 18:00:40 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 18:17:49 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ t_elem		*break_cmd(char *full_cmd);
 int			fill_token(t_token **token, t_elem *elems);
 
 // EXPANSION
-void		*expansion(t_token **token, char **envp);
+int		*expander(t_token **token, t_envlist *env_list);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

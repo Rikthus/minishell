@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 17:41:28 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 18:18:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	if (!token)
 		return (0);
 	// print_tokens(token);
-	// expander(&token, envp);
+	// expander(&token, env_list);
 	// redir & exec
 	free_token(token);
 	return (free_rd_line(raw_line, 1));
