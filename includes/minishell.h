@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/21 18:33:35 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 20:42:39 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 // STATE MACHINE
 # define OFF 0
 # define ON 1
+# define CHANGED 1
 
 // REDIRECTION TYPES
 # define NO_REDIR -1
@@ -105,6 +106,18 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+// EXPANSION STRUCT
+typedef struct s_expan
+{
+	int		end_begin;
+	int		start_end;
+	int		var_name_index;
+	char	*start_dup;
+	char	*end_dup;
+	char	*var_name_dup;
+	char	*var_dup;
+}	t_expan;
+
 // STATE MACHINE STRUCT
 typedef struct s_state
 {
@@ -136,13 +149,18 @@ int			fill_token(t_token **token, t_elem *elems);
 // EXPANSION
 int			expander(t_token **token, t_envlist *env_list);
 
+// TRIM_QUOTES
+int			trim_quotes(char **str);
+
 /////////////////////////////////////
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
+int			is_exit_status(char *str);
 int			cmd_part_len(int *i, char *cmd, int type);
 int			free_rd_line(char *line, int ret);
-void		change_quote_state(char quote, t_state *state);
+int		change_quote_state(char quote, t_state *state);
+char		*custon_strdup(char *str, int start, int end);
 
 // FREE_STRUCT
 void		free_basic_token(t_base *basic_token);
@@ -150,6 +168,7 @@ void		*free_token(t_token *token);
 void		*free_elem(t_elem *elems);
 void		free_elem_struct(t_elem *elems);
 void		free_env(t_envlist *envlist);
+int			free_expan(t_expan *exp);
 
 // FREE_MEMORY
 void		*free_split_error(char **array, int nb_pointer);

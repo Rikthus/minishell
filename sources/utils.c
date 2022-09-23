@@ -6,11 +6,18 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/21 17:48:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 20:42:23 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	is_exit_status(char *str)
+{
+	if (str[0] == '$' && str[1] == '?')
+		return (1);
+	return (0);
+}
 
 int	cmd_part_len(int *i, char *cmd, int type)
 {
@@ -46,7 +53,7 @@ int	free_rd_line(char *line, int ret)
 	return (ret);
 }
 
-void	change_quote_state(char quote, t_state *state)
+int	change_quote_state(char quote, t_state *state)
 {
 	if (quote == '\'' && state->dq == OFF)
 	{
@@ -54,6 +61,7 @@ void	change_quote_state(char quote, t_state *state)
 			state->sq = ON;
 		else
 			state->sq = OFF;
+		return (CHANGED);
 	}
 	else if (quote == '\"' && state->sq == OFF)
 	{
@@ -61,6 +69,7 @@ void	change_quote_state(char quote, t_state *state)
 			state->dq = ON;
 		else
 			state->dq = OFF;
+		return (CHANGED);
 	}
 }
 

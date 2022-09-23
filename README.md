@@ -1,9 +1,10 @@
 ### A faire:
 
 - expansion des variables d'env
+- trim quotes
 - redirections et exec (expansion du "$?")
 - gestion des signaux
-- gestion de l'historique
+**DONE**- gestion de l'historique
 - built-ins
 
 
@@ -13,6 +14,8 @@
 **DONE**- **Segfault if free(token->redir)**
 - (optional : checker si le terminal est un tty valid)
 **DONE**- (optional : $"lol")
+- echo "lol"okep => lolokep (they are the same element)
+ (the current shell treat "lol" and okep as separated elements)
 
 
 

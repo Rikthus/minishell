@@ -6,88 +6,81 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/21 20:07:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 19:37:15 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//si $VAR vide
-//si $VAR plein
-//si $VAR ou "$VAR" ou '$VAR'
-//si NESTED $VAR export lol="SUPER COOL $PATH okep"
-
 #include "../includes/minishell.h"
 
-static	int	is_exit_status(char *str)
-{
-	if (str[0] == '$' && str[1] == '?')
-		return (1);
-	return (0);
-}
-
-static	int	expand_target(t_token *token, int index)
+static	int	no_envvar(char *str)
 {
 	int		i;
-	int		j;
 	t_state	state;
-	char	*path_dup;
 
 	i = 0;
 	state.sq = OFF;
 	state.dq = OFF;
-	while (token->target[index])
+	while (str[i])
 	{
-		if (token->target[index][i] == '\'' || token->target[index][i] == '\"')
-			change_quote_state(token->target[index][i], &state);
-		if (state.sq == OFF && token->target[index][i] == '$'
-				&& !is_exit_status(&(token->target[index][i])))
-		{
-			j = i + 1;
-			while (ft_isalnum(token->target[index][j]))
-				j++;
-			path_dup = custom_dup(token->target[index], i + 1, j);
-			if (!path_dup)
-				return (0);
-			if (!make_new_target_elem(token, index))
-			{
-				free(path_dup);
-				return (0);
-			}
-			return (2);
-		}
+		if (str[i] == '\'' || str[i] == '\"')
+			change_quote_state(str[i], &state);
+		if (state.sq == OFF && str[i] == '$' && str[i + 1] != '\0'
+				&& !is_exit_status(&str[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }
 
-static	int	expand_cmd(t_token *token, int index)
+static	int	expand(char **str, t_expan *exp)
 {
-	int		i;
-	int		j;
-	t_state	state;
-	char	*path_dup;
+	if (no_envvar(exp->var_dup))
+		if (!join_all(str, exp))
+			return (0);
+	
+}
 
-	i = 0;
+static	t_expan	*init_expan(void)
+{
+	t_expan	*exp;
+	
+	exp = malloc(sizeof(t_expan));
+	if (!exp)
+		return (NULL);
+	exp->start_dup = NULL;
+	exp->end_dup = NULL;
+	exp->var_name_dup = NULL;
+	exp->var_dup = NULL;
+	return (exp);
+}
+
+static	int	expand_cmd(char **str)
+{
+	t_expan	*exp;
+	t_state	state;
+	int		i;
+
+	exp = init_expan();
+	if (!exp)
+		return (0);
 	state.sq = OFF;
 	state.dq = OFF;
-	while (token->cmd[index][i])
+	while (*str[i])
 	{
-		if (token->cmd[index][i] == '\'' || token->cmd[index][i] == '\"')
-			change_quote_state(token->cmd[index][i], &state);
-		if (state.sq == OFF && token->cmd[index][i] == '$'
-				&& !is_exit_status(&(token->cmd[index][i])))
+		if (*str[i] == '\'' || *str[i] == '\"')
+			change_quote_state(*str[i], &state);
+		if (state.sq == OFF && *str[i] == '$' && !is_exit_status(&(*str[i]))
+				&& *str[i + 1] != '\0')
 		{
-			j = i + 1;
-			while (ft_isalnum(token->cmd[index][j]))
-				j++;
-			path_dup = custom_dup(token->cmd, i + 1, j);
-			if (!path_dup)
-				return (0);
-			if (!make_new_cmd_elem(token,index, path_dup))
-			{
-				free(path_dup);
-				return (0);
-			}
-			return (2);
+			exp->end_begin = i;
+			exp->var_name_index = i + 1;
+			while (*str[i] && ft_isalnum(*str[i]))
+				i++;
+			exp->start_end = i;
+			if (!expand(str, exp))
+				return (free_expan(exp));
 		}
+		i++;
 	}
 	return (1);
 }
@@ -96,7 +89,6 @@ int	expander(t_token **token, t_envlist *env_list)
 {
 	t_token	*tmp;
 	int		i;
-	int		expand_ret;
 
 	tmp = *token;
 	while (tmp)
@@ -104,21 +96,11 @@ int	expander(t_token **token, t_envlist *env_list)
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			expand_ret = expand_cmd(tmp, i);
-			if (expand_ret == 0)
+			if (!expand_cmd(&(tmp->cmd[i])))
 				return (0);
-			else if (expand_ret == 1)
-				i++;
+			i++;
 		}
-		i = 0;
-		while (tmp->target[i])
-		{
-			expand_ret = expand_target(tmp, i);
-			if (expand_ret == 0)
-				return (0);
-			else if (expand_ret == 1)
-				i++;
-		}
+		//TARGET EXPANSION
 		tmp = tmp->next;
 	}
 	return (1);

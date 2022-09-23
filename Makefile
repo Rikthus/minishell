@@ -29,7 +29,8 @@ LST_SRCS	:=	main.c				\
 				tokenizer.c			\
 				lexer.c				\
 				break_cmd.c			\
-				fill_token.c
+				fill_token.c		\
+				trim_quotes.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 
