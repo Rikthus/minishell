@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/23 20:42:23 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/23 21:20:26 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,26 @@ int	is_exit_status(char *str)
 int	cmd_part_len(int *i, char *cmd, int type)
 {
 	int		len;
-	char	quote;
+	t_state	state;
 
 	len = *i;
-	if (type == QUOTE)
-	{
-		quote = cmd[len];
-		len++;
-		while (cmd[len] != quote)
-			len++;
-		len++;
-	}
-	else if (type == REDIR)
+	state.sq = OFF;
+	state.dq = OFF;
+	if (type == REDIR)
 	{
 		while (cmd[len] == '<' || cmd[len] == '>')
 			len++;
 	}
 	else
 	{
-		while (cmd[len] && !ft_isspace(cmd[len]) && cmd[len] != '\''
-			&& cmd[len] != '\"' && cmd[len] != '<' && cmd[len] != '>')
+		while (cmd[len] && cmd[len] != '<' && cmd[len] != '>'
+				&& !(ft_isspace(cmd[len])
+			&& state.sq == OFF && state.dq == OFF))
+		{
+			if (cmd[len] == '\'' || cmd[len] == '\"')
+				change_quote_state(cmd[len], &state);
 			len++;
+		}
 	}
 	return (len - *i);
 }
@@ -71,6 +70,7 @@ int	change_quote_state(char quote, t_state *state)
 			state->dq = OFF;
 		return (CHANGED);
 	}
+	return (0);
 }
 
 char	*custom_strdup(char *str, int start, int end)
