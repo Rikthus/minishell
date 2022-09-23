@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:02:06 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/23 21:12:01 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 00:03:54 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static	int	trimmed_len(char *str)
 {
 	int		i;
+	int		len;
 	t_state	state;
 
 	i = 0;
+	len = 0;
 	state.sq = OFF;
 	state.dq = OFF;
 	while (str[i])
@@ -25,12 +27,13 @@ static	int	trimmed_len(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			if (!change_quote_state(str[i], &state))
-				i++;
+				len++;
 		}
 		else
-			i++;
+			len++;
+		i++;
 	}
-	return (i);
+	return (len);
 }
 
 static	void	cpy_trimmed(char **trimmed_str, char *str)
@@ -48,14 +51,22 @@ static	void	cpy_trimmed(char **trimmed_str, char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			if (!change_quote_state(str[i], &state))
-				*trimmed_str[j++] = str[i++];
+			{
+				trimmed_str[0][j] = str[i];
+				i++;
+				j++;
+			}
 			else
 				i++;
 		}
 		else
-			*trimmed_str[j++] = str[i++];
+		{
+			trimmed_str[0][j] = str[i];
+			j++;
+			i++;
+		}
 	}
-	*trimmed_str[j] = '\0';
+	trimmed_str[0][j] = '\0';
 }
 
 int	trim_quotes(char **str)
