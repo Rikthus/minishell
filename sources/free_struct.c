@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/18 14:58:27 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 19:44:52 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,17 @@ void	*free_elem(t_elem *elems)
 		free(previous);
 	}
 	return (NULL);
+}
+
+void	free_env(t_envlist *envlist)
+{
+	t_envlist	*previous;
+
+	while (envlist)
+	{
+		previous = envlist;
+		envlist = envlist->next;
+		free(previous->env_var);
+		free(previous);
+	}
 }

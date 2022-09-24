@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 14:58:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 21:42:22 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,65 @@ static	void	print_tokens(t_token *token)
 	}
 }
 
-static	int	controler(char *raw_line, char **envp)
+// static	void	print_env(t_envlist *env_list)
+// {
+// 	while (env_list)
+// 	{
+// 		printf("%s\n", env_list->env_var);
+// 		env_list = env_list->next;
+// 	}
+// }
+
+static	int	controler(char *raw_line, t_envlist *env_list)
 {
 	t_base	*basic_token;
 	t_token	*token;
 
-	(void)envp;
-	if (!raw_line || raw_line[0] == '\0' || !pre_parsing(raw_line))
-		return (free_rd_line(raw_line, 0));
+	if (!raw_line || raw_line[0] == '\0')
+		return (free_rd_line(raw_line, BAD_EXIT));
+	add_history(raw_line);
+	if (!pre_parsing(raw_line))
+		return (free_rd_line(raw_line, BAD_EXIT));
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
-		return (free_rd_line(raw_line, 0));
+		return (free_rd_line(raw_line, BAD_EXIT));
 	token = lexer(basic_token);
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
+	if (!expander(&token, env_list))
+	{
+		free_token(token);
+		return (free_rd_line(raw_line, BAD_EXIT));
+	}
 	print_tokens(token);
-	// expander(&token, envp);
 	// redir & exec
 	free_token(token);
-	return (free_rd_line(raw_line, 1));
+	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_envlist	*env_list;
+
 	(void)argv;
-	g_status = 0;
-	if (argc != 1)
+	g_status = 1;
+	if (argc != 1 || !isatty(1))
 	{
 		printf("Usage: ./minishell\n");
 		return (g_status);
 	}
+	env_list = make_env(envp);
+	if (!env_list)
+	{
+		printf("ERROR\n");
+		return (g_status);
+	}
 	while (1)
 	{
-		controler(readline("Maxine <3 "), envp);
+		controler(readline("Maxine <3 "), env_list);
 	}
+	free_env(env_list);
+	g_status = 0;
 	return (g_status);
 }

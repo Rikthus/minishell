@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/18 15:02:05 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 19:49:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,26 @@
 int	cmd_part_len(int *i, char *cmd, int type)
 {
 	int		len;
-	char	quote;
+	t_state	state;
 
 	len = *i;
-	if (type == QUOTE)
-	{
-		quote = cmd[len];
-		len++;
-		while (cmd[len] != quote)
-			len++;
-		len++;
-	}
-	else if (type == REDIR)
+	state.sq = OFF;
+	state.dq = OFF;
+	if (type == REDIR)
 	{
 		while (cmd[len] == '<' || cmd[len] == '>')
 			len++;
 	}
 	else
 	{
-		while (cmd[len] && !ft_isspace(cmd[len]) && cmd[len] != '\''
-			&& cmd[len] != '\"' && cmd[len] != '<' && cmd[len] != '>')
+		while (cmd[len] && cmd[len] != '<' && cmd[len] != '>'
+				&& !(ft_isspace(cmd[len])
+			&& state.sq == OFF && state.dq == OFF))
+		{
+			if (cmd[len] == '\'' || cmd[len] == '\"')
+				change_quote_state(cmd[len], &state);
 			len++;
+		}
 	}
 	return (len - *i);
 }
@@ -46,7 +45,7 @@ int	free_rd_line(char *line, int ret)
 	return (ret);
 }
 
-void	change_quote_state(char quote, t_state *state)
+int	change_quote_state(char quote, t_state *state)
 {
 	if (quote == '\'' && state->dq == OFF)
 	{
@@ -54,6 +53,7 @@ void	change_quote_state(char quote, t_state *state)
 			state->sq = ON;
 		else
 			state->sq = OFF;
+		return (CHANGED);
 	}
 	else if (quote == '\"' && state->sq == OFF)
 	{
@@ -61,5 +61,26 @@ void	change_quote_state(char quote, t_state *state)
 			state->dq = ON;
 		else
 			state->dq = OFF;
+		return (CHANGED);
 	}
+	return (0);
+}
+
+char	*custom_strdup(char *str, int start, int end)
+{
+	char	*dup;
+	int		i;
+
+	dup = malloc(sizeof(char) * ((end - start) + 2));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (start <= end)
+	{
+		dup[i] = str[start];
+		start++;
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

@@ -3,11 +3,11 @@ NAME	:= minishell
 CSAN	:=	-fsanitize=address -g3
 
 CC	:= gcc
-CFLAGS	:=	-Wall -Wextra -Werror
-# RLFLAGS		:=	-L /opt/homebrew/opt/readline/lib #max_home
-# RDFLAGS		:=	-I /opt/homebrew/opt/readline/include #max_home
-RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
-RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
+CFLAGS	:=	-Wall -Wextra -Werror #$(CSAN)
+RLFLAGS		:=	-L /opt/homebrew/opt/readline/lib #max_home
+RDFLAGS		:=	-I /opt/homebrew/opt/readline/include #max_home
+# RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
+# RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
 #RLFLAGS	:=	-L /usr/local/opt/readline/lib #cha_home
 #RDFLAGS	:=	-I /usr/local/opt/readline/include #cha_home
 #RLFLAGS	:=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
@@ -20,6 +20,7 @@ DIR_OBJS	:=	.objs
 DIR_LIBFT	:=	libft
 
 LST_SRCS	:=	main.c				\
+				make_env.c			\
 				utils.c				\
 				free_struct.c		\
 				free_memory.c		\
@@ -28,7 +29,10 @@ LST_SRCS	:=	main.c				\
 				tokenizer.c			\
 				lexer.c				\
 				break_cmd.c			\
-				fill_token.c
+				fill_token.c		\
+				trim_quotes.c		\
+				expander.c			\
+				expander_utils.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 
