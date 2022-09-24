@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/23 19:08:24 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 19:44:52 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,4 @@ void	free_env(t_envlist *envlist)
 		free(previous->env_var);
 		free(previous);
 	}
-}
-
-int		free_expan(t_expan *exp)
-{
-	free(exp->start_dup);
-	free(exp->end_dup);
-	free(exp->var_name_dup);
-	free(exp->var_dup);
-	free(exp);
-	return (0);
 }

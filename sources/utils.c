@@ -6,18 +6,11 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/23 21:20:26 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 19:49:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	is_exit_status(char *str)
-{
-	if (str[0] == '$' && str[1] == '?')
-		return (1);
-	return (0);
-}
 
 int	cmd_part_len(int *i, char *cmd, int type)
 {

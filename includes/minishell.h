@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/23 20:42:39 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/24 21:13:52 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ typedef struct s_token
 // EXPANSION STRUCT
 typedef struct s_expan
 {
-	int		end_begin;
-	int		start_end;
+	int		left_end;
+	int		right_begin;
 	int		var_name_index;
-	char	*start_dup;
-	char	*end_dup;
+	char	*left_dup;
+	char	*right_dup;
 	char	*var_name_dup;
 	char	*var_dup;
 }	t_expan;
@@ -156,11 +156,17 @@ int			trim_quotes(char **str);
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
-int			is_exit_status(char *str);
+// UTILS
 int			cmd_part_len(int *i, char *cmd, int type);
 int			free_rd_line(char *line, int ret);
-int		change_quote_state(char quote, t_state *state);
+int			change_quote_state(char quote, t_state *state);
 char		*custon_strdup(char *str, int start, int end);
+
+// EXPANDER_UTILS
+int			init_exp(char **str, t_expan *exp);
+int			comp_var_name(char *env_var, char *dup_var_name);
+int			dup_var(char *str, t_expan *exp);
+int			free_expan(t_expan *exp);
 
 // FREE_STRUCT
 void		free_basic_token(t_base *basic_token);
@@ -168,7 +174,6 @@ void		*free_token(t_token *token);
 void		*free_elem(t_elem *elems);
 void		free_elem_struct(t_elem *elems);
 void		free_env(t_envlist *envlist);
-int			free_expan(t_expan *exp);
 
 // FREE_MEMORY
 void		*free_split_error(char **array, int nb_pointer);
