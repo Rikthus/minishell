@@ -2,26 +2,27 @@
 
 ### A faire:
 
-- expansion des variables d'env
-**DONE**- trim quotes
+- expansion des variables d'env **DONE**
+- trim quotes 
 - redirections et exec (expansion du "$?")
 - gestion des signaux
-**DONE**- gestion de l'historique
+- gestion de l'historique **DONE**
 - built-ins
 
 
 
 ### BUGS:
 
-**DONE**- **Segfault if free(token->redir)**
-- (optional : checker si le terminal est un tty valid)
-**DONE**- (optional : $"lol")
-***DONE*- echo "lol"okep => lolokep (they are the same element)
- (the current shell treat "lol" and okep as separated elements)
+- **Segfault if free(token->redir)** **DONE**
+- (optional : checker si le terminal est un tty valid) **DONE**
+- (optional : $"lol") **DONE**
+- echo "lol"okep => lolokep (they are the same element)
+ (the current shell treat "lol" and okep as separated elements) **DONE**
+- bad quotes trimming
 
 
 
 
 
 **TEST LEAKS**
-while true; do leaks minishell; sleep 1.6; clear; done
+- while true; do leaks minishell; sleep 1.6; clear; done
