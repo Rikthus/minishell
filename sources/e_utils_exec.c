@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/25 02:37:27 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:51:50 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	**custom_envp(t_envlist *envp)
 	i = 0;
 	while (env)
 	{
-		ft_putstr(env->env_var);
 		i++;
 		env = env->next;
 	}
@@ -96,7 +95,7 @@ char	*exec_cmd(char	**cmds, char *env_path)
 	return (good_path);
 } */
 
-void	ft_putstr(char *str)
+/* void	ft_putstr(char *str)
 {
 	int	i;
 
@@ -106,26 +105,16 @@ void	ft_putstr(char *str)
 		write(1, &str[i], 1);
 		i++;
 	}
-}
+} */
 
-char	*prepare_commands(t_token *token)
+char	*prepare_commands(t_token *token, t_envlist *envp)
 {
 	char		*good_path;
 	char		*envp_path;
 	char		**tab_env;
-	t_envlist	*envp = NULL;
-	int			i;
 
 	good_path = NULL;
 	tab_env = custom_envp(envp);
-	write(1, "zz\n", 3);
-	i = 0;
-	while (tab_env[i])
-	{
-		ft_putstr(tab_env[i]);
-		//dprintf(1, "%s\n", tab_env[i]);
-		i++;
-	}
 	envp_path = env_path(tab_env);
 	if (find_absolute_path(token->cmd) == -1)
 		good_path = token->cmd[0];

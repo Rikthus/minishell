@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/25 02:21:39 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:50:06 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,8 @@ char		**pipe_split(char *str);
 //////////   UTILS_EXEC  ////////////
 /////////////////////////////////////
 
-char	*prepare_commands(t_token *token);
+char	*prepare_commands(t_token *token, t_envlist *envp);
+//char	*prepare_commands(t_token *token);
 //char	*exec_cmd(char	**cmds);
 char	*exec_cmd(char	**cmds, char *env_path);
 char	**custom_envp(t_envlist *envp);

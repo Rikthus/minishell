@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:33:36 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/25 02:28:16 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:51:05 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void choose_process(t_token *token, t_envlist *envp, int *pipeline, int *pipetmp
 	char	*good_path;
 	char	**env;
 
-	good_path = prepare_commands(token);
+	good_path = prepare_commands(token, envp);
 	if (!good_path)
 		return (perror(""));
 	env = custom_envp(envp);
@@ -117,10 +117,7 @@ void	exec(t_token *token, t_envlist *envp)
 		if (pid < 0)
 			return (perror(""));
 		if (pid == 0)
-		{
-			write(1, "hello\n", 6);
 			choose_process(token, envp, pipeline, pipetmp, i);
-		}
 		if (i > 0)
 			close(pipetmp[0]);
 		close(pipeline[1]);
