@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/25 22:51:50 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:56:02 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ char	**custom_envp(t_envlist *envp)
 	while (env)
 	{
 		tab_envp[i] = ft_strdup(env->env_var);
-		/* if (!tab_envp[i])
+		if (!tab_envp[i])
 		{
-			free;
+			free_2d_array(tab_envp);
 			return (NULL);
-		} */
+		}
 		i++;
 		env = env->next;
 	}

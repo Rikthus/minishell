@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/25 02:20:06 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/25 23:02:05 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	}
 	//print_tokens(token);
 	exec(token, env_list);
+	/* if (!exec(token, env_list))
+	{
+		free_token(token);
+		return(free_rd_line(raw_line, BAD_EXIT));
+	} */
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
