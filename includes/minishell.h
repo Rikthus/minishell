@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/24 21:13:52 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/25 02:21:39 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,16 @@ int			expander(t_token **token, t_envlist *env_list);
 int			trim_quotes(char **str);
 
 /////////////////////////////////////
+//////////     EXEC     ////////////
+/////////////////////////////////////
+
+//void	exec(t_token *token, char **envp);
+void	exec(t_token *token, t_envlist *envp);
+int		find_absolute_path(char **cmd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	**ft_split_mod(char const *s, char c);
+
+/////////////////////////////////////
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
@@ -181,5 +191,14 @@ void		*free_2d_array(char **array);
 
 // PIPE_SPLIT
 char		**pipe_split(char *str);
+
+/////////////////////////////////////
+//////////   UTILS_EXEC  ////////////
+/////////////////////////////////////
+
+char	*prepare_commands(t_token *token);
+//char	*exec_cmd(char	**cmds);
+char	*exec_cmd(char	**cmds, char *env_path);
+char	**custom_envp(t_envlist *envp);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/24 21:42:22 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/25 02:20:06 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void	print_tokens(t_token *token)
+/* static	void	print_tokens(t_token *token)
 {
 	int	i;
 	int	j;
@@ -35,7 +35,7 @@ static	void	print_tokens(t_token *token)
 		printf("\n\n\n");
 		token = token->next;
 	}
-}
+} */
 
 // static	void	print_env(t_envlist *env_list)
 // {
@@ -68,8 +68,8 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		free_token(token);
 		return (free_rd_line(raw_line, BAD_EXIT));
 	}
-	print_tokens(token);
-	// redir & exec
+	//print_tokens(token);
+	exec(token, env_list);
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
@@ -93,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (1)
 	{
-		controler(readline("Maxine <3 "), env_list);
+		controler(readline("Maxine ❤️ "), env_list);
 	}
 	free_env(env_list);
 	g_status = 0;
