@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 00:19:23 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:55:02 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	redir_outfile(t_env_token *e_t, int i)
 		//perror(target[i]);
 		return;
 	}
-	if (dup2(fd, 1) < 0)
+	if (dup2(fd, STDOUT_FILENO) < 0)
 	{
 		return(perror(""));
 	}

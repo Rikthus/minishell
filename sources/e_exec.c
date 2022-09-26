@@ -6,7 +6,7 @@
 /*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/26 22:46:55 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:26:15 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	exec(t_token *token, t_envlist *envp)
 			return (perror(""));
 		if (pid == 0)
 		{
-			//redir avec boucle
 			redirection(&env_token);
 			choose_process(&env_token, pipeline, pipetmp, i);
 		}
