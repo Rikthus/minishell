@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/24 21:42:22 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 21:39:02 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	if (!raw_line || raw_line[0] == '\0')
 		return (free_rd_line(raw_line, BAD_EXIT));
 	add_history(raw_line);
+	if (ft_strncmp("exit", raw_line, 4) == 0)
+		exit(0);
 	if (!pre_parsing(raw_line))
 		return (free_rd_line(raw_line, BAD_EXIT));
 	basic_token = tokenizer(raw_line);
@@ -74,28 +76,35 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
+static	void	init_global(void)
+{
+	g_mini.exit = 0;
+	g_mini.is_child = 0;
+	g_mini.child_pid = -1;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_envlist	*env_list;
 
 	(void)argv;
-	g_status = 1;
+	init_global();
+	signals();
 	if (argc != 1 || !isatty(1))
 	{
 		printf("Usage: ./minishell\n");
-		return (g_status);
+		return (g_mini.exit);
 	}
 	env_list = make_env(envp);
 	if (!env_list)
 	{
 		printf("ERROR\n");
-		return (g_status);
+		return (g_mini.exit);
 	}
 	while (1)
 	{
 		controler(readline("Maxine <3 "), env_list);
 	}
 	free_env(env_list);
-	g_status = 0;
-	return (g_status);
+	return (g_mini.exit);
 }

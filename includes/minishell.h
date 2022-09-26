@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/24 21:13:52 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 21:36:30 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,14 @@
 # define LAST_CMD 1
 # define INTER_CMD 2
 
-int	g_status;
+typedef struct	s_mini
+{
+	int	exit;
+	int	is_child;
+	int	child_pid;
+}	t_mini;
+
+t_mini	g_mini;
 
 //CUSTOM ENVP
 typedef struct s_envlist
@@ -151,6 +158,12 @@ int			expander(t_token **token, t_envlist *env_list);
 
 // TRIM_QUOTES
 int			trim_quotes(char **str);
+
+/////////////////////////////////////
+/////////     SIGNALS     ///////////
+/////////////////////////////////////
+void		signals(void);
+void		signal_handler(int signum);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
