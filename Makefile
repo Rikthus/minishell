@@ -37,7 +37,8 @@ LST_SRCS	:=	main.c				\
 				e_find_absolute_path.c \
 				e_ft_split_mod.c	\
 				e_ft_strjoin.c		\
-				e_utils_exec.c
+				e_utils_exec.c		\
+				e_redirection.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 

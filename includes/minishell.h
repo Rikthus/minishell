@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 18:49:06 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:23:39 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,9 @@ void		exec(t_token *token, t_envlist *envp);
 int			find_absolute_path(char **cmd);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split_mod(char const *s, char c);
+
+// REDIRECTION
+int			redirection(t_env_token *e_t);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
