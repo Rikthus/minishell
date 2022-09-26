@@ -3,74 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/24 22:19:55 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 16:32:12 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	int	full_len(t_expan exp)
-{
-	int	i;
-	int	full_len;
-
-	full_len = 0;
-	i = 0;
-	while (exp.left_dup[i])
-		i++;
-	full_len += i;
-	i = 0;
-	while (exp.right_dup[i])
-		i++;
-	full_len += i;
-	if (exp.var_dup)
-	{
-		i = 0;
-		while (exp.var_dup[i])
-			i++;
-		full_len += i;
-	}
-	return (full_len);
-}
-
 static	int	join_all(char **str, t_expan exp)
 {
 	char	*new_str;
-	int		i;
-	int		j;
 
-	new_str = malloc(sizeof(char) * (full_len(exp) + 1));
+	new_str = malloc(sizeof(char) * (full_line_len(exp) + 1));
 	if (!new_str)
 		return (free_expan(&exp));
-	i = 0;
-	j = 0;
-	while (exp.left_dup[i])
-	{
-		new_str[j] = exp.left_dup[i];
-		i++;
-		j++;
-	}
-	if (exp.var_dup)
-	{
-		i = 0;
-		while (exp.var_dup[i])
-		{
-			new_str[j] = exp.var_dup[i];
-			i++;
-			j++;
-		}
-	}
-	i = 0;
-	while (exp.right_dup[i])
-	{
-		new_str[j] = exp.right_dup[i];
-		i++;
-		j++;
-	}
-	new_str[j] = '\0';
+	cpy_full_line(exp, &new_str);
 	free(str[0]);
 	free_expan(&exp);
 	str[0] = new_str;
@@ -81,7 +30,7 @@ static	int	expand(char **str, t_envlist *env_list, t_expan exp)
 {
 	if (!init_exp(str, &exp))
 		return (0);
-	while(env_list)
+	while (env_list)
 	{
 		if (comp_var_name(env_list->env_var, exp.var_name_dup) == 0)
 		{
@@ -109,7 +58,7 @@ static	int	find_env_var(char **str, t_envlist *env_list)
 	{
 		if (str[0][i] == '\'' || str[0][i] == '\"')
 			change_quote_state(str[0][i], &state);
-		if (state.sq == OFF && str[0][i] == '$'  && str[0][i + 1] != '\0'
+		if (state.sq == OFF && str[0][i] == '$' && str[0][i + 1] != '\0'
 				&& str[0][i + 1] != '?')
 		{
 			exp.left_end = i;
@@ -123,6 +72,8 @@ static	int	find_env_var(char **str, t_envlist *env_list)
 		}
 		i++;
 	}
+	if (!trim_quotes(str))
+		return (0);
 	return (1);
 }
 

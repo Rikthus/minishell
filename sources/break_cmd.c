@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   break_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 13:12:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/23 21:20:49 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 15:39:21 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,30 @@ static	char	*dup_redir(int *i, char *cmd)
 	return (dup);
 }
 
+static	void	cpy_cmd_part(int *i, char *cmd, char **dup)
+{
+	int		j;
+	t_state	state;
+
+	j = 0;
+	state.sq = OFF;
+	state.dq = OFF;
+	while (cmd[*i] && cmd[*i] != '<' && cmd[*i] != '>'
+		&& !(ft_isspace(cmd[*i])
+			&& state.sq == OFF && state.dq == OFF))
+	{
+		if (cmd[*i] == '\'' || cmd[*i] == '\"')
+			change_quote_state(cmd[*i], &state);
+		dup[0][j] = cmd[*i];
+		*i += 1;
+		j++;
+	}
+	dup[0][j] = '\0';
+}
+
 static	char	*cmd_part_dup(int *i, char *cmd)
 {
 	char	*dup;
-	int		j;
 	t_state	state;
 
 	state.sq = OFF;
@@ -46,18 +66,7 @@ static	char	*cmd_part_dup(int *i, char *cmd)
 		dup = malloc(sizeof(char) * (cmd_part_len(i, cmd, WORD) + 1));
 		if (!dup)
 			return (NULL);
-		j = 0;
-		while (cmd[*i] && cmd[*i] != '<' && cmd[*i] != '>'
-				&& !(ft_isspace(cmd[*i])
-			&& state.sq == OFF && state.dq == OFF))
-		{
-			if (cmd[*i] == '\'' || cmd[*i] == '\"')
-				change_quote_state(cmd[*i], &state);
-			dup[j] = cmd[*i];
-			*i += 1;
-			j++;
-		}
-		dup[j] = '\0';
+		cpy_cmd_part(i, cmd, &dup);
 		return (dup);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:02:06 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/24 00:03:54 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 16:02:40 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int	trim_quotes(char **str)
 	cpy_trimmed(&trimmed_str, *str);
 	free(*str);
 	*str = trimmed_str;
-	return (1); 
+	return (1);
 }
