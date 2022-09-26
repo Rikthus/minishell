@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 00:13:19 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/09/27 01:15:22 by tulipe            #+#    #+#             */
+/*   Updated: 2022/09/27 01:32:47 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-void	signal_handler(int signum)
+int	main(int argc, char **argv)
 {
-	if (signum == SIGINT && !g_mini.is_child)
+	int	option;
+	int	i;
+
+	option = 0;
+	i = 1;
+	if (argc > 1)
 	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (ft_strncmp(argv[1], "-n", 3) == 0)
+			option = 1;
+		i++;
 	}
-	else if (signum == SIGINT && g_mini.is_child)
-		kill(g_mini.child_pid, SIGKILL);
-	else
-		return ;
-}
-
-void	signals(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+	while (argv[i])
+	{
+		printf("%s", argv[i]);
+		i++;
+		if (argv[i])
+			printf(" ");
+	}
+	if (!option)
+		printf("\n");
+	return (0);
 }

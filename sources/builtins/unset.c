@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 00:13:19 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
+/*   Updated: 2022/09/27 01:15:04 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	signal_handler(int signum)
+//test
+int	is_valid_env(char *str)
 {
-	if (signum == SIGINT && !g_mini.is_child)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
 	}
-	else if (signum == SIGINT && g_mini.is_child)
-		kill(g_mini.child_pid, SIGKILL);
-	else
-		return ;
+	return (1);
 }
 
-void	signals(void)
+int	main(int argc, char **argv)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+	t_envlist	*previous;
+	t_envlist	*actual;
+	t_envlist	*follow;
+
+	if (argc > 1)
+	{
+		if (argv[1][0] == '-' || !is_valid_env(argv[1]))
+			return (1);
+	}
+	actual = g_mini.env_list;
+	lst_removeif();
 }

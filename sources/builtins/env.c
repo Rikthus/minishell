@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 00:13:19 by tulipe           ###   ########lyon.fr   */
+/*   Created: 2022/09/27 00:47:19 by tulipe            #+#    #+#             */
+/*   Updated: 2022/09/27 00:54:27 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	signal_handler(int signum)
+int	main(int argc, char **argv)
 {
-	if (signum == SIGINT && !g_mini.is_child)
+	t_envlist	*tmp_envlist;
+	
+	if (argc > 1)
+		return (1);
+	tmp_envlist = g_mini.env_list;
+	while (tmp_envlist)
 	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		printf("%s\n", tmp_envlist->env_var);
+		tmp_envlist = tmp_envlist->next;
 	}
-	else if (signum == SIGINT && g_mini.is_child)
-		kill(g_mini.child_pid, SIGKILL);
-	else
-		return ;
-}
-
-void	signals(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+	return (0);
 }

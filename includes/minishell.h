@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 21:36:30 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 00:49:19 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@
 
 typedef struct	s_mini
 {
-	int	exit;
-	int	is_child;
-	int	child_pid;
+	int			exit;
+	int			is_child;
+	int			child_pid;
+	t_envlist	*env_list;
 }	t_mini;
 
 t_mini	g_mini;
