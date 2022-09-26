@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/26 19:21:32 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:46:55 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	exec(t_token *token, t_envlist *envp)
 		if (pid == 0)
 		{
 			//redir avec boucle
-			redir(&env_token);
+			redirection(&env_token);
 			choose_process(&env_token, pipeline, pipetmp, i);
 		}
 		if (i > 0)

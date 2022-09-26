@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 19:23:39 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:47:59 by charline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split_mod(char const *s, char c);
 
 // REDIRECTION
-int			redirection(t_env_token *e_t);
+void		redirection(t_env_token *e_t);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
