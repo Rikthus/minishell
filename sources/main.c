@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/24 21:42:22 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 19:38:48 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	g_status = 1;
-	if (argc != 1 || !isatty(1))
+	if (argc != 1 || !isatty(STDIN_FILENO))
 	{
 		printf("Usage: ./minishell\n");
 		return (g_status);
 	}
+	launch_terms();
 	env_list = make_env(envp);
 	if (!env_list)
 	{
