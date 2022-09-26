@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_utils_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/25 22:56:02 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:09:30 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*env_path(char **envp)
 
 char	**custom_envp(t_envlist *envp)
 {
-	t_envlist 	*env;
+	t_envlist	*env;
 	char		**tab_envp;
 	int			i;
-	
+
 	env = envp;
 	i = 0;
 	while (env)
@@ -52,7 +52,7 @@ char	**custom_envp(t_envlist *envp)
 		env = env->next;
 	}
 	tab_envp[i] = NULL;
-	return(tab_envp);
+	return (tab_envp);
 }
 
 char	*exec_cmd(char	**cmds, char *env_path)

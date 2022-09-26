@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/25 22:50:06 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:49:06 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,23 @@ typedef struct s_state
 	int	dq;
 }	t_state;
 
+// // PIPE STRUCT
+
+// typedef struct s_pipes
+// {
+// 	t_token	*token;
+// 	int		pipeline[2];
+// 	int		pipetmp[2];
+// }	t_pipes;
+
+// ENV_TOKEN STRUCT
+typedef struct s_env_token
+{
+	t_token		*token;
+	t_envlist	*envp;
+	char		**env;
+}	t_env_token;
+
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -157,10 +174,10 @@ int			trim_quotes(char **str);
 /////////////////////////////////////
 
 //void	exec(t_token *token, char **envp);
-void	exec(t_token *token, t_envlist *envp);
-int		find_absolute_path(char **cmd);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	**ft_split_mod(char const *s, char c);
+void		exec(t_token *token, t_envlist *envp);
+int			find_absolute_path(char **cmd);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		**ft_split_mod(char const *s, char c);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
@@ -196,10 +213,10 @@ char		**pipe_split(char *str);
 //////////   UTILS_EXEC  ////////////
 /////////////////////////////////////
 
-char	*prepare_commands(t_token *token, t_envlist *envp);
-//char	*prepare_commands(t_token *token);
-//char	*exec_cmd(char	**cmds);
-char	*exec_cmd(char	**cmds, char *env_path);
-char	**custom_envp(t_envlist *envp);
+char		*prepare_commands(t_token *token, t_envlist *envp);
+//char		*prepare_commands(t_token *token);
+//char		*exec_cmd(char	**cmds);
+char		*exec_cmd(char	**cmds, char *env_path);
+char		**custom_envp(t_envlist *envp);
 
 #endif
