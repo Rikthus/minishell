@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 22:47:59 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:11:42 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_index
 // LEXER STRUCT
 typedef struct s_token
 {
-	int				exec_pos;
 	char			**cmd;
 	int				*redir;
 	char			**target;
@@ -137,6 +136,7 @@ typedef struct s_state
 // ENV_TOKEN STRUCT
 typedef struct s_env_token
 {
+	int			old_stdout;
 	t_token		*token;
 	t_envlist	*envp;
 	char		**env;

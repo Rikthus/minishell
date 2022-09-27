@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 00:26:15 by charline         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:13:57 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p)
 	close(pipetmp[0]);
 	close(pipeline[1]);
 	close(pipeline[0]);
+	redirection(e_t);
 	if (execve(g_p, e_t->token->cmd, e_t->env) == -1)
 	{
 		perror("Could not execute execve middle process");
@@ -33,6 +34,9 @@ void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
 		exit(1);
 	close(pipetmp[0]);
+	redirection(e_t);
+	if (dup2(e_t->old_stdout, 1) == -1)
+		return (perror(""));
 	if (execve(good_path, e_t->token->cmd, e_t->env) == -1)
 	{
 		perror("Could not execute execve last process");
@@ -44,6 +48,7 @@ void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 {
 	if (e_t->token->next == NULL)
 	{
+		redirection(e_t);
 		if (execve(good_path, e_t->token->cmd, e_t->env) == -1)
 		{
 			perror("Could not execute execve");
@@ -56,6 +61,7 @@ void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 			exit(1);
 		close(pipeline[1]);
 		close(pipeline[0]);
+		redirection(e_t);
 		if (execve(good_path, e_t->token->cmd, e_t->env) == -1)
 		{
 			perror("Could not execute execve first process");
@@ -105,6 +111,7 @@ void	exec(t_token *token, t_envlist *envp)
 
 	env_token.token = token;
 	env_token.envp = envp;
+	env_token.old_stdout = dup(STDOUT_FILENO);
 	if (pipe(pipeline) == -1)
 		return (perror(""));
 	i = 0;
@@ -115,7 +122,7 @@ void	exec(t_token *token, t_envlist *envp)
 			return (perror(""));
 		if (pid == 0)
 		{
-			redirection(&env_token);
+			/* redirection(&env_token); */
 			choose_process(&env_token, pipeline, pipetmp, i);
 		}
 		if (i > 0)
