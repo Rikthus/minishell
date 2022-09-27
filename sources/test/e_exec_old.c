@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:33:36 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/26 18:44:28 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:23:43 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,15 @@ void	choose_process(t_token *token, t_envlist *envp,
 
 void	wait_norm_exec(int i)
 {
+	int status;
+
 	while (i > 0)
 	{
-		wait(NULL);
+		wait(&status);
+		if (WIFSIGNALED(status))
+		{
+			
+		}
 		i--;
 	}
 	//while (--i >= 0)

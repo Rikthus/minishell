@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 16:13:57 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:02:31 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,18 @@ void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
 
 void	wait_norm_exec(int i)
 {
+	/* int status;
+	wait(&status);
+
+	printf("Status: %d\n");
+	if (WIFSIGNALED(status))
+	{
+		printf("Mort par le signal %d\n", WTERMSIG(status));
+	}
+	else
+	{
+		printf("Exited normally with code %d\n", WEXITSTATUS(status));
+	} */
 	while (i > 0)
 	{
 		wait(NULL);
@@ -121,10 +133,7 @@ void	exec(t_token *token, t_envlist *envp)
 		if (pid < 0)
 			return (perror(""));
 		if (pid == 0)
-		{
-			/* redirection(&env_token); */
 			choose_process(&env_token, pipeline, pipetmp, i);
-		}
 		if (i > 0)
 			close(pipetmp[0]);
 		close(pipeline[1]);
