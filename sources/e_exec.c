@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 17:24:19 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:05:14 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,31 @@
 
 void	wait_exec(int i)
 {
-	/* int status;
-	wait(&status);
+	int	status;
 
-	printf("Status: %d\n");
-	if (WIFSIGNALED(status))
-	{
-		printf("Mort par le signal %d\n", WTERMSIG(status));
-	}
-	else
-	{
-		printf("Exited normally with code %d\n", WEXITSTATUS(status));
-	} */
 	while (i > 0)
+	{
+		wait(&status);
+		//printf("Status: %d\n", status);
+		if (WIFSIGNALED(status))
+		{
+			//perror("WTERMSIG(status)");
+			if (status == 10)
+				printf("Bus error: %d\n", WTERMSIG(status));
+			else if (status == 11)
+				printf("Segmentation fault: %d\n", WTERMSIG(status));
+		}
+		else if (WIFEXITED(status))
+		{
+			//printf("Exited normally with code %d\n", WEXITSTATUS(status));
+		}
+		i--;
+	}
+	/* while (i > 0)
 	{
 		wait(NULL);
 		i--;
-	}
+	} */
 	//while (--i >= 0)
 	//	wait(NULL);
 }
