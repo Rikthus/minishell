@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 16:11:42 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:27:24 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,10 @@ char		**ft_split_mod(char const *s, char c);
 
 // REDIRECTION
 void		redirection(t_env_token *e_t);
+
+// PIPES
+void		choose_process(t_env_token *e_t,
+				int *pipeline, int *pipetmp, int i);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

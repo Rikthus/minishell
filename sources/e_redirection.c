@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 15:04:19 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:28:08 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	redir_infile(t_env_token *e_t, int i)
 	if (fd < 0)
 	{
 		//perror(target[i]);
-		return;
+		return ;
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{
-		return(perror(""));
+		return (perror(""));
 	}
-	close(fd); //
+	close(fd);
 }
 
 void	redir_append(t_env_token *e_t, int i)
@@ -37,11 +37,11 @@ void	redir_append(t_env_token *e_t, int i)
 	if (fd < 0)
 	{
 		//perror(target[i]);
-		return;
+		return ;
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0)
 	{
-		return(perror(""));
+		return (perror(""));
 	}
 	close(fd);
 }
@@ -54,11 +54,11 @@ void	redir_outfile(t_env_token *e_t, int i)
 	if (fd < 0)
 	{
 		//perror(target[i]);
-		return;
+		return ;
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0)
 	{
-		return(perror(""));
+		return (perror(""));
 	}
 	close(fd);
 }

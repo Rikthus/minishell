@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/26 16:09:30 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:38:24 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ char	*env_path(char **envp)
 	return (envp[i]);
 }
 
+int	find_size_env(t_envlist *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
 char	**custom_envp(t_envlist *envp)
 {
 	t_envlist	*env;
@@ -29,12 +42,7 @@ char	**custom_envp(t_envlist *envp)
 	int			i;
 
 	env = envp;
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
+	i = find_size_env(env);
 	tab_envp = malloc(sizeof(char *) * (i + 1));
 	if (!tab_envp)
 		return (NULL);
@@ -74,39 +82,6 @@ char	*exec_cmd(char	**cmds, char *env_path)
 	return (good_path);
 }
 
-/* char	*exec_cmd(char	**cmds)
-{
-	char	*env_path;
-	char	**tab_paths;
-	char	*a_path;
-	char	*good_path;
-	int		i;
-
-	i = 0;
-	env_path = getenv("PATH");
-	tab_paths = ft_split_mod(env_path, ':');
-	while (tab_paths[i])
-	{
-		a_path = ft_strjoin(tab_paths[i], cmds[0]);
-		if (access(a_path, X_OK) == 0)
-			good_path = a_path;
-		i++;
-	}
-	return (good_path);
-} */
-
-/* void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-} */
-
 char	*prepare_commands(t_token *token, t_envlist *envp)
 {
 	char		*good_path;
@@ -122,15 +97,3 @@ char	*prepare_commands(t_token *token, t_envlist *envp)
 		good_path = exec_cmd(token->cmd, envp_path);
 	return (good_path);
 }
-
-/* char	*prepare_commands(t_token *token)
-{
-	char		*good_path;
-
-	good_path = NULL;
-	if (find_absolute_path(token->cmd) == -1)
-		good_path = token->cmd[0];
-	else if (find_absolute_path(token->cmd) == 0)
-		good_path = exec_cmd(token->cmd);
-	return (good_path);
-} */
