@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 18:16:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 20:05:13 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void	print_tokens(t_token *token)
-{
-	int	i;
-	int	j;
+// static	void	print_tokens(t_token *token)
+// {
+// 	int	i;
+// 	int	j;
 
-	while (token)
-	{
-		i = 0;
-		j = 0;
-		while (token->cmd[i])
-		{
-			printf("%s\n", token->cmd[i]);
-			i++;
-		}
-		printf("\n");
-		while (token->target[j])
-		{
-			printf("%d   %s\n", token->redir[j], token->target[j]);
-			j++;
-		}
-		printf("\n\n\n");
-		token = token->next;
-	}
-}
+// 	while (token)
+// 	{
+// 		i = 0;
+// 		j = 0;
+// 		while (token->cmd[i])
+// 		{
+// 			printf("%s\n", token->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("\n");
+// 		while (token->target[j])
+// 		{
+// 			printf("%d   %s\n", token->redir[j], token->target[j]);
+// 			j++;
+// 		}
+// 		printf("\n\n\n");
+// 		token = token->next;
+// 	}
+// }
 
 // static	void	print_env(t_envlist *env_list)
 // {
@@ -72,8 +72,8 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		free_token(token);
 		return (free_rd_line(raw_line, BAD_EXIT));
 	}
-	print_tokens(token);
-	// redir & exec
+	//print_tokens(token);
+	exec(token, env_list); //retour erreur
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 17:49:47 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 20:03:20 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,15 @@ typedef struct s_state
 	int	dq;
 }	t_state;
 
+// EXEC STRUCT
+typedef struct s_env_token
+{
+	int			old_stdout;
+	t_token		*token;
+	t_envlist	*envp;
+	char		**env;
+}	t_env_token;
+
 typedef struct s_mini
 {
 	int			exit;
@@ -201,5 +210,35 @@ void		*free_2d_array(char **array);
 
 // PIPE_SPLIT
 char		**pipe_split(char *str);
+
+//////////////////////////////////////////////
+//////////////      EXEC      ////////////////
+//////////////////////////////////////////////
+void		wait_exec(int i);
+void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
+void		exec(t_token *token, t_envlist *envp);
+
+int			find_absolute_path(char **cmd);
+
+void		free_all(char **test, int i);
+char		**ft_split_mod(char const *s, char c);
+
+char		*ft_strjoin_mini(char const *s1, char const *s2);
+
+void		inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p);
+void		last_process(t_env_token *e_t, int *pipetmp, char *goodpath);
+void		first_process(t_env_token *e_t, int *pipeline, char *goodpath);
+void		choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i);
+
+void		redir_infile(t_env_token *e_t, int i);
+void		redir_append(t_env_token *e_t, int i);
+void		redir_outfile(t_env_token *e_t, int i);
+void		redirection(t_env_token *e_t);
+
+char		*env_path(char **envp);
+int			find_size_env(t_envlist *env);
+char		**custom_envp(t_envlist *envp);
+char		*exec_cmd(char **cmds, char *enc_path);
+char		*prepare_commands(t_token *token, t_envlist *envp);
 
 #endif

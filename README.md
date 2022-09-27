@@ -20,7 +20,7 @@
  (the current shell treat "lol" and okep as separated elements) **DONE**
 - bad quotes trimming **PARTIALLY DONE**
 
-
+- BUG : PIPE NON SUIVI D'UNE COMMANDE
 
 
 
