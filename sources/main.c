@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 16:59:16 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 18:16:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	if (ft_strncmp("exit", raw_line, 4) == 0)
 		exit(0);
 	if (!pre_parsing(raw_line))
-		return (free_rd_line(raw_line, BAD_EXIT));
+		return (free_rd_line(raw_line, GOOD_EXIT));
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
 		return (free_rd_line(raw_line, BAD_EXIT));
@@ -78,29 +78,22 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
-static	void	init_global(void)
-{
-	g_mini.exit = 0;
-	
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_envlist	*env_list;
 
 	(void)argv;
-	init_global();
 	signal_mini();
 	if (argc != 1 || !isatty(1))
 	{
 		printf("Usage: ./minishell\n");
-		return (g_mini.exit);
+		return (0);
 	}
 	env_list = make_env(envp);
 	if (!env_list)
 	{
 		printf("ERROR\n");
-		return (g_mini.exit);
+		return (0);
 	}
 	while (1)
 	{
@@ -109,5 +102,5 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	free_env(env_list);
-	return (g_mini.exit);
+	return (0);
 }

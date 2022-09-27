@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:02:06 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/24 00:03:54 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 18:14:53 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ static	int	trimmed_len(char *str)
 	return (len);
 }
 
+static	void	cpy_trim_norm(char **trimmed_str, char *str, int *i, int *j)
+{
+	trimmed_str[0][*j] = str[*i];
+	*j += 1;
+	*i += 1;
+}
+
 static	void	cpy_trimmed(char **trimmed_str, char *str)
 {
 	int		i;
@@ -60,11 +67,7 @@ static	void	cpy_trimmed(char **trimmed_str, char *str)
 				i++;
 		}
 		else
-		{
-			trimmed_str[0][j] = str[i];
-			j++;
-			i++;
-		}
+			cpy_trim_norm(trimmed_str, str, &i, &j);
 	}
 	trimmed_str[0][j] = '\0';
 }
@@ -83,5 +86,5 @@ int	trim_quotes(char **str)
 	cpy_trimmed(&trimmed_str, *str);
 	free(*str);
 	*str = trimmed_str;
-	return (1); 
+	return (1);
 }

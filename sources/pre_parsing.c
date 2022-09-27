@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/26 23:54:33 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 17:24:14 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	int	check_char(char c)
 {
 	if (!ft_isalnum(c) && !ft_isspace(c) && c != '-' && c != '\'' && c != '\"'
 		&& c != '$' && c != '<' && c != '>' && c != '|' && c != '/'
-			&& c != '=' && c != '.')
+		&& c != '=' && c != '.')
 		return (0);
 	return (1);
 }
