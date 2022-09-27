@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 21:00:39 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 21:52:45 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 
 	if (!raw_line)
 		return (free_rd_line(raw_line, BAD_EXIT));
+	signal_mini();
 	if (raw_line[0] == '\0')
 		return (free_rd_line(raw_line, GOOD_EXIT));
 	add_history(raw_line);
@@ -95,7 +96,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (1)
 	{
-		// signal_exec(); PUT INSIDE EXEC
 		if (!controler(readline("Maxine <3 "), env_list))
 			break ;
 	}

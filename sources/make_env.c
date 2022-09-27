@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:12:04 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/18 17:39:41 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 21:55:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ static	t_envlist	*add_env_elem(char *str)
 	new = malloc(sizeof(t_envlist));
 	if (!new)
 		return (NULL);
+	new->next = NULL;
+	if (!str)
+	{
+		new->env_var = NULL;
+		return (new);
+	}
 	new->env_var = ft_strdup(str);
 	if (!(new->env_var))
 	{
 		free(new);
 		return (NULL);
 	}
-	new->next = NULL;
 	return (new);
 }
 
@@ -35,6 +40,8 @@ t_envlist	*make_env(char **envp)
 	t_envlist	*tmp;
 	int			i;
 
+	if (!envp[0])
+		return (add_env_elem(NULL));
 	env_list = add_env_elem(envp[0]);
 	if (!env_list)
 		return (NULL);
