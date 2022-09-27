@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 13:12:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/26 15:39:21 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 17:33:16 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ static	void	cpy_cmd_part(int *i, char *cmd, char **dup)
 static	char	*cmd_part_dup(int *i, char *cmd)
 {
 	char	*dup;
-	t_state	state;
 
-	state.sq = OFF;
-	state.dq = OFF;
 	if (cmd[*i] == '<' || cmd[*i] == '>')
 		return (dup_redir(i, cmd));
 	else

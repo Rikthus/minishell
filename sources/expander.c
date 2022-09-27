@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/26 16:32:12 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 18:09:42 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,23 @@ static	int	expand(char **str, t_envlist *env_list, t_expan exp)
 	return (1);
 }
 
-static	int	find_env_var(char **str, t_envlist *env_list)
+static	int	launch_expand(char **str, t_envlist *env_list, int *i)
 {
 	t_expan	exp;
+
+	exp.left_end = *i;
+	exp.var_name_index = *i + 1;
+	*i += 1;
+	while (str[0][*i] && ft_isalnum(str[0][*i]))
+		*i += 1;
+	exp.right_begin = *i;
+	if (!expand(str, env_list, exp))
+		return (0);
+	return (1);
+}
+
+static	int	find_env_var(char **str, t_envlist *env_list)
+{
 	t_state	state;
 	int		i;
 
@@ -58,16 +72,10 @@ static	int	find_env_var(char **str, t_envlist *env_list)
 	{
 		if (str[0][i] == '\'' || str[0][i] == '\"')
 			change_quote_state(str[0][i], &state);
-		if (state.sq == OFF && str[0][i] == '$' && str[0][i + 1] != '\0'
-				&& str[0][i + 1] != '?')
+		if (state.sq == OFF && str[0][i] == '$'
+			&& str[0][i + 1] != '\0' && str[0][i + 1] != '?')
 		{
-			exp.left_end = i;
-			exp.var_name_index = i + 1;
-			i++;
-			while (str[0][i] && ft_isalnum(str[0][i]))
-				i++;
-			exp.right_begin = i;
-			if (!expand(str, env_list, exp))
+			if (!launch_expand(str, env_list, &i))
 				return (0);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 17:16:35 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 18:16:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	if (raw_line[0] == '\0')
 		return (free_rd_line(raw_line, GOOD_EXIT));
 	add_history(raw_line);
+	if (ft_strncmp("exit", raw_line, 4) == 0)
+		exit(0);
 	if (!pre_parsing(raw_line))
-		return (free_rd_line(raw_line, BAD_EXIT));
+		return (free_rd_line(raw_line, GOOD_EXIT));
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
 		return (free_rd_line(raw_line, BAD_EXIT));
@@ -81,7 +83,8 @@ int	main(int argc, char **argv, char **envp)
 	t_envlist	*env_list;
 
 	(void)argv;
-	if (argc != 1 || !isatty(STDIN_FILENO))
+	signal_mini();
+	if (argc != 1 || !isatty(1))
 	{
 		printf("Usage: ./minishell\n");
 		return (0);
@@ -94,6 +97,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (1)
 	{
+		// signal_exec(); PUT INSIDE EXEC
 		if (!controler(readline("Maxine <3 "), env_list))
 			break ;
 	}
