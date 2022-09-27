@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 12:50:06 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 16:59:16 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	t_base	*basic_token;
 	t_token	*token;
 
-	if (!raw_line || raw_line[0] == '\0')
+	if (!raw_line)
 		return (free_rd_line(raw_line, BAD_EXIT));
+	if (raw_line[0] == '\0')
+		return (free_rd_line(raw_line, GOOD_EXIT));
 	add_history(raw_line);
 	if (ft_strncmp("exit", raw_line, 4) == 0)
 		exit(0);
@@ -79,8 +81,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 static	void	init_global(void)
 {
 	g_mini.exit = 0;
-	g_mini.is_child = 0;
-	g_mini.child_pid = -1;
+	
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -89,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	init_global();
-	signals();
+	signal_mini();
 	if (argc != 1 || !isatty(1))
 	{
 		printf("Usage: ./minishell\n");
@@ -103,7 +104,9 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (1)
 	{
-		controler(readline("Maxine <3 "), env_list);
+		// signal_exec(); PUT INSIDE EXEC
+		if (!controler(readline("Maxine <3 "), env_list))
+			break ;
 	}
 	free_env(env_list);
 	return (g_mini.exit);

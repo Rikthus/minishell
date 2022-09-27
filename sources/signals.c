@@ -6,29 +6,41 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 12:54:00 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 16:52:03 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	signal_handler(int signum)
+void	handle_shell(int signum)
 {
-	if (signum == SIGINT && !g_mini.is_child)
+	if (signum == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (signum == SIGINT && g_mini.is_child)
-		kill(g_mini.child_pid, SIGKILL);
 	else
 		return ;
 }
 
-void	signals(void)
+void	handle_exec(int signum)
+{
+	if (signum == SIGINT || signum == SIGQUIT)
+		printf("\n");
+	else
+		return ;
+}
+
+void	signal_exec(void)
+{
+	signal(SIGQUIT, handle_exec);
+	signal(SIGINT, handle_exec);
+}
+
+void	signal_mini(void)
 {
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+	signal(SIGINT, handle_shell);
 }

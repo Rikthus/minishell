@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 12:50:25 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 16:59:02 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,6 @@
 # define FIRST_CMD 0
 # define LAST_CMD 1
 # define INTER_CMD 2
-
-typedef struct	s_mini
-{
-	int			exit;
-	int			is_child;
-	int			child_pid;
-}	t_mini;
-
-t_mini	g_mini;
 
 //CUSTOM ENVP
 typedef struct s_envlist
@@ -132,6 +123,14 @@ typedef struct s_state
 	int	dq;
 }	t_state;
 
+typedef struct s_mini
+{
+	int			exit;
+	t_envlist	*env_list;
+}	t_mini;
+
+typedef t_mini	g_mini;
+
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -162,8 +161,10 @@ int			trim_quotes(char **str);
 /////////////////////////////////////
 /////////     SIGNALS     ///////////
 /////////////////////////////////////
-void		signals(void);
-void		signal_handler(int signum);
+void		signal_mini(void);
+void		signal_exec(void);
+void		handle_shell(int signum);
+void		handle_exec(int signum);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

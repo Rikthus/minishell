@@ -3,9 +3,9 @@
 ### A faire:
 
 - expansion des variables d'env **DONE**
-- trim quotes 
+- trim quotes **PARTIALLY DONE**
 - redirections et exec (expansion du "$?")
-- gestion des signaux
+- gestion des signaux **PARTIALLY DONE** (see blocking cmd: grep and cat)
 - gestion de l'historique **DONE**
 - built-ins
 
@@ -18,7 +18,7 @@
 - (optional : $"lol") **DONE**
 - echo "lol"okep => lolokep (they are the same element)
  (the current shell treat "lol" and okep as separated elements) **DONE**
-- bad quotes trimming
+- bad quotes trimming **PARTIALLY DONE**
 
 
 
