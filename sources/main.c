@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 00:49:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 12:50:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	main(int argc, char **argv, char **envp)
 		printf("ERROR\n");
 		return (g_mini.exit);
 	}
-	g_mini.env_list = env_list;
 	while (1)
 	{
 		controler(readline("Maxine <3 "), env_list);
