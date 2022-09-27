@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 19:38:48 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 17:16:35 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	t_base	*basic_token;
 	t_token	*token;
 
-	if (!raw_line || raw_line[0] == '\0')
+	if (!raw_line)
 		return (free_rd_line(raw_line, BAD_EXIT));
+	if (raw_line[0] == '\0')
+		return (free_rd_line(raw_line, GOOD_EXIT));
 	add_history(raw_line);
 	if (!pre_parsing(raw_line))
 		return (free_rd_line(raw_line, BAD_EXIT));
@@ -79,24 +81,22 @@ int	main(int argc, char **argv, char **envp)
 	t_envlist	*env_list;
 
 	(void)argv;
-	g_status = 1;
 	if (argc != 1 || !isatty(STDIN_FILENO))
 	{
 		printf("Usage: ./minishell\n");
-		return (g_status);
+		return (0);
 	}
-	launch_terms();
 	env_list = make_env(envp);
 	if (!env_list)
 	{
 		printf("ERROR\n");
-		return (g_status);
+		return (0);
 	}
 	while (1)
 	{
-		controler(readline("Maxine <3 "), env_list);
+		if (!controler(readline("Maxine <3 "), env_list))
+			break ;
 	}
 	free_env(env_list);
-	g_status = 0;
-	return (g_status);
+	return (0);
 }

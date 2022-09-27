@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/26 15:19:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 16:59:02 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@
 # define FIRST_CMD 0
 # define LAST_CMD 1
 # define INTER_CMD 2
-
-int	g_status;
 
 //CUSTOM ENVP
 typedef struct s_envlist
@@ -125,6 +123,14 @@ typedef struct s_state
 	int	dq;
 }	t_state;
 
+typedef struct s_mini
+{
+	int			exit;
+	t_envlist	*env_list;
+}	t_mini;
+
+typedef t_mini	g_mini;
+
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -153,6 +159,14 @@ int			expander(t_token **token, t_envlist *env_list);
 int			trim_quotes(char **str);
 
 /////////////////////////////////////
+/////////     SIGNALS     ///////////
+/////////////////////////////////////
+void		signal_mini(void);
+void		signal_exec(void);
+void		handle_shell(int signum);
+void		handle_exec(int signum);
+
+/////////////////////////////////////
 //////////     UTILS     ////////////
 /////////////////////////////////////
 
@@ -162,17 +176,11 @@ int			free_rd_line(char *line, int ret);
 int			change_quote_state(char quote, t_state *state);
 char		*custon_strdup(char *str, int start, int end);
 
-// EXPANDER_DUPS
-char		*dup_var_name(char *str, int i);
-void		cpy_l_and_r(char *str, t_expan *exp);
-int			dup_var(char *env_var, t_expan *exp);
-void		cpy_full_line(t_expan exp, char **new_line);
-
 // EXPANDER_UTILS
 int			init_exp(char **str, t_expan *exp);
 int			comp_var_name(char *env_var, char *dup_var_name);
+int			dup_var(char *str, t_expan *exp);
 int			free_expan(t_expan *exp);
-int			full_line_len(t_expan exp);
 
 // FREE_STRUCT
 void		free_basic_token(t_base *basic_token);
