@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 17:53:26 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 21:16:48 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handle_shell(int signum)
 
 void	handle_exec(int signum)
 {
-	if (signum == SIGINT || signum == SIGQUIT)
+	if (signum == SIGINT)
 		printf("\n");
 	else
 		return ;
