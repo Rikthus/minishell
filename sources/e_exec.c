@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 21:17:13 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 22:27:00 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	exec(t_token *token, t_envlist *envp)
 	while (env_token.token)
 	{
 		pid = fork();
-		signal_exec();
 		if (pid < 0)
 			return (perror(""));
 		if (pid == 0)

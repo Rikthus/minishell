@@ -26,6 +26,7 @@
 - > a pb
 - check if cmd in token and if ENV VARIABLE EXISTS AND IF PATH exists    else only do redir 
 - if ./minishell inside minishell bad ctrl-C
+- bad signal Maxine <3 Maxine <3 if ctrl-c after cat
 
 - parsing: si pas d'envp alors env_list->env_var = NULL (et juste un element dans env_list)
 

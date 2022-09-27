@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 21:52:45 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 22:37:16 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@
 // 		env_list = env_list->next;
 // 	}
 // }
+static	int	syntax_err(char *raw_line)
+{
+	ft_putstr_fd("lol", 1);
+	return (free_rd_line(raw_line, GOOD_EXIT));
+}
 
 static	int	controler(char *raw_line, t_envlist *env_list)
 {
@@ -52,10 +57,10 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	t_token	*token;
 
 	if (!raw_line)
-		return (free_rd_line(raw_line, BAD_EXIT));
+		return (free_rd_line(raw_line, EOF));
 	signal_mini();
 	if (raw_line[0] == '\0')
-		return (free_rd_line(raw_line, GOOD_EXIT));
+		return (syntax_err(raw_line));
 	add_history(raw_line);
 	if (!pre_parsing(raw_line))
 		return (free_rd_line(raw_line, GOOD_EXIT));
@@ -72,7 +77,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		return (free_rd_line(raw_line, BAD_EXIT));
 	}
 	//print_tokens(token);
-	exec(token, env_list); //retour erreur
+	exec(token, env_list);         //retour erreur
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
@@ -80,25 +85,27 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 int	main(int argc, char **argv, char **envp)
 {
 	t_envlist	*env_list;
+	int			rl_ret;
 
 	(void)argv;
 	signal_mini();
 	if (argc != 1 || !isatty(1))
-	{
-		printf("Usage: ./minishell\n");
-		return (0);
-	}
+		return (err_minishell_usage());
 	env_list = make_env(envp);
 	if (!env_list)
-	{
-		printf("ERROR\n");
-		return (0);
-	}
+		return (err_bad_envp_malloc());
 	while (1)
 	{
-		if (!controler(readline("Maxine <3 "), env_list))
+		rl_ret = controler(readline("Maxine <3 "), env_list);
+		if (rl_ret == BAD_EXIT)
+		{
+			ft_putstr_fd("Malloc failed\n", 2);
+			break ;
+		}
+		else if (rl_ret == EOF)
 			break ;
 	}
 	free_env(env_list);
+	rl_clear_history();        // necessary ?
 	return (0);
 }
