@@ -6,18 +6,26 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:15:22 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 01:32:47 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 17:38:37 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int argc, char **argv)
+#include "../includes/minishell.h"
+
+//DONE
+//NO VERIF
+int	echo(char **argv)
 {
 	int	option;
 	int	i;
+	int	nb_arg;
 
+	nb_arg = 1;
+	while (argv[nb_arg])
+		nb_arg++;
 	option = 0;
 	i = 1;
-	if (argc > 1)
+	if (nb_arg > 1)
 	{
 		if (ft_strncmp(argv[1], "-n", 3) == 0)
 			option = 1;
@@ -32,5 +40,5 @@ int	main(int argc, char **argv)
 	}
 	if (!option)
 		printf("\n");
-	return (0);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/28 11:00:45 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 13:44:41 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,13 @@ int			find_size_env(t_envlist *env);
 char		**custom_envp(t_envlist *envp);
 char		*exec_cmd(char **cmds, char *enc_path);
 char		*prepare_commands(t_token *token, t_envlist *envp);
+
+///////////  BUILTINS  //////////
+int			pwd(char **argv, t_envlist *env_list);
+int			env(char **argv, t_env_list);
+int			unset(char **argv, t_envlist *env_list);
+int			echo(char **argv);
+int			export(char **argv, t_envlist **env_list);
 
 ///////////  ERROR  //////////
 int			err_no_cmd(t_token *token, char *raw_line);
