@@ -7,26 +7,21 @@
 - redirections et exec (expansion du "$?")
 - gestion des signaux **PARTIALLY DONE** (see blocking cmd: grep and cat)
 - gestion de l'historique **DONE**
-- built-ins
+- built-ins et makefile gcc builtins avec dependance minishell.h
 
 
 
 ### BUGS:
 
-- **Segfault if free(token->redir)** **DONE**
-- (optional : checker si le terminal est un tty valid) **DONE**
-- (optional : $"lol") **DONE**
-- echo "lol"okep => lolokep (they are the same element)
- (the current shell treat "lol" and okep as separated elements) **DONE**
 - bad quotes trimming **PARTIALLY DONE**
 
-- BUG : PIPE NON SUIVI D'UNE COMMANDE **DONE**
-
-- < a pb
-- > a pb
+- gestion si pas de commande
 - check if cmd in token and if ENV VARIABLE EXISTS AND IF PATH exists    else only do redir 
 - if ./minishell inside minishell bad ctrl-C
 - bad signal Maxine <3 Maxine <3 if ctrl-c after cat
+
+
+
 
 - parsing: si pas d'envp alors env_list->env_var = NULL (et juste un element dans env_list)
 

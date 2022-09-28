@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 22:27:00 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 11:03:54 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,31 @@ void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 	*i = *i + 1;
 }
 
+// static	int	is_builtin(t_token *token)
+// {
+// 	char	*cmd;
+
+// 	if (token->cmd)
+// 	{
+// 		cmd = token->cmd[0];
+// 		if (ft_strncmp(cmd, "cd", 3) == 0)
+// 			return (1);
+// 		if (ft_strncmp(cmd, "pwd", 4) == 0)
+// 			return (2);
+// 		if (ft_strncmp(cmd, "exit", 5) == 0)
+// 			return (3);
+// 		if (ft_strncmp(cmd, "env", 4) == 0)
+// 			return (4);
+// 		if (ft_strncmp(cmd, "export", 7) == 0)
+// 			return (5);
+// 		if (ft_strncmp(cmd, "unset", 6) == 0)
+// 			return (6);
+// 		if (ft_strncmp(cmd, "echo", 5) == 0)
+// 			return (7);
+// 	}
+// 	return (0);
+// }
+
 void	exec(t_token *token, t_envlist *envp)
 {
 	pid_t		pid;
@@ -76,6 +101,7 @@ void	exec(t_token *token, t_envlist *envp)
 		if (pid == 0)
 			choose_process(&env_token, pipeline, pipetmp, i);
 		close_pipes_norm(pipeline, pipetmp, &i);
+		// }
 		env_token.token = env_token.token->next;
 	}
 	wait_exec(i);

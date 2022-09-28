@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 22:08:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 11:00:45 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,12 @@ typedef struct s_env_token
 typedef struct s_mini
 {
 	int			exit;
-	t_envlist	*env_list;
+	t_envlist	**env_list;
 }	t_mini;
 
 typedef t_mini	g_mini;
+
+g_mini	g_global;
 
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
@@ -151,6 +153,7 @@ t_envlist	*make_env(char **envp);
 /////////////////////////////////////
 
 // PRE_PARSING
+int			check_tokens(t_token *token);
 int			pre_parsing(char *raw_line);
 
 // TOKENIZER
@@ -242,6 +245,7 @@ char		*exec_cmd(char **cmds, char *enc_path);
 char		*prepare_commands(t_token *token, t_envlist *envp);
 
 ///////////  ERROR  //////////
+int			err_no_cmd(t_token *token, char *raw_line);
 int			err_minishell_usage(void);
 int			err_bad_envp_malloc(void);
 

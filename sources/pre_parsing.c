@@ -6,11 +6,22 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 21:09:26 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 10:59:10 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	check_tokens(t_token *token)
+{
+	while (token)
+	{
+		if (!(token->cmd[0]))
+			return (0);
+		token = token->next;
+	}
+	return (1);
+}
 
 static	int	check_char(char c)
 {

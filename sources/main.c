@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 22:37:16 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 10:50:18 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 // 		env_list = env_list->next;
 // 	}
 // }
+
 static	int	syntax_err(char *raw_line)
 {
 	ft_putstr_fd("lol", 1);
@@ -71,6 +72,8 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	free_basic_token(basic_token);
 	if (!token)
 		return (0);
+	if (!check_tokens(token))
+		return (err_no_cmd(token, raw_line));
 	if (!expander(&token, env_list))
 	{
 		free_token(token);
@@ -80,6 +83,12 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	exec(token, env_list);         //retour erreur
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
+}
+
+static	void	init_global(t_envlist **env_list)
+{
+	g_global.exit = 0;
+	g_global.env_list = env_list;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -94,6 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	env_list = make_env(envp);
 	if (!env_list)
 		return (err_bad_envp_malloc());
+	init_global(&env_list);
 	while (1)
 	{
 		rl_ret = controler(readline("Maxine <3 "), env_list);

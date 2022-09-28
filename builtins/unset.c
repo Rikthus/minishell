@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 01:15:04 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 00:24:47 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_valid_env(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
+		if (!ft_isalnum(str[i]) && str[i] != '-')
 			return (0);
 		i++;
 	}
@@ -38,6 +38,6 @@ int	main(int argc, char **argv)
 		if (argv[1][0] == '-' || !is_valid_env(argv[1]))
 			return (1);
 	}
-	actual = g_mini.env_list;
+	actual = g_global.e;
 	lst_removeif();
 }
