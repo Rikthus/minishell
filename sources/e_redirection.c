@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 14:59:15 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 15:59:47 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ void	redir_outfile(t_env_token *e_t, int i)
 
 void	redir_heredoc(t_env_token *e_t, int i)
 {
-	if (dup2(e_t->token->hd_pipe[i][1], STDIN_FILENO) < 0)
+	if (dup2(e_t->token->hd_pipe[i][0], STDIN_FILENO) < 0)
 	{
-		return (perror("super"));
+		return (perror(""));
 	}
 	close(e_t->token->hd_pipe[i][0]);
-	close(e_t->token->hd_pipe[i][1]);
 }
 
 void	redirection(t_env_token *e_t)

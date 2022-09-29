@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 14:57:29 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 15:53:31 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int	read_heredoc(int fd, char *eof)
 		line = readline(">");
 		if (!line)
 			return (0); // ERR
-		if (line[0] != '\0' && ft_strncmp(line, eof, ft_strlen(eof)) == 0)
+		if (line[0] != '\0' && ft_strcmp(line, eof) == 0)
 		{
 			free(line);
 			break ;
@@ -56,9 +56,7 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	int		*fd;
 	pid_t	pid;
 
-	fd = malloc(sizeof(int *) * 2);
-	if (!fd)
-		return (0);
+	fd = malloc(sizeof(int) * 2);
 	token->hd_pipe[pipe_i] = fd;
 	if (pipe(fd) == -1)
 		return (0);
@@ -69,14 +67,12 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	{
 		if (!read_heredoc(token->hd_pipe[pipe_i][1], eof))
 			exit(EXIT_FAILURE);
-		// close(fd[0]);
-		// close(fd[1]);
-		// while (no eof)
-		//file = readline(">")
-		// ft_pustr_fd(file, pipe[1]);
+		close(fd[0]);
+		close(fd[1]);
 		//close PIPES ?
 		exit(EXIT_SUCCESS);
 	}
+	close(fd[1]);
 	wait(NULL);
 	return (1);
 }

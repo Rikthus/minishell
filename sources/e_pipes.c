@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 15:04:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 15:43:51 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 			perror("Could not execute execve");
 			exit(0);
 		}
+		write(1, "DEBUG\n", 6);
 	}
 	else
 	{

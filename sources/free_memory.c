@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:37:21 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/18 17:40:39 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 16:06:56 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ void	*free_2d_array(char **array)
 	}
 	free(array);
 	return (NULL);
+}
+
+void	free_2d_int_array(int **array, int nb_heredoc)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb_heredoc)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

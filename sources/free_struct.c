@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 14:32:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 16:10:16 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,26 @@ void	free_basic_token(t_base *basic_token)
 void	*free_token(t_token *token)
 {
 	t_token	*previous;
-	// int		i;
+	int		i;
+	int		nb_heredoc;
 
 	while (token)
 	{
 		previous = token;
 		token = token->next;
+		i = 0;
+		nb_heredoc = 0;
+		while (previous->redir[i] != NO_REDIR)
+		{
+			if (previous->redir[i] == HEREDOC)
+				nb_heredoc++;
+			i++;
+		}
+		if (nb_heredoc > 0)
+			free_2d_int_array(previous->hd_pipe, nb_heredoc);
 		free_2d_array(previous->cmd);
 		free(previous->redir);
 		free_2d_array(previous->target);
-
-		// FREE INT 2D ARRAY
-		// if (previous->hd_pipe)
-		// {
-		// 	i = 0;
-		// 	while (previous->hd_pipe[i])
-		// 	{
-		// 		close(previous->hd_pipe[i][0]); //BAD ?
-		// 		close(previous->hd_pipe[i][1]); //BAD ?
-		// 		i++;
-		// 	}
-		// 	free_2d_array(previous->hd_pipe);
-		// }
 		free(previous);
 	}
 	return (NULL);

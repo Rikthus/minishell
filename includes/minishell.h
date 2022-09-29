@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 14:30:02 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 16:07:28 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ int			cmd_part_len(int *i, char *cmd, int type);
 int			free_rd_line(char *line, int ret);
 int			change_quote_state(char quote, t_state *state);
 char		*custon_strdup(char *str, int start, int end);
+int			ft_strcmp(char *s1, char *s2);
 
 // EXPANDER_UTILS
 int			init_exp(char **str, t_expan *exp);
@@ -214,6 +215,7 @@ void		free_env(t_envlist *envlist);
 // FREE_MEMORY
 void		*free_split_error(char **array, int nb_pointer);
 void		*free_2d_array(char **array);
+void		free_2d_int_array(int **array, int nb_heredoc);
 
 // PIPE_SPLIT
 char		**pipe_split(char *str);
