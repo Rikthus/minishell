@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 12:58:58 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:32:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_basic_token(t_base *basic_token)
 void	*free_token(t_token *token)
 {
 	t_token	*previous;
-	int		i;
+	// int		i;
 
 	while (token)
 	{
@@ -49,12 +49,19 @@ void	*free_token(t_token *token)
 		free_2d_array(previous->cmd);
 		free(previous->redir);
 		free_2d_array(previous->target);
-		if (previous->hd_pipe)
-		{
-				close(previous->hd_pipe[0]);
-				close(previous->hd_pipe[1]);
-				free(previous->hd_pipe);
-		}
+
+		// FREE INT 2D ARRAY
+		// if (previous->hd_pipe)
+		// {
+		// 	i = 0;
+		// 	while (previous->hd_pipe[i])
+		// 	{
+		// 		close(previous->hd_pipe[i][0]); //BAD ?
+		// 		close(previous->hd_pipe[i][1]); //BAD ?
+		// 		i++;
+		// 	}
+		// 	free_2d_array(previous->hd_pipe);
+		// }
 		free(previous);
 	}
 	return (NULL);

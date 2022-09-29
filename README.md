@@ -16,9 +16,10 @@
 - bad quotes trimming **PARTIALLY DONE**
 
 - gestion si pas de commande **DONE**
-- check if cmd in token and if ENV VARIABLE EXISTS AND IF PATH exists    else only do redir 
+- check if cmd in token and if ENV VARIABLE EXISTS AND IF PATH exists    else only do redir  **DONE**
 - if ./minishell inside minishell bad ctrl-C
 - bad signal Maxine <3 Maxine <3 if ctrl-c after cat
+- heredoc
 
 
 

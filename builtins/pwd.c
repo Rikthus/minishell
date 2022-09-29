@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:35:04 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 17:37:12 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:29:42 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static	char	*ft_getcwd(t_envlist *env_list)
 {
 	char	*cwd;
-	
+
 	cwd = NULL;
 	while (env_list)
 	{
@@ -33,7 +33,7 @@ static	char	*ft_getcwd(t_envlist *env_list)
 	return (cwd);
 }
 
-int	pwd(char **argv, t_envlist *env_list)
+int	ft_pwd(char **argv, t_envlist *env_list)
 {
 	char	*cwd;
 	int		i;

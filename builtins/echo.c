@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:15:22 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 17:38:37 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:29:26 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //DONE
 //NO VERIF
-int	echo(char **argv)
+int	ft_echo(char **argv)
 {
 	int	option;
 	int	i;

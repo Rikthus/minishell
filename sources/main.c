@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/28 10:50:18 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:27:31 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		return (0);
 	if (!check_tokens(token))
 		return (err_no_cmd(token, raw_line));
-	if (!expander(&token, env_list))
+	if (!expander(&token, env_list) || !heredoc_init(token))
 	{
 		free_token(token);
 		return (free_rd_line(raw_line, BAD_EXIT));

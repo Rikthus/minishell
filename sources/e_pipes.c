@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 22:28:49 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 15:04:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,18 @@ void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
 	char	*good_path;
 	char	**env;
 
-	good_path = prepare_commands(e_t->token, e_t->envp);
-	if (!good_path)
-		return (perror(""));
-	env = custom_envp(e_t->envp);
-	if (!env)
-		return (perror(""));
-	e_t->env = env;
+	if (e_t->envp->env_var)
+	{
+		good_path = prepare_commands(e_t->token, e_t->envp);
+		if (!good_path)
+			return (perror(""));
+		env = custom_envp(e_t->envp);
+		if (!env)
+			return (perror(""));
+		e_t->env = env;
+	}
+	else
+		good_path = NULL;
 	if (i == 0)
 		first_process(e_t, pipeline, good_path);
 	else if (e_t->token->next == NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 17:28:08 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:59:15 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ void	redir_outfile(t_env_token *e_t, int i)
 	close(fd);
 }
 
+void	redir_heredoc(t_env_token *e_t, int i)
+{
+	if (dup2(e_t->token->hd_pipe[i][1], STDIN_FILENO) < 0)
+	{
+		return (perror("super"));
+	}
+	close(e_t->token->hd_pipe[i][0]);
+	close(e_t->token->hd_pipe[i][1]);
+}
+
 void	redirection(t_env_token *e_t)
 {
 	int	i;
@@ -76,7 +86,8 @@ void	redirection(t_env_token *e_t)
 			redir_append(e_t, i);
 		else if (e_t->token->redir[i] == INFILE)
 			redir_infile(e_t, i);
-		//if (redir[i] == HEREDOC)
+		else if (e_t->token->redir[i] == HEREDOC)
+			redir_heredoc(e_t, i);
 		i++;
 	}
 }

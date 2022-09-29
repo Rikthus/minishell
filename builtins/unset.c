@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 17:39:23 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:29:47 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static	void	env_remove(char *to_rm, t_envlist **env_list)
 	t_envlist	*previous;
 	t_envlist	*actual;
 	t_envlist	*next;
-	
+
 	previous = *env_list;
 	actual = previous->next;
 	next = actual->next;
@@ -85,7 +85,7 @@ static	void	env_remove(char *to_rm, t_envlist **env_list)
 	}
 }
 
-int	unset(char **argv, t_envlist **env_list)
+int	ft_unset(char **argv, t_envlist **env_list)
 {
 	int	i;
 

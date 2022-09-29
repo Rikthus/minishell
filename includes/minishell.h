@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 12:56:32 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:30:02 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_token
 	char			**cmd;
 	int				*redir;
 	char			**target;
-	int				*hd_pipe;
+	int				**hd_pipe;
 	struct s_token	*next;
 }	t_token;
 
@@ -171,6 +171,9 @@ int			expander(t_token **token, t_envlist *env_list);
 // TRIM_QUOTES
 int			trim_quotes(char **str);
 
+// HEREDOC_INIT
+int			heredoc_init(t_token *token);
+
 /////////////////////////////////////
 /////////     SIGNALS     ///////////
 /////////////////////////////////////
@@ -218,12 +221,16 @@ char		**pipe_split(char *str);
 //////////////////////////////////////////////
 //////////////      EXEC      ////////////////
 //////////////////////////////////////////////
+
+// EXEC
 void		wait_exec(int i);
 void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
 void		exec(t_token *token, t_envlist *envp);
 
+// FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);
 
+//
 void		free_all(char **test, int i);
 char		**ft_split_mod(char const *s, char c);
 
@@ -234,9 +241,11 @@ void		last_process(t_env_token *e_t, int *pipetmp, char *goodpath);
 void		first_process(t_env_token *e_t, int *pipeline, char *goodpath);
 void		choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i);
 
+// REDIRECTION
 void		redir_infile(t_env_token *e_t, int i);
 void		redir_append(t_env_token *e_t, int i);
 void		redir_outfile(t_env_token *e_t, int i);
+void		redir_heredoc(t_env_token *e_t, int i);
 void		redirection(t_env_token *e_t);
 
 char		*env_path(char **envp);
@@ -246,11 +255,11 @@ char		*exec_cmd(char **cmds, char *enc_path);
 char		*prepare_commands(t_token *token, t_envlist *envp);
 
 ///////////  BUILTINS  //////////
-int			pwd(char **argv, t_envlist *env_list);
-int			env(char **argv, t_env_list);
-int			unset(char **argv, t_envlist *env_list);
-int			echo(char **argv);
-int			export(char **argv, t_envlist **env_list);
+int			ft_pwd(char **argv, t_envlist *env_list);
+int			ft_env(char **argv, t_envlist *env_list);
+int			ft_unset(char **argv, t_envlist *env_list);
+int			ft_echo(char **argv);
+int			ft_export(char **argv, t_envlist **env_list);
 
 ///////////  ERROR  //////////
 int			err_no_cmd(t_token *token, char *raw_line);

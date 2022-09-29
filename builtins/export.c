@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 18:29:26 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:29:37 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	int	print_export(t_envlist *env_list)
 {
 	int	i;
-	
+
 	if (!env_list->env_var)
 		return (1);
 	i = 0;
@@ -88,11 +88,11 @@ static	int	add_var_to_env(char *var, t_envlist **env_list)
 	tmp = *env_list;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;	
+	tmp->next = new;
 	return (EXIT_SUCCESS);
 }
 
-int	export(char **argv, t_envlist **env_list)
+int	ft_export(char **argv, t_envlist **env_list)
 {
 	int	i;
 
