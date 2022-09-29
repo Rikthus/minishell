@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 18:36:33 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:01:03 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_env_token
 }	t_env_token;
 
 int	g_exit_status;
+int	g_herestop;
 
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
@@ -175,7 +176,6 @@ void		signal_heredoc(void);
 void		handle_shell(int signum);
 void		handle_exec(int signum);
 void		handle_heredoc(int signum);
-
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

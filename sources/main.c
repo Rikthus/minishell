@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 18:35:55 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:53:29 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		return (free_rd_line(raw_line, BAD_EXIT));
 	if (!check_tokens(token))
 		return (err_no_cmd(token, raw_line));
-	if (!expander(&token, env_list) || !heredoc_init(token)
-		|| !exec(token, env_list))
+	if (!expander(&token, env_list) || !heredoc_init(token))
 	{
 		free_token(token);
 		return (free_rd_line(raw_line, BAD_EXIT));
 	}
+	if (g_herestop == 0)
+		exec(token, env_list); // ERRRRRR
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
@@ -64,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		return (err_bad_envp_malloc());
 	while (1)
 	{
+		g_herestop = 0;
 		rl_ret = controler(readline("Maxine ❤️ "), env_list);
 		if (rl_ret == BAD_EXIT)
 		{

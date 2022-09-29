@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 18:35:44 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:19:19 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	exec(t_token *token, t_envlist *envp)
 	i = 0;
 	while (env_token.token)
 	{
+		signal_exec();
 		pid = fork();
 		if (pid < 0)
 			return (0);
@@ -106,5 +107,6 @@ int	exec(t_token *token, t_envlist *envp)
 		env_token.token = env_token.token->next;
 	}
 	wait_exec(i);
+	signal_mini();
 	return (1);
 }

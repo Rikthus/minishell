@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 18:17:36 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:43:25 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int	read_heredoc(int fd, char *eof)
 		line = readline(">");
 		if (!line)
 			return (0); // ERR
-		if (line[0] != '\0' && ft_strcmp(line, eof) == 0)
+		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0) || g_herestop == 1)
 		{
 			free(line);
 			break ;
@@ -57,9 +57,12 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	pid_t	pid;
 
 	fd = malloc(sizeof(int) * 2);
+	if (!fd)
+		return (0); // ERRRRRRR
 	token->hd_pipe[pipe_i] = fd;
 	if (pipe(fd) == -1)
 		return (0);
+	signal_heredoc();
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -73,6 +76,7 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	}
 	close(fd[1]);
 	wait(NULL);
+	signal_mini();
 	return (1);
 }
 
@@ -97,6 +101,8 @@ int	heredoc_init(t_token *token)
 			{
 				if (!add_heredoc(token, i, token->target[i]))
 					return (0);
+				if (g_herestop == 1)
+					return (1);
 			}
 			i++;
 		}
