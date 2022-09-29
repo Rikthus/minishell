@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 01:18:54 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/21 18:09:19 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 12:57:20 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static	t_token	*add_token(char *full_cmd)
 	token->redir = NULL;
 	token->target = NULL;
 	token->next = NULL;
+	token->hd_pipe = NULL;
 	if (fill_token(&token, elems) == 0)
 	{
 		free_token(token);

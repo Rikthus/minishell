@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/24 19:44:52 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 12:58:58 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_basic_token(t_base *basic_token)
 void	*free_token(t_token *token)
 {
 	t_token	*previous;
+	int		i;
 
 	while (token)
 	{
@@ -48,6 +49,12 @@ void	*free_token(t_token *token)
 		free_2d_array(previous->cmd);
 		free(previous->redir);
 		free_2d_array(previous->target);
+		if (previous->hd_pipe)
+		{
+				close(previous->hd_pipe[0]);
+				close(previous->hd_pipe[1]);
+				free(previous->hd_pipe);
+		}
 		free(previous);
 	}
 	return (NULL);
