@@ -8,7 +8,7 @@
 - gestion des signaux **PARTIALLY DONE** (see blocking cmd: grep and cat)
 - gestion de l'historique **DONE**
 - built-ins et makefile gcc builtins avec dependance minishell.h
-
+- SIGNAUX ..... 
 
 
 ### BUGS:
@@ -26,7 +26,18 @@
 
 - parsing: si pas d'envp alors env_list->env_var = NULL (et juste un element dans env_list)
 
+## TO DO
+- line with only spaces
 
+**SIGNALS**
+- ctrl-\ in a prompt after you wrote some stuff : should quit minishell
+- blocking commands
+
+**QUOTES**
+- bad redir handling
+
+**HISTORY**
+- pb
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)

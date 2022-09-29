@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 15:35:24 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 18:35:44 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 // 	return (0);
 // }
 
-void	exec(t_token *token, t_envlist *envp)
+int	exec(t_token *token, t_envlist *envp)
 {
 	pid_t		pid;
 	t_env_token	env_token;
@@ -91,18 +91,20 @@ void	exec(t_token *token, t_envlist *envp)
 	env_token.envp = envp;
 	env_token.old_stdout = dup(STDOUT_FILENO);
 	if (pipe(pipeline) == -1)
-		return (perror(""));
+		return (0);
 	i = 0;
 	while (env_token.token)
 	{
 		pid = fork();
 		if (pid < 0)
-			return (perror(""));
+			return (0);
 		if (pid == 0)
+		{
 			choose_process(&env_token, pipeline, pipetmp, i);
+		}
 		close_pipes_norm(pipeline, pipetmp, &i);
-		// }
 		env_token.token = env_token.token->next;
 	}
 	wait_exec(i);
+	return (1);
 }

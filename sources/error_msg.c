@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:00:31 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 11:01:13 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 16:42:31 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	err_minishell_usage(void)
 {
-	printf("Usage: ./minishell\n");
+	ft_putstr_fd("Usage: ./minishell\n", 2);
 	return (0);
 }
 
 int	err_bad_envp_malloc(void)
 {
-	printf("Malloc failed\n");
+	ft_putstr_fd("Malloc failed\n", 2);
 	return (1);
 }
 
@@ -28,6 +28,7 @@ int	err_no_cmd(t_token *token, char *raw_line)
 {
 	free(raw_line);
 	free_token(token);
-	printf("No command to exec\n");
+	ft_putstr_fd("No command to exec\n", 2);
+	g_exit_status = 1;
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 15:53:31 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 18:17:36 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,17 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 			exit(EXIT_FAILURE);
 		close(fd[0]);
 		close(fd[1]);
-		//close PIPES ?
 		exit(EXIT_SUCCESS);
 	}
 	close(fd[1]);
 	wait(NULL);
 	return (1);
 }
-/**
- * @brief test explaination for function
- *
- * @param token
- * @return int
- */
 
-////////////////// BAAAAAAAADDDD  DOESNT CARE ABOUT HOW MANY HEREDOCS IN A TOKEN
 int	heredoc_init(t_token *token)
 {
 	int		i;
 
-	// HEREDOC SIGNALS
 	while (token)
 	{
 		i = 0;

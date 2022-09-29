@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 16:07:28 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 18:36:33 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,15 +133,7 @@ typedef struct s_env_token
 	char		**env;
 }	t_env_token;
 
-typedef struct s_mini
-{
-	int			exit;
-	t_envlist	**env_list;
-}	t_mini;
-
-typedef t_mini	g_mini;
-
-g_mini	g_global;
+int	g_exit_status;
 
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
@@ -179,8 +171,11 @@ int			heredoc_init(t_token *token);
 /////////////////////////////////////
 void		signal_mini(void);
 void		signal_exec(void);
+void		signal_heredoc(void);
 void		handle_shell(int signum);
 void		handle_exec(int signum);
+void		handle_heredoc(int signum);
+
 
 /////////////////////////////////////
 //////////     UTILS     ////////////
@@ -227,7 +222,7 @@ char		**pipe_split(char *str);
 // EXEC
 void		wait_exec(int i);
 void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
-void		exec(t_token *token, t_envlist *envp);
+int			exec(t_token *token, t_envlist *envp);
 
 // FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);
