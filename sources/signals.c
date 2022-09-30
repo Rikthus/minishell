@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 01:48:08 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 02:47:49 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ void	handle_heredoc(int signum)
 {
 	(void)signum;
 	g_herestop = 1;
-	close(1);
+	write(1, "OK", 2);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 	ft_putstr_fd("\n", 1);
-	// rl_on_new_line();
-	rl_replace_line("\r", 0);
-	// rl_redisplay();
-	// ft_putstr_fd("\n", 1);
-	// printf("\n");
 }
 
 void	signal_exec(void)

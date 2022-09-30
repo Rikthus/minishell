@@ -6,13 +6,13 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/30 02:06:22 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 03:12:52 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p)
+static	void	inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p)
 {
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
 		exit(1);
@@ -27,7 +27,7 @@ void	inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p)
 	exit(0);
 }
 
-void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
+static	void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 {
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
 		exit(1);
@@ -40,7 +40,7 @@ void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 	exit(0);
 }
 
-void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
+static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 {
 	if (e_t->token->next == NULL)
 	{

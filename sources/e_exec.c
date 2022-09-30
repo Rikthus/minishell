@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 19:19:19 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:28:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	wait_exec(int i)
 {
-	int	status;
-
 	while (i > 0)
 	{
-		wait(&status);
+		wait(&g_exit_status);
 		//printf("Status: %d\n", status);
-		if (WIFSIGNALED(status))
+		if (WIFSIGNALED(g_exit_status))
 		{
 			//perror("WTERMSIG(status)");
-			if (status == 10)
-				printf("Bus error: %d\n", WTERMSIG(status));
-			else if (status == 11)
-				printf("Segmentation fault: %d\n", WTERMSIG(status));
+			if (g_exit_status == 10)
+				printf("Bus error: %d\n", WTERMSIG(g_exit_status));
+			else if (g_exit_status == 11)
+				printf("Segmentation fault: %d\n", WTERMSIG(g_exit_status));
 		}
-		else if (WIFEXITED(status))
+		else if (WIFEXITED(g_exit_status))
 		{
 			//printf("Exited normally with code %d\n", WEXITSTATUS(status));
 		}
@@ -54,29 +52,27 @@ void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 	*i = *i + 1;
 }
 
-// static	int	is_builtin(t_token *token)
+//BUILTINS
+// static	int	is_builtin(char *str)
 // {
-// 	char	*cmd;
+// 	int	ret;
 
-// 	if (token->cmd)
-// 	{
-// 		cmd = token->cmd[0];
-// 		if (ft_strncmp(cmd, "cd", 3) == 0)
-// 			return (1);
-// 		if (ft_strncmp(cmd, "pwd", 4) == 0)
-// 			return (2);
-// 		if (ft_strncmp(cmd, "exit", 5) == 0)
-// 			return (3);
-// 		if (ft_strncmp(cmd, "env", 4) == 0)
-// 			return (4);
-// 		if (ft_strncmp(cmd, "export", 7) == 0)
-// 			return (5);
-// 		if (ft_strncmp(cmd, "unset", 6) == 0)
-// 			return (6);
-// 		if (ft_strncmp(cmd, "echo", 5) == 0)
-// 			return (7);
-// 	}
-// 	return (0);
+// 	ret = 0;
+// 	if (ft_strcmp(str, "cd") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "pwd") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "exit") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "env") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "export") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "unset") == 0)
+// 		ret = choose_process_bltn();
+// 	else if (ft_strcmp(str, "echo") == 0)
+// 		ret = choose_process_bltn();
+// 	return (ret);
 // }
 
 int	exec(t_token *token, t_envlist *envp)
@@ -95,6 +91,7 @@ int	exec(t_token *token, t_envlist *envp)
 	i = 0;
 	while (env_token.token)
 	{
+		// EXEC BUILTINS if ()
 		signal_exec();
 		pid = fork();
 		if (pid < 0)

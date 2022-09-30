@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 02:09:30 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 04:16:10 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ t_elem		*break_cmd(char *full_cmd);
 int			fill_token(t_token **token, t_elem *elems);
 
 // EXPANSION
+int			join_all(char **str, t_expan exp);
 int			expander(t_token **token, t_envlist *env_list);
 
 // TRIM_QUOTES
@@ -226,22 +227,17 @@ int			exec(t_token *token, t_envlist *envp);
 // FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);
 
-//
+// FT_SPLIT_MOD
 void		free_all(char **test, int i);
 char		**ft_split_mod(char const *s, char c);
 
+// FT_STRJOIN
 char		*ft_strjoin_mini(char const *s1, char const *s2);
 
-void		inter_process(t_env_token *e_t, int *pipeline, int *pipetmp, char *g_p);
-void		last_process(t_env_token *e_t, int *pipetmp, char *goodpath);
-void		first_process(t_env_token *e_t, int *pipeline, char *goodpath);
+// PIPES
 void		choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i);
 
 // REDIRECTION
-void		redir_infile(t_env_token *e_t, int i);
-void		redir_append(t_env_token *e_t, int i);
-void		redir_outfile(t_env_token *e_t, int i);
-void		redir_heredoc(t_env_token *e_t, int i);
 void		redirection(t_env_token *e_t);
 
 char		*env_path(char **envp);
@@ -250,10 +246,13 @@ char		**custom_envp(t_envlist *envp);
 char		*exec_cmd(char **cmds, char *enc_path);
 char		*prepare_commands(t_token *token, t_envlist *envp);
 
+// REPLACE EXIT STATUS
+int			replace_exit_status(char ** str, t_expan exp);
+
 ///////////  BUILTINS  //////////
 int			ft_pwd(char **argv, t_envlist *env_list);
 int			ft_env(char **argv, t_envlist *env_list);
-int			ft_unset(char **argv, t_envlist *env_list);
+int			ft_unset(char **argv, t_envlist **env_list);
 int			ft_echo(char **argv);
 int			ft_export(char **argv, t_envlist **env_list);
 

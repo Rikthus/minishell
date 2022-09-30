@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/29 15:59:47 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 03:14:40 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	redir_infile(t_env_token *e_t, int i)
+static	void	redir_infile(t_env_token *e_t, int i)
 {
 	int	fd;
 
@@ -29,7 +29,7 @@ void	redir_infile(t_env_token *e_t, int i)
 	close(fd);
 }
 
-void	redir_append(t_env_token *e_t, int i)
+static	void	redir_append(t_env_token *e_t, int i)
 {
 	int	fd;
 
@@ -46,7 +46,7 @@ void	redir_append(t_env_token *e_t, int i)
 	close(fd);
 }
 
-void	redir_outfile(t_env_token *e_t, int i)
+static	void	redir_outfile(t_env_token *e_t, int i)
 {
 	int	fd;
 
@@ -63,7 +63,7 @@ void	redir_outfile(t_env_token *e_t, int i)
 	close(fd);
 }
 
-void	redir_heredoc(t_env_token *e_t, int i)
+static	void	redir_heredoc(t_env_token *e_t, int i)
 {
 	if (dup2(e_t->token->hd_pipe[i][0], STDIN_FILENO) < 0)
 	{

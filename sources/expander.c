@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 18:09:42 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 04:27:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	int	join_all(char **str, t_expan exp)
+int	join_all(char **str, t_expan exp)
 {
 	char	*new_str;
 
@@ -35,7 +35,10 @@ static	int	expand(char **str, t_envlist *env_list, t_expan exp)
 		if (comp_var_name(env_list->env_var, exp.var_name_dup) == 0)
 		{
 			if (!dup_var(env_list->env_var, &exp))
+			{
+				free_expan(&exp);
 				return (0);
+			}
 			break ;
 		}
 		env_list = env_list->next;
@@ -52,6 +55,14 @@ static	int	launch_expand(char **str, t_envlist *env_list, int *i)
 	exp.left_end = *i;
 	exp.var_name_index = *i + 1;
 	*i += 1;
+	if (str[0][*i] == '?')
+	{
+		*i += 1;
+		exp.right_begin = *i;
+		if (!replace_exit_status(str, exp))
+			return (0);
+		return (1);
+	}
 	while (str[0][*i] && ft_isalnum(str[0][*i]))
 		*i += 1;
 	exp.right_begin = *i;
@@ -73,7 +84,7 @@ static	int	find_env_var(char **str, t_envlist *env_list)
 		if (str[0][i] == '\'' || str[0][i] == '\"')
 			change_quote_state(str[0][i], &state);
 		if (state.sq == OFF && str[0][i] == '$'
-			&& str[0][i + 1] != '\0' && str[0][i + 1] != '?')
+			&& str[0][i + 1] != '\0')
 		{
 			if (!launch_expand(str, env_list, &i))
 				return (0);

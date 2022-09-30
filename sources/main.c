@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 02:07:36 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 04:35:29 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 		return (free_rd_line(raw_line, BAD_EXIT));
 	}
 	if (g_herestop == 0)
-		exec(token, env_list); // ERRRRRR
+	{
+		if (!exec(token, env_list))
+		{
+			free_token(token);
+			return (free_rd_line(raw_line, BAD_EXIT));
+		}
+	}
 	free_token(token);
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
@@ -55,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	int			rl_ret;
 
 	(void)argv;
+	g_exit_status = 0;
 	signal_mini();
 	if (argc != 1 || !isatty(1))
 		return (err_minishell_usage());

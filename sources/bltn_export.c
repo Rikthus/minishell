@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   bltn_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 14:29:37 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 04:14:57 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ int	ft_export(char **argv, t_envlist **env_list)
 			return (EXIT_FAILURE);
 	}
 	else
-		return (print_export(*envlist));
+		return (print_export(*env_list));
 	while (argv[i])
 	{
 		if (is_valid_name(argv[i]))
 		{
-			unset(&argv[i]); // limite limite la technique.
+			ft_unset(&argv[i], env_list); // limite limite la technique.
 			if (!add_var_to_env(argv[i], env_list))
 				return (EXIT_FAILURE);
 		}

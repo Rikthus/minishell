@@ -43,7 +43,16 @@ LST_SRCS	:=	main.c				\
 				e_pipes.c			\
 				e_redirection.c		\
 				e_utils_exec.c		\
-				error_msg.c
+				error_msg.c			\
+				rplc_exit_status.c	\
+				bltn_cd.c			\
+				bltn_echo.c			\
+				bltn_env.c			\
+				bltn_exit.c			\
+				bltn_export.c		\
+				bltn_pwd.c			\
+				bltn_unset.c		\
+				builtin_redir.c
 LST_INCS	:=	minishell.h
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 

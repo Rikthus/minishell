@@ -34,7 +34,8 @@
 - heredoc BAD CTRL-D
 
 **QUOTES**
-- bad redir handling
+- bad redir handling **!!!!!!!!!!!WARNING!!!!!!!!!!!!!**
+- check "dsfdsf $" (env var)
 
 **HISTORY**
 - pb  **DONE** pb not replicable
@@ -44,3 +45,5 @@
 - env -i ./minishell (check minishell with no env)
 - cat /dev/urandom ./minishell
 - < /dev/urandom ./minishell
+
+Charline, rajoute la gestion des builtins de la meme maniere que tu geres les commandes mais en dehors du fork, tout en gardant les redirections et les pipes. Attention a close() le bon nombre de pipes et a ne pas wait() les executions de builtins car ce ne sont pas des binaires (donc juste wait les processus qui s'executent dans des fork() avec execve() ).

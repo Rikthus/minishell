@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 01:30:50 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 02:48:28 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ static	int	read_heredoc(int fd, char *eof)
 {
 	char	*line;
 
+	write(1, "> ", 2);
 	while (1)
 	{
-		if (g_herestop == 1)
-			break ;
-		line = readline(">");
+		line = readline("");
+		if (g_herestop == 0)
+			write(1, "> ", 2);
 		if (!line)
 			return (0); // ERR
 		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0) || g_herestop == 1)
