@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:47:19 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 04:13:39 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:02:40 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// ADD CHECK NO = env var
 
 // DONE
 // NO VERIF

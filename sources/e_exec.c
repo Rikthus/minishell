@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/30 03:28:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:29:34 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,8 @@ int	exec(t_token *token, t_envlist *envp)
 	}
 	wait_exec(i);
 	signal_mini();
+	close(pipetmp[0]);
+	close(pipeline[0]);
+	close(pipeline[1]);
 	return (1);
 }
