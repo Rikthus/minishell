@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 04:14:57 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:25:16 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	int	print_export(t_envlist *env_list)
 	if (!env_list->env_var)
 		return (1);
 	i = 0;
-	while(env_list)
+	while (env_list)
 	{
 		ft_putstr_fd("declare -x ", 1);
 		while (env_list->env_var[i++] && env_list->env_var[i] != '=')
