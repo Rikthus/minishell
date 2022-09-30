@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 19:01:03 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/30 02:09:30 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ t_envlist	*make_env(char **envp);
 /////////////////////////////////////
 
 // PRE_PARSING
-int			check_tokens(t_token *token);
 int			pre_parsing(char *raw_line);
 
 // TOKENIZER

@@ -6,28 +6,17 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/28 10:59:10 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 02:10:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_tokens(t_token *token)
-{
-	while (token)
-	{
-		if (!(token->cmd[0]))
-			return (0);
-		token = token->next;
-	}
-	return (1);
-}
-
 static	int	check_char(char c)
 {
 	if (!ft_isalnum(c) && !ft_isspace(c) && c != '-' && c != '\'' && c != '\"'
 		&& c != '$' && c != '<' && c != '>' && c != '|' && c != '/'
-		&& c != '=' && c != '.')
+		&& c != '=' && c != '.' && c != '-' && c != '+' && c != '*')
 		return (0);
 	return (1);
 }
@@ -86,7 +75,7 @@ int	pre_parsing(char *raw_line)
 	i = 0;
 	while (raw_line[i] && ft_isspace(raw_line[i]))
 		i++;
-	if (raw_line[i] == '|')
+	if (raw_line[i] == '|' || raw_line[i] == '\0')
 		return (0);
 	while (raw_line[i])
 	{

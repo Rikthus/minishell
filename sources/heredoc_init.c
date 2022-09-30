@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/29 19:43:25 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:30:50 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static	int	read_heredoc(int fd, char *eof)
 
 	while (1)
 	{
+		if (g_herestop == 1)
+			break ;
 		line = readline(">");
 		if (!line)
 			return (0); // ERR

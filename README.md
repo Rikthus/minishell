@@ -27,17 +27,17 @@
 - parsing: si pas d'envp alors env_list->env_var = NULL (et juste un element dans env_list)
 
 ## TO DO
-- line with only spaces
+- line with only spaces **DONE**
 
 **SIGNALS**
-- ctrl-\ in a prompt after you wrote some stuff : should quit minishell
-- blocking commands
+- ctrl-\ in a prompt after you wrote some stuff : should quit minishell  **SEE BASH**
+- heredoc BAD CTRL-D
 
 **QUOTES**
 - bad redir handling
 
 **HISTORY**
-- pb
+- pb  **DONE** pb not replicable
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)

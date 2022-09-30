@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 19:45:41 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:48:08 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,22 @@ void	handle_shell(int signum)
 void	handle_exec(int signum)
 {
 	if (signum == SIGINT)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	else
-		printf("Quit: 3\n");
+		ft_putstr_fd("Quit: 3\n", 1);
 }
 
 void	handle_heredoc(int signum)
 {
 	(void)signum;
 	g_herestop = 1;
-	close(0);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	close(1);
 	ft_putstr_fd("\n", 1);
+	// rl_on_new_line();
+	rl_replace_line("\r", 0);
+	// rl_redisplay();
+	// ft_putstr_fd("\n", 1);
+	// printf("\n");
 }
 
 void	signal_exec(void)
