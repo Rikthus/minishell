@@ -42,15 +42,13 @@
 - pb  **DONE** pb not replicable
 
 ## FINALISATION
-1. Add builtins in exec
-2. Finish 2 builtins
-3. Fix Heredox signals
-4. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
-5. Make error messages and good g_exit_status update
-6. Fix quotes with redir inside and multiple env var replacing
-7. Test Builtins
-8. Norm everything
-9. Crash Test Everything
+1. Finish 2 builtins
+2. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
+3. Make error messages and good g_exit_status update
+4. Fix quotes with redir inside and multiple env var replacing
+5. Test Builtins
+6. Norm everything
+7. Crash Test Everything
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)
@@ -58,5 +56,3 @@
 - cat /dev/urandom ./minishell
 - < /dev/urandom ./minishell
 - lsof -p <PID process> (fuite de fd)
-
-Charline, rajoute la gestion des builtins de la meme maniere que tu geres les commandes mais en dehors du fork, tout en gardant les redirections et les pipes. Attention a close() le bon nombre de pipes et a ne pas wait() les executions de builtins car ce ne sont pas des binaires (donc juste wait les processus qui s'executent dans des fork() avec execve() ).

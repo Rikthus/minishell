@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/30 03:14:40 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 23:20:46 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ static	void	redir_infile(t_env_token *e_t, int i)
 	fd = open(e_t->token->target[i], O_RDONLY);
 	if (fd < 0)
 	{
-		//perror(target[i]);
-		return ;
+		ft_putstr_fd("Maxine ❤️: ", 2);
+		ft_putstr_fd(e_t->token->target[i], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		exit(EXIT_FAILURE);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{

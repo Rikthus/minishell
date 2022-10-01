@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/01 15:40:46 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 23:13:09 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	exec(t_token *token, t_envlist *envp)
 	i[COUNT_BUILTS] = 0;
 	while (env_token.token)
 	{
-		// EXEC BUILTINS if ()
-		if (is_builtin(env_token.token->cmd[i[COUNT_ALL]]) != 0)
+		if (env_token.token->cmd[0] && is_builtin(env_token.token->cmd[0]) != 0)
 		{
 			if (choose_process_bltn(&env_token, pipeline, pipetmp, &i[0], &i[1]) == -1)
 				return (-1);
@@ -96,9 +95,7 @@ int	exec(t_token *token, t_envlist *envp)
 			if (pid < 0)
 				return (0);
 			if (pid == 0)
-			{
 				choose_process(&env_token, pipeline, pipetmp, i[COUNT_ALL]);
-			}
 		}
 		close_pipes_norm(pipeline, pipetmp, &i[COUNT_ALL]);
 		env_token.token = env_token.token->next;

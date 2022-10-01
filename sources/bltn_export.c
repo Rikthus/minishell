@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 04:14:57 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 23:01:47 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ static	int	print_export(t_envlist *env_list)
 	int	i;
 
 	if (!env_list->env_var)
-		return (1);
-	i = 0;
+		return (EXIT_SUCCESS);
 	while(env_list)
 	{
+		i = 0;
 		ft_putstr_fd("declare -x ", 1);
-		while (env_list->env_var[i++] && env_list->env_var[i] != '=')
-			write(1, &(env_list->env_var[i]), 1);
-		if (env_list->env_var[++i])
+		while (env_list->env_var[i] && env_list->env_var[i] != '=')
 		{
+			write(1, &(env_list->env_var[i]), 1);
+			i++;
+		}
+		if (env_list->env_var[i] == '=')
+		{
+			i++;
 			write(1, "=", 1);
 			write(1, "\"", 1);
 			ft_putstr_fd(&(env_list->env_var[i]), 1);
@@ -97,10 +101,10 @@ int	ft_export(char **argv, t_envlist **env_list)
 	int	i;
 
 	i = 1;
-	if (argv[1])
+	if (argv[1] && argv[1][0] == '-')
 	{
-		if (argv[1][0] == '-')
-			return (EXIT_FAILURE);
+		ft_putstr_fd("export: no options handled\n", 2);
+		return (EXIT_FAILURE);
 	}
 	else
 		return (print_export(*env_list));
