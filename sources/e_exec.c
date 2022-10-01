@@ -6,15 +6,18 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/01 15:29:21 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:40:46 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	wait_exec(int i)
+static	void	wait_exec(int i[2])
 {
-	while (i > 0)
+	int	u;
+
+	u = i[COUNT_ALL] - i[COUNT_BUILTS];
+	while (u > 0)
 	{
 		wait(&g_exit_status);
 		//printf("Status: %d\n", status);
@@ -30,7 +33,7 @@ void	wait_exec(int i)
 		{
 			//printf("Exited normally with code %d\n", WEXITSTATUS(status));
 		}
-		i--;
+		u--;
 	}
 	/* while (i > 0)
 	{
@@ -41,7 +44,7 @@ void	wait_exec(int i)
 	//	wait(NULL);
 }
 
-void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
+static	void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 {
 	if (i > 0)
 		close(pipetmp[0]);
@@ -52,28 +55,16 @@ void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 	*i = *i + 1;
 }
 
-//BUILTINS
-// static	int	is_builtin(char *str)
-// {
-// 	int	ret;
-
-// 	ret = 0;
-// 	if (ft_strcmp(str, "cd") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "pwd") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "exit") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "env") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "export") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "unset") == 0)
-// 		ret = choose_process_bltn();
-// 	else if (ft_strcmp(str, "echo") == 0)
-// 		ret = choose_process_bltn();
-// 	return (ret);
-// }
+static	int	is_builtin(char *str)
+{
+	if (ft_strcmp(str, "cd") == 0 || ft_strcmp(str, "pwd") == 0
+		|| ft_strcmp(str, "exit") == 0 || ft_strcmp(str, "env") == 0
+		|| ft_strcmp(str, "export") == 0 || ft_strcmp(str, "unset") == 0
+		|| ft_strcmp(str, "echo") == 0)
+		return (1);
+	else
+		return (0);
+}
 
 int	exec(t_token *token, t_envlist *envp)
 {
@@ -81,32 +72,41 @@ int	exec(t_token *token, t_envlist *envp)
 	t_env_token	env_token;
 	int			pipeline[2];
 	int			pipetmp[2];
-	int			i;
+	int			i[2];
 
 	env_token.token = token;
 	env_token.envp = envp;
 	env_token.old_stdout = dup(STDOUT_FILENO);
 	if (pipe(pipeline) == -1)
 		return (0);
-	i = 0;
+	i[COUNT_ALL] = 0;
+	i[COUNT_BUILTS] = 0;
 	while (env_token.token)
 	{
 		// EXEC BUILTINS if ()
-		signal_mini(EXEC);
-		pid = fork();
-		if (pid < 0)
-			return (0);
-		if (pid == 0)
+		if (is_builtin(env_token.token->cmd[i[COUNT_ALL]]) != 0)
 		{
-			choose_process(&env_token, pipeline, pipetmp, i);
+			if (choose_process_bltn(&env_token, pipeline, pipetmp, &i[0], &i[1]) == -1)
+				return (-1);
 		}
-		close_pipes_norm(pipeline, pipetmp, &i);
+		else
+		{
+			signal_mini(EXEC);
+			pid = fork();
+			if (pid < 0)
+				return (0);
+			if (pid == 0)
+			{
+				choose_process(&env_token, pipeline, pipetmp, i[COUNT_ALL]);
+			}
+		}
+		close_pipes_norm(pipeline, pipetmp, &i[COUNT_ALL]);
 		env_token.token = env_token.token->next;
 	}
 	wait_exec(i);
-	signal_mini(BASIC);
-	close(pipetmp[0]);
 	close(pipeline[0]);
 	close(pipeline[1]);
+	close(pipetmp[0]);
+	signal_mini(BASIC);
 	return (1);
 }

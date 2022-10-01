@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/01 15:28:42 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:42:48 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@
 # define FIRST_CMD 0
 # define LAST_CMD 1
 # define INTER_CMD 2
+
+// CMD COUNT EXEC
+# define COUNT_ALL 0
+# define COUNT_BUILTS 1
 
 // SIGNALS
 # define BASIC 0
@@ -221,8 +225,6 @@ char		**pipe_split(char *str);
 //////////////////////////////////////////////
 
 // EXEC
-void		wait_exec(int i);
-void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
 int			exec(t_token *token, t_envlist *envp);
 
 // FIND_ABSOLUTE_PATH
@@ -251,6 +253,7 @@ char		*prepare_commands(t_token *token, t_envlist *envp);
 int			replace_exit_status(char ** str, t_expan exp);
 
 ///////////  BUILTINS  //////////
+int			choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int *i, int *u);
 int			ft_pwd(char **argv, t_envlist *env_list);
 int			ft_env(char **argv, t_envlist *env_list);
 int			ft_unset(char **argv, t_envlist **env_list);
