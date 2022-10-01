@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:47:19 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/01 23:04:19 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 23:24:49 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 // DONE
 // NO VERIF
+static	int	is_empty_var(char *var)
+{
+	int	i;
+
+	i = 0;
+	while (var[i])
+	{
+		if (var[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 int	ft_env(char **argv, t_envlist *env_list)
 {
 	int			i;
@@ -28,7 +41,7 @@ int	ft_env(char **argv, t_envlist *env_list)
 	}
 	while (env_list)
 	{
-		if (env_list->env_var)
+		if (env_list->env_var && is_empty_var(env_list->env_var) == 0)
 		{
 			ft_putstr_fd(env_list->env_var, 1);
 			ft_putstr_fd("\n", 1);

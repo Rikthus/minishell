@@ -43,12 +43,18 @@
 
 ## FINALISATION
 1. Finish 2 builtins
-2. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
-3. Make error messages and good g_exit_status update
-4. Fix quotes with redir inside and multiple env var replacing
-5. Test Builtins
-6. Norm everything
-7. Crash Test Everything
+2. BUILTIN PIPES
+3. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
+4. Make error messages and good g_exit_status update
+5. Fix quotes with redir inside and multiple env var replacing
+6. Test Builtins
+7. Norm everything
+8. Crash Test Everything
+
+**BUILTINS_ERRORS**
+- pwd : DONE
+- env : almost DONE
+- unset : segfault if unsetting first env variable
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)

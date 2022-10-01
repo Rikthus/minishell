@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   bltn_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 14:29:47 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 01:19:59 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 //DONE
 //NO VERIF
+// 
 static	int	is_valid_env_name(char *str)
 {
 	int	i;
@@ -39,21 +40,24 @@ static	int	is_var_to_remove(char *str, char *to_rm)
 			return (0);
 		i++;
 	}
-	if (str[i] == '=' && to_rm[i] == '\0')
+	if ((str[i] == '\0'|| str[i] == '=') && to_rm[i] == '\0')
 		return (1);
 	return (0);
 }
 
 static	void	remove_first_elem(t_envlist **env_list)
 {
-	t_envlist	*previous;
 	t_envlist	*actual;
 
-	previous = *env_list;
-	actual = previous->next;
-	free(previous->env_var);
-	free(previous);
-	*env_list = actual;
+	actual = *env_list;
+	if (!actual->next)
+	{
+		free(actual->env_var);
+		return ;
+	}
+	*env_list = actual->next;
+	free(actual->env_var);
+	free(actual);
 	return ;
 }
 
@@ -61,27 +65,22 @@ static	void	env_remove(char *to_rm, t_envlist **env_list)
 {
 	t_envlist	*previous;
 	t_envlist	*actual;
-	t_envlist	*next;
 
 	previous = *env_list;
 	actual = previous->next;
-	next = actual->next;
 	if (is_var_to_remove(previous->env_var, to_rm))
 		return (remove_first_elem(env_list));
 	while (actual)
 	{
 		if (is_var_to_remove(actual->env_var, to_rm))
 		{
+			previous->next = actual->next;
 			free(actual->env_var);
 			free(actual);
-			previous->next = next;
 			return ;
 		}
-		if (!next)
-			return;
 		previous = previous->next;
 		actual = actual->next;
-		next = next->next;
 	}
 }
 
@@ -89,16 +88,8 @@ int	ft_unset(char **argv, t_envlist **env_list)
 {
 	int	i;
 
-	i = 0;
 	if (!(*env_list)->env_var)
-		return (EXIT_FAILURE);
-	while (argv[i])
-		i++;
-	if (i > 1)
-	{
-		if (argv[1][0] == '-')
-			return (EXIT_FAILURE);
-	}
+		return (EXIT_SUCCESS);
 	i = 1;
 	while (argv[i])
 	{
@@ -110,6 +101,7 @@ int	ft_unset(char **argv, t_envlist **env_list)
 			ft_putstr_fd(argv[i], 2);
 			ft_putstr_fd("': not a valid indentifier\n", 2);
 		}
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

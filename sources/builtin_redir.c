@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/01 15:35:09 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 00:22:25 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static	int	last_process_bltn(t_env_token *e_t, int *pipetmp)
 
 static	int	first_process_bltn(t_env_token *e_t, int *pipeline)
 {
+	(void) pipeline;
 	if (e_t->token->next == NULL)
 	{
 		redirection(e_t);
@@ -75,7 +76,7 @@ static	int	first_process_bltn(t_env_token *e_t, int *pipeline)
 		if (dup2(pipeline[1], STDOUT_FILENO) == -1)
 			return (-1);
 		close(pipeline[1]);
-		close(pipeline[0]);
+		// close(pipeline[0]);
 		redirection(e_t);
 		if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
 			return (-1);

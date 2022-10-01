@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/27 19:52:10 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 01:29:46 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*env_path(char **envp)
 	int	i;
 
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	return (envp[i]);
 }
@@ -91,6 +91,8 @@ char	*prepare_commands(t_token *token, t_envlist *envp)
 	good_path = NULL;
 	tab_env = custom_envp(envp);
 	envp_path = env_path(tab_env);
+	if (!envp_path)
+		return (NULL);
 	if (find_absolute_path(token->cmd) == -1)
 		good_path = token->cmd[0];
 	else if (find_absolute_path(token->cmd) == 0)
