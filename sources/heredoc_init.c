@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 15:09:56 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:30:02 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	token->hd_pipe[pipe_i] = fd;
 	if (pipe(fd) == -1)
 		return (0);
-	signal_heredoc();
+	signal_mini(PARENT_STOP);
 	pid = fork();
 	if (pid == -1)
 		return (0);
 	if (pid == 0)
 	{
+		signal_mini(HEREDOC);
 		if (!read_heredoc(token->hd_pipe[pipe_i][1], eof))
 			exit(EXIT_FAILURE);
 		close(fd[0]);
@@ -76,7 +77,7 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	}
 	close(fd[1]);
 	wait(NULL);
-	signal_mini();
+	signal_mini(BASIC);
 	return (1);
 }
 

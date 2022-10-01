@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_ft_split_mod.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charline <charline@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 15:19:17 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/21 18:22:28 by charline         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:27:09 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	ft_countinword(char const *str, char cc, char **test)
 			j = 0;
 			while (str[i + j] && str[i + j] != cc)
 				j++;
-			test[w] = malloc(sizeof(char) * j + 1);
+			test[w] = malloc(sizeof(char) * (j + 2));
 			if (test[w] == 0)
 				free_all(test, w);
 			ft_cpyy(test[w], (char *)(str + i), cc);

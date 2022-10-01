@@ -45,7 +45,7 @@
 1. Add builtins in exec
 2. Finish 2 builtins
 3. Fix Heredox signals
-4. Fix fd leak 1 pipe sur HEREDOC (test avec signaux)
+4. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
 5. Make error messages and good g_exit_status update
 6. Fix quotes with redir inside and multiple env var replacing
 7. Test Builtins

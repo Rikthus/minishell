@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/30 15:29:34 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:29:21 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	exec(t_token *token, t_envlist *envp)
 	while (env_token.token)
 	{
 		// EXEC BUILTINS if ()
-		signal_exec();
+		signal_mini(EXEC);
 		pid = fork();
 		if (pid < 0)
 			return (0);
@@ -104,7 +104,7 @@ int	exec(t_token *token, t_envlist *envp)
 		env_token.token = env_token.token->next;
 	}
 	wait_exec(i);
-	signal_mini();
+	signal_mini(BASIC);
 	close(pipetmp[0]);
 	close(pipeline[0]);
 	close(pipeline[1]);

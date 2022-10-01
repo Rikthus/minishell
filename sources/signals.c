@@ -6,13 +6,13 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 02:47:49 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:32:09 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	handle_shell(int signum)
+static	void	handle_shell(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -23,7 +23,7 @@ void	handle_shell(int signum)
 	}
 }
 
-void	handle_exec(int signum)
+static	void	handle_exec(int signum)
 {
 	if (signum == SIGINT)
 		ft_putstr_fd("\n", 1);
@@ -31,31 +31,40 @@ void	handle_exec(int signum)
 		ft_putstr_fd("Quit: 3\n", 1);
 }
 
-void	handle_heredoc(int signum)
+static	void	handle_pstop(int signum)
 {
 	(void)signum;
 	g_herestop = 1;
-	write(1, "OK", 2);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+}
+
+static	void	handle_heredoc(int signum)
+{
+	(void)signum;
+	g_herestop = 1;
+	close(0);
 	ft_putstr_fd("\n", 1);
 }
 
-void	signal_exec(void)
+void	signal_mini(int	type)
 {
-	signal(SIGQUIT, handle_exec);
-	signal(SIGINT, handle_exec);
-}
-
-void	signal_heredoc(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handle_heredoc);
-}
-
-void	signal_mini(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handle_shell);
+	if (type == BASIC)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, handle_shell);
+	}
+	else if (type == PARENT_STOP)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, handle_pstop);
+	}
+	else if (type == EXEC)
+	{
+		signal(SIGQUIT, handle_exec);
+		signal(SIGINT, handle_exec);
+	}
+	else if (type == HEREDOC)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, handle_heredoc);
+	}
 }
