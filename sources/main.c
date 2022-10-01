@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 04:35:29 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/01 15:22:28 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
+
+//// WARNING : `cat < infile`   not working if infile doesn't exists
 int	main(int argc, char **argv, char **envp)
 {
 	t_envlist	*env_list;
@@ -62,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	g_exit_status = 0;
-	signal_mini();
+	signal_mini(BASIC);
 	if (argc != 1 || !isatty(1))
 		return (err_minishell_usage());
 	env_list = make_env(envp);

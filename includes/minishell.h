@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/30 15:50:06 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:17:13 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@
 // CMD COUNT EXEC
 # define COUNT_ALL 0
 # define COUNT_BUILTS 1
+
+// SIGNALS
+# define BASIC 0
+# define PARENT_STOP 1
+# define EXEC 2
+# define HEREDOC 3
 
 //CUSTOM ENVP
 typedef struct s_envlist
@@ -174,12 +180,7 @@ int			heredoc_init(t_token *token);
 /////////////////////////////////////
 /////////     SIGNALS     ///////////
 /////////////////////////////////////
-void		signal_mini(void);
-void		signal_exec(void);
-void		signal_heredoc(void);
-void		handle_shell(int signum);
-void		handle_exec(int signum);
-void		handle_heredoc(int signum);
+void		signal_mini(int type);
 
 /////////////////////////////////////
 //////////     UTILS     ////////////

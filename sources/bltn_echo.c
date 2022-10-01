@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:15:22 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 15:58:00 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:07:16 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_echo(char **argv)
 	int	nb_arg;
 
 	nb_arg = 1;
+	
 	while (argv[nb_arg])
 		nb_arg++;
 	option = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/09/30 15:58:51 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:19:19 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	exec(t_token *token, t_envlist *envp)
 		}
 		else
 		{
-			signal_exec();
+			signal_mini(EXEC);
 			pid = fork();
 			if (pid < 0)
 				return (0);
@@ -130,7 +130,7 @@ int	exec(t_token *token, t_envlist *envp)
 	wait_exec(i);
 	close(pipeline[0]);
 	close(pipeline[1]);
-	close(pipetmp[1]);
-	signal_mini();
+	close(pipetmp[0]);
+	signal_mini(BASIC);
 	return (1);
 }
