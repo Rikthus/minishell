@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/02 01:49:14 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 15:30:40 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ static	void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 	if (pipe(pipeline) < 0)
 		return (perror("pipe"));
 	*i = *i + 1;
+}
+
+static	void	close_heredoc_pipes(t_token *token)
+{
+	int	i;
+
+	while (token)
+	{
+		i = 0;
+		if (token->hd_pipe)
+		{
+			while (token->hd_pipe[i])
+			{
+				close(token->hd_pipe[i][0]);
+				i++;
+			}
+		}
+		token = token->next;
+	}
 }
 
 static	int	is_builtin(char *str)
@@ -104,6 +123,7 @@ int	exec(t_token *token, t_envlist *envp)
 	close(pipeline[0]);
 	close(pipeline[1]);
 	close(pipetmp[0]);
+	close_heredoc_pipes(token);
 	signal_mini(BASIC);
 	return (1);
 }

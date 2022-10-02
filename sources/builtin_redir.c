@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 02:27:35 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 15:38:38 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	choose_builtin(char *str, t_env_token *env_token)
 	else if (ret == EXIT_FAILURE)
 		g_exit_status = 1;
 	else
-		g_exit_status = -1 // malloc error number ?
+		g_exit_status = -1; // malloc error number ?
 	return (ret);
 }
 
