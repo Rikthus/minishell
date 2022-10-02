@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 16:52:33 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 01:10:11 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,41 @@ static	int	add_var_to_env(char *var, t_envlist **env_list)
 	return (EXIT_SUCCESS);
 }
 
+static	char	**var_to_unset(char *full_var)
+{
+	int		i;
+	char	*target;
+	char	**big;
+
+	i = 0;
+	while(full_var[i] && full_var[i] != '=')
+		i++;
+	target = malloc(sizeof(char) * i);
+	if (!target)
+		return (NULL);
+	i = 0;
+	while (full_var[i] && full_var[i] != '=')
+	{
+		target[i] = full_var[i];
+		i++;
+	}
+	target[i] = '\0';
+	big = malloc(sizeof(char *) * 3);
+	if (!big)
+	{
+		free(target);
+		return (NULL);
+	}
+	big[0] = target;
+	big[1] = target;
+	big[2] = NULL;
+	return (big);
+}
+
 int	ft_export(char **argv, t_envlist **env_list)
 {
-	int	i;
+	int		i;
+	char	**target_var;
 
 	i = 1;
 	if (argv[1] && argv[1][0] == '-')
@@ -112,7 +144,12 @@ int	ft_export(char **argv, t_envlist **env_list)
 	{
 		if (is_valid_name(argv[i]) == 0)
 		{
-			ft_unset(&argv[i], env_list); // limite limite la technique.
+			target_var = var_to_unset(argv[i]);
+			if (!target_var)
+				return (-1);
+			ft_unset(target_var, env_list);
+			free(target_var[0]);
+			free(target_var);
 			if (!add_var_to_env(argv[i], env_list))
 				return (-1);
 		}

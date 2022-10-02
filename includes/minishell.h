@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/02 16:48:53 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 00:46:56 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int	g_herestop;
 //////////    FUNCTION    //////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+// ENV
 t_envlist	*make_env(char **envp);
 
 /////////////////////////////////////
@@ -259,6 +260,7 @@ int			ft_env(char **argv, t_envlist *env_list);
 int			ft_unset(char **argv, t_envlist **env_list);
 int			ft_echo(char **argv);
 int			ft_export(char **argv, t_envlist **env_list);
+int			ft_cd(char **argv, t_envlist **env_list);
 
 ///////////  ERROR  //////////
 int			err_no_cmd(t_token *token, char *raw_line);

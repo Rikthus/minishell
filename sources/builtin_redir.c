@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 16:54:22 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 17:07:10 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	choose_builtin(char *str, t_env_token *env_token)
 
 	ret = 0;
 	if (ft_strcmp(str, "cd") == 0)
-		ret = ft_cd(env_token->token->cmd, &(env_token->envp));
+		ret = ft_cd(env_token->token->cmd, env_token->envp);
 	if (ft_strcmp(str, "pwd") == 0)
 		ret = ft_pwd(env_token->token->cmd, env_token->envp[0]);
 	// else if (ft_strcmp(str, "exit") == 0)

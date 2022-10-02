@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:35:04 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/01 23:01:37 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 00:52:27 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_pwd(char **argv, t_envlist *env_list)
 		return (1);
 	while (argv[i])
 		i++;
-	if (i > 1 || argv[1][0] == '-')
+	if (i > 1 && argv[1][0] == '-')
 	{
 		ft_putstr_fd("pwd: no options handled\n", 2);
 		return (EXIT_FAILURE);
