@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:47:19 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/01 23:24:49 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:30:55 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	ft_env(char **argv, t_envlist *env_list)
 	int			i;
 
 	i = 0;
-	while (argv[i])
-		i++;
+	// while (argv[i])
+	// 	i++;
+	(void) argv;
 	if (i > 1)
 	{
 		ft_putstr_fd("env: no options handled\n", 2);

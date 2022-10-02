@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/02 01:34:17 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:48:44 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	int	syntax_err(char *raw_line)
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
-static	int	controler(char *raw_line, t_envlist *env_list)
+static	int	controler(char *raw_line, t_envlist **env_list)
 {
 	t_base	*basic_token;
 	t_token	*token;
@@ -38,7 +38,7 @@ static	int	controler(char *raw_line, t_envlist *env_list)
 	free_basic_token(basic_token);
 	if (!token)
 		return (free_rd_line(raw_line, BAD_EXIT));
-	if (!expander(&token, env_list) || !heredoc_init(token))
+	if (!expander(&token, *env_list) || !heredoc_init(token))
 	{
 		free_token(token);
 		return (free_rd_line(raw_line, BAD_EXIT));
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		g_herestop = 0;
-		rl_ret = controler(readline("Maxine ❤️ "), env_list);
+		rl_ret = controler(readline("Maxine ❤️ "), &env_list);
 		if (rl_ret == BAD_EXIT)
 		{
 			ft_putstr_fd("Malloc failed\n", 2);

@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 15:38:38 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:47:44 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static int	choose_builtin(char *str, t_env_token *env_token)
 	// if (ft_strcmp(str, "cd") == 0)
 	// 	ret = ft_cd(env_token->token->cmd, &(env_token->envp));
 	if (ft_strcmp(str, "pwd") == 0)
-		ret = ft_pwd(env_token->token->cmd, env_token->envp);
+		ret = ft_pwd(env_token->token->cmd, env_token->envp[0]);
 	// else if (ft_strcmp(str, "exit") == 0)
 	// 	ret = ft_exit();
 	else if (ft_strcmp(str, "env") == 0)
-		ret = ft_env(env_token->token->cmd, env_token->envp);
+		ret = ft_env(env_token->token->cmd, env_token->envp[0]);
 	else if (ft_strcmp(str, "export") == 0)
-		ret = ft_export(env_token->token->cmd, &(env_token->envp));
+		ret = ft_export(env_token->token->cmd, env_token->envp);
 	else if (ft_strcmp(str, "unset") == 0)
-		ret = ft_unset(env_token->token->cmd, &(env_token->envp));
+		ret = ft_unset(env_token->token->cmd, env_token->envp);
 	else if (ft_strcmp(str, "echo") == 0)
 		ret = ft_echo(env_token->token->cmd);
 	if (ret == EXIT_SUCCESS)
@@ -60,6 +60,7 @@ static	int	last_process_bltn(t_env_token *e_t, int *pipetmp)
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
 		return (-1);
 	close(pipetmp[0]);
+	close(pipetmp[1]);
 	redirection(e_t);
 	if (dup2(e_t->old_stdout, 1) == -1)
 		return (-1);
@@ -82,7 +83,7 @@ static	int	first_process_bltn(t_env_token *e_t, int *pipeline)
 		if (dup2(pipeline[1], STDOUT_FILENO) == -1)
 			return (-1);
 		close(pipeline[1]);
-		// close(pipeline[0]);
+		close(pipeline[0]);
 		redirection(e_t);
 		if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/02 15:30:40 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:43:19 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static	int	is_builtin(char *str)
 		return (0);
 }
 
-int	exec(t_token *token, t_envlist *envp)
+int	exec(t_token *token, t_envlist **envp)
 {
 	pid_t		pid;
 	t_env_token	e_t;

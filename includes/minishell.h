@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/01 15:42:48 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:48:53 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct s_env_token
 {
 	int			old_stdout;
 	t_token		*token;
-	t_envlist	*envp;
+	t_envlist	**envp;
 	char		**env;
 }	t_env_token;
 
@@ -225,7 +225,7 @@ char		**pipe_split(char *str);
 //////////////////////////////////////////////
 
 // EXEC
-int			exec(t_token *token, t_envlist *envp);
+int			exec(t_token *token, t_envlist **envp);
 
 // FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);

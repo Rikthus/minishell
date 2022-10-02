@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/02 01:22:26 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:45:43 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,17 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 
 void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
 {
-	char	*good_path;
-	char	**env;
+	t_envlist	*env_cpy;
+	char		*good_path;
+	char		**env;
 
-	if (e_t->envp->env_var && e_t->token->cmd[0])
+	env_cpy = e_t->envp[0];
+	if (env_cpy && e_t->token->cmd[0])
 	{
-		good_path = prepare_commands(e_t->token, e_t->envp);
+		good_path = prepare_commands(e_t->token, env_cpy);
 		if (!good_path)
 			return (perror(""));
-		env = custom_envp(e_t->envp);
+		env = custom_envp(env_cpy);
 		if (!env)
 			return (perror(""));
 		e_t->env = env;
