@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 01:51:25 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 16:52:33 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int	ft_export(char **argv, t_envlist **env_list)
 		return (print_export(*env_list));
 	while (argv[i])
 	{
-		if (is_valid_name(argv[i]))
+		if (is_valid_name(argv[i]) == 0)
 		{
-			//ft_unset(&argv[i], env_list); // limite limite la technique.
+			ft_unset(&argv[i], env_list); // limite limite la technique.
 			if (!add_var_to_env(argv[i], env_list))
 				return (-1);
 		}
