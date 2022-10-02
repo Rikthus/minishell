@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 01:19:59 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/02 01:35:36 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //DONE
 //NO VERIF
-// 
+// bad when removing first env_var
 static	int	is_valid_env_name(char *str)
 {
 	int	i;

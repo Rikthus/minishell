@@ -43,7 +43,7 @@
 
 ## FINALISATION
 1. Finish 2 builtins
-2. BUILTIN PIPES
+2. BUILTIN PIPES et check fd leaks
 3. Fix fd leak 1 pipe sur HEREDOC (test avec signaux) and signals ctrl-d new line to remove
 4. Make error messages and good g_exit_status update
 5. Fix quotes with redir inside and multiple env var replacing
