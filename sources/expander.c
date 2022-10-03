@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 04:27:14 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 03:37:37 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,23 @@ static	int	expand(char **str, t_envlist *env_list, t_expan exp)
 
 static	int	launch_expand(char **str, t_envlist *env_list, int *i)
 {
+	int		j;
 	t_expan	exp;
 
-	exp.left_end = *i;
-	exp.var_name_index = *i + 1;
-	*i += 1;
-	if (str[0][*i] == '?')
+	j = *i;
+	exp.left_end = j;
+	j++;
+	exp.var_name_index = j;
+	if (str[0][j] == '?')
 	{
-		*i += 1;
-		exp.right_begin = *i;
+		exp.right_begin = j + 2;
 		if (!replace_exit_status(str, exp))
 			return (0);
 		return (1);
 	}
-	while (str[0][*i] && ft_isalnum(str[0][*i]))
-		*i += 1;
-	exp.right_begin = *i;
+	while (str[0][j] && (ft_isalnum(str[0][j] || str[0][j] == '_')))
+		j ++;
+	exp.right_begin = j;
 	if (!expand(str, env_list, exp))
 		return (0);
 	return (1);
@@ -86,8 +87,10 @@ static	int	find_env_var(char **str, t_envlist *env_list)
 		if (state.sq == OFF && str[0][i] == '$'
 			&& str[0][i + 1] != '\0')
 		{
+			printf("i before expansion:%d\n", i);
 			if (!launch_expand(str, env_list, &i))
 				return (0);
+			printf("i after expansion:%d\n", i);
 		}
 		i++;
 	}
