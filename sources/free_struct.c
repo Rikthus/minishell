@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:17:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 16:42:58 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/03 02:54:32 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*free_token(t_token *token)
 				nb_heredoc++;
 			i++;
 		}
-		if (nb_heredoc > 0)
+		if (nb_heredoc > 0 && previous->hd_pipe)
 			free_2d_int_array(previous->hd_pipe, nb_heredoc);
 		free_2d_array(previous->cmd);
 		free(previous->redir);

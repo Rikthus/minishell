@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/01 15:30:02 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 02:45:01 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	heredoc_init(t_token *token)
 					return (0);
 				if (g_herestop == 1)
 					return (1);
+				
 			}
 			i++;
 		}
