@@ -44,12 +44,12 @@
 ## FINALISATION
 1. Finish 1 builtins
 2. BUILTIN PIPES et check fd leaks
-3. (optionnel)HEREDOC signals ctrl-d new line to remove
+3. Fix multiple env var replacing
 4. Make error messages and good g_exit_status update
-5. Fix quotes with redir inside and multiple env var replacing
-6. Test Builtins
-7. Norm everything
-8. Crash Test Everything
+5. Test Builtins
+6. Norm everything
+7. Crash Test Everything
+8. (optional) HEREDOC signals ctrl-d new line to remove
 
 **BUILTINS_ERRORS**
 - pwd : DONE
