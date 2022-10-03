@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/03 17:14:48 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:06:45 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void	wait_exec(int i[2])
+static	void	wait_exec(int i)
 {
-	int	u;
-
-	u = i[COUNT_ALL] - i[COUNT_BUILTS];
-	while (u > 0)
+	while (i > 0)
 	{
 		wait(&g_exit_status);
 		//printf("Status: %d\n", status);
@@ -33,7 +30,7 @@ static	void	wait_exec(int i[2])
 		{
 			//printf("Exited normally with code %d\n", WEXITSTATUS(status));
 		}
-		u--;
+		i--;
 	}
 	/* while (i > 0)
 	{
@@ -85,38 +82,42 @@ static	int	is_builtin(char *str)
 		return (0);
 }
 
+
+
 int	exec(t_token *token, t_envlist **envp)
 {
 	pid_t		pid;
 	t_env_token	e_t;
 	int			pipeline[2];
 	int			pipetmp[2];
-	int			i[2];
+	int			i;
 
 	e_t.token = token;
 	e_t.envp = envp;
 	e_t.old_stdout = dup(STDOUT_FILENO);
 	if (pipe(pipeline) == -1)
 		return (0);
-	i[COUNT_ALL] = 0;
-	i[COUNT_BUILTS] = 0;
+	i = 0;
 	while (e_t.token)
 	{
-		if (e_t.token->cmd[0] && is_builtin(e_t.token->cmd[0]) != 0)
+		if (i == 0 && !e_t.token->next && is_builtin(e_t.token->cmd[0]) != 0)
 		{
-			if (choose_process_bltn(&e_t, pipeline, pipetmp, &i[0], &i[1]) == -1)
+			redirection(&e_t);
+			if (choose_builtin(e_t.token->cmd[0], &e_t) == -1)
 				return (-1);
 		}
-		else
+		signal_mini(EXEC);
+		pid = fork();
+		if (pid < 0)
+			return (0);
+		if (pid == 0)
 		{
-			signal_mini(EXEC);
-			pid = fork();
-			if (pid < 0)
-				return (0);
-			if (pid == 0)
-				choose_process(&e_t, pipeline, pipetmp, i[COUNT_ALL]);
+			if (e_t.token->cmd[0] && is_builtin(e_t.token->cmd[0]) != 0)
+				choose_process_bltn(&e_t, pipeline, pipetmp, i);
+			else
+				choose_process(&e_t, pipeline, pipetmp, i);
 		}
-		close_pipes_norm(pipeline, pipetmp, &i[COUNT_ALL]);
+		close_pipes_norm(pipeline, pipetmp, &i);
 		e_t.token = e_t.token->next;
 	}
 	wait_exec(i);

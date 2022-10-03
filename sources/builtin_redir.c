@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 17:07:10 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:07:18 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	choose_builtin(char *str, t_env_token *env_token)
+int	choose_builtin(char *str, t_env_token *env_token)
 {
 	int	ret;
 
@@ -40,73 +40,62 @@ static int	choose_builtin(char *str, t_env_token *env_token)
 	return (ret);
 }
 
-static	int	inter_process_bltn(t_env_token *e_t, int *pipeline, int *pipetmp)
+static	void	inter_process_bltn(t_env_token *e_t, int *pipeline, int *pipetmp)
 {
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
-		return (-1);
+		exit (-1);
 	if (dup2(pipeline[1], STDOUT_FILENO) == -1)
-		return (-1);
+		exit (-1);
 	close(pipetmp[0]);
 	close(pipeline[1]);
 	close(pipeline[0]);
 	redirection(e_t);
 	if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
-		return (-1);
-	return (0);
+		exit (-1);
+	exit (0);
 }
 
-static	int	last_process_bltn(t_env_token *e_t, int *pipetmp)
+static	void	last_process_bltn(t_env_token *e_t, int *pipetmp)
 {
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
-		return (-1);
+		exit (-1);
 	close(pipetmp[0]);
 	close(pipetmp[1]);
 	redirection(e_t);
 	if (dup2(e_t->old_stdout, 1) == -1)
-		return (-1);
+		exit (-1);
 	if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
-		return (-1);
-	return (0);
+		exit (-1);
+	exit (0);
 }
 
-static	int	first_process_bltn(t_env_token *e_t, int *pipeline)
+static	void	first_process_bltn(t_env_token *e_t, int *pipeline)
 {
-	(void) pipeline;
 	if (e_t->token->next == NULL)
 	{
 		redirection(e_t);
 		if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
-			return (-1);
+			exit (-1);
 	}
 	else
 	{
 		if (dup2(pipeline[1], STDOUT_FILENO) == -1)
-			return (-1);
+			exit (-1);
 		close(pipeline[1]);
 		close(pipeline[0]);
 		redirection(e_t);
 		if (choose_builtin(e_t->token->cmd[0], e_t) == -1)
-			return (-1);
+			exit (-1);
 	}
-	return (0);
+	exit (0);
 }
 
-int	choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int *i, int *u)
+void	choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int i)
 {
-	if (*i == 0)
-	{
-		*u += 1;
-		return (first_process_bltn(env_token, pipeline));
-	}
+	if (i == 0)
+		first_process_bltn(env_token, pipeline);
 	else if (env_token->token->next == NULL)
-	{
-		*u += 1;
-		return (last_process_bltn(env_token, pipetmp));
-	}
+		last_process_bltn(env_token, pipetmp);
 	else
-	{
-		*u += 1;
-		return (inter_process_bltn(env_token, pipeline, pipetmp));
-	}
-	return (0);
+		inter_process_bltn(env_token, pipeline, pipetmp);
 }

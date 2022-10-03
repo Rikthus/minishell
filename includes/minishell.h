@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 17:22:06 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:05:58 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,8 @@ char		*prepare_commands(t_token *token, t_envlist *envp);
 int			replace_exit_status(char ** str, t_expan exp);
 
 ///////////  BUILTINS  //////////
-int			choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int *i, int *u);
+void		choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int i);
+int			choose_builtin(char *str, t_env_token *env_token);
 int			ft_pwd(char **argv, t_envlist *env_list);
 int			ft_env(char **argv, t_envlist *env_list);
 int			ft_unset(char **argv, t_envlist **env_list);
