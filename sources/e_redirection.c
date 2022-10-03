@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/02 15:26:15 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 19:29:06 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ static	void	redir_infile(t_env_token *e_t, int i)
 		exit(EXIT_FAILURE);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
-	{
 		return (perror(""));
-	}
 	close(fd);
 }
 
@@ -37,14 +35,9 @@ static	void	redir_append(t_env_token *e_t, int i)
 
 	fd = open(e_t->token->target[i], O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
-	{
-		//perror(target[i]);
-		return ;
-	}
-	if (dup2(fd, STDOUT_FILENO) < 0)
-	{
 		return (perror(""));
-	}
+	if (dup2(fd, STDOUT_FILENO) < 0)
+		return (perror(""));
 	close(fd);
 }
 
@@ -54,23 +47,16 @@ static	void	redir_outfile(t_env_token *e_t, int i)
 
 	fd = open(e_t->token->target[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
-	{
-		//perror(target[i]);
-		return ;
-	}
-	if (dup2(fd, STDOUT_FILENO) < 0)
-	{
 		return (perror(""));
-	}
+	if (dup2(fd, STDOUT_FILENO) < 0)
+		return (perror(""));
 	close(fd);
 }
 
 static	void	redir_heredoc(t_env_token *e_t, int i)
 {
 	if (dup2(e_t->token->hd_pipe[i][0], STDIN_FILENO) < 0)
-	{
 		return (perror(""));
-	}
 	close(e_t->token->hd_pipe[i][0]);
 }
 

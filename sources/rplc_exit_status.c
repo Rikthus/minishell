@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:25:10 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:24:06 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:53:59 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	int	status_len(void)
 	int	tmp_status;
 	int	len;
 
-	tmp_status = g_exit_status;
+	tmp_status = g_shell.exit_status;
 	len = 0;
 	if (tmp_status == 0)
 		return (1);
@@ -37,7 +37,7 @@ static	char	*fill_str_exit(void)
 	int		i;
 	char	*str_exit;
 
-	tmp_status = g_exit_status;
+	tmp_status = g_shell.exit_status;
 	i = status_len();
 	str_exit = malloc(sizeof(char) * (i + 1));
 	if (!str_exit)

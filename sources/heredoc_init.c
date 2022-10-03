@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 18:23:12 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 19:09:51 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ static	int	read_heredoc(int fd, char *eof)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
-			return (0); // ERR
-		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0) || g_herestop == 1)
+		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0) || g_shell.herestop == 1)
 		{
 			free(line);
 			break ;
@@ -58,14 +56,14 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 
 	fd = malloc(sizeof(int) * 2);
 	if (!fd)
-		return (0); // ERRRRRRR
+		return (error_malloc(0));
 	token->hd_pipe[pipe_i] = fd;
 	if (pipe(fd) == -1)
-		return (0);
+		return (perror_msg(0));
 	signal_mini(PARENT_STOP);
 	pid = fork();
 	if (pid == -1)
-		return (0);
+		return (perror_msg(0));
 	if (pid == 0)
 	{
 		signal_mini(HEREDOC);
@@ -102,7 +100,7 @@ int	heredoc_init(t_token *token)
 			{
 				if (!add_heredoc(token, i, token->target[i]))
 					return (0);
-				if (g_herestop == 1)
+				if (g_shell.herestop == 1)
 					return (1);
 			}
 			i++;

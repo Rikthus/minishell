@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:00:31 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/29 16:42:31 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:19:19 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	err_minishell_usage(void)
 
 int	err_bad_envp_malloc(void)
 {
+	g_shell.exit_status = -1;
 	ft_putstr_fd("Malloc failed\n", 2);
 	return (1);
 }
@@ -29,6 +30,19 @@ int	err_no_cmd(t_token *token, char *raw_line)
 	free(raw_line);
 	free_token(token);
 	ft_putstr_fd("No command to exec\n", 2);
-	g_exit_status = 1;
+	g_shell.exit_status = 1;
 	return (1);
+}
+
+int	perror_msg(int err)
+{
+	perror("");
+	return (err);
+}
+
+int	error_malloc(int err)
+{
+	g_shell.exit_status = -1;
+	ft_putstr_fd("Malloc failed\n", 2);
+	return (err);
 }

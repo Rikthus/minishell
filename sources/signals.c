@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:24:21 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:45:56 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static	void	handle_exec(int signum)
 static	void	handle_pstop(int signum)
 {
 	(void)signum;
-	g_herestop = 1;
+	g_shell.herestop = 1;
 }
 
 static	void	handle_heredoc(int signum)
 {
 	(void)signum;
-	g_herestop = 1;
+	g_shell.herestop = 1;
 	close(0);
 	ft_putstr_fd("\n", 1);
 }

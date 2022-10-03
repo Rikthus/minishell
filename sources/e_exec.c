@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/03 18:25:10 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 19:23:26 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 static	void	wait_exec(int i)
 {
+	int	status;
+
 	while (i > 0)
 	{
-		wait(&g_exit_status);
-		//printf("Status: %d\n", status);
-		if (WIFSIGNALED(g_exit_status))
+		wait(&status);
+		if (WIFSIGNALED(status))
 		{
-			//perror("WTERMSIG(status)");
-			if (g_exit_status == 10)
-				printf("Bus error: %d\n", WTERMSIG(g_exit_status));
-			else if (g_exit_status == 11)
-				printf("Segmentation fault: %d\n", WTERMSIG(g_exit_status));
+			if (status == 10)
+			{
+				g_shell.exit_status = WTERMSIG(status);
+				printf("Bus error: %d\n", g_shell.exit_status);
+			}
+			else if (status == 11)
+			{
+				g_shell.exit_status = WTERMSIG(status);
+				printf("Segmentation fault: %d\n", g_shell.exit_status);
+			}
 		}
-		else if (WIFEXITED(g_exit_status))
-		{
-			//printf("Exited normally with code %d\n", WEXITSTATUS(status));
-		}
+		else if (WIFEXITED(status))
+			g_shell.exit_status = WEXITSTATUS(status);
 		i--;
 	}
-	/* while (i > 0)
-	{
-		wait(NULL);
-		i--;
-	} */
-	//while (--i >= 0)
-	//	wait(NULL);
 }
 
 static	void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
@@ -94,7 +91,7 @@ int	exec(t_token *token, t_envlist **envp)
 	e_t.envp = envp;
 	e_t.old_stdout = dup(STDOUT_FILENO);
 	if (pipe(pipeline) == -1)
-		return (0);
+		return (perror_msg(0));
 	i = 0;
 	while (e_t.token)
 	{
@@ -104,16 +101,19 @@ int	exec(t_token *token, t_envlist **envp)
 			if (choose_builtin(e_t.token->cmd[0], &e_t) == -1)
 				return (-1);
 		}
-		signal_mini(EXEC);
-		pid = fork();
-		if (pid < 0)
-			return (0);
-		if (pid == 0)
+		else
 		{
-			if (e_t.token->cmd[0] && is_builtin(e_t.token->cmd[0]) != 0)
-				choose_process_bltn(&e_t, pipeline, pipetmp, i);
-			else
-				choose_process(&e_t, pipeline, pipetmp, i);
+			signal_mini(EXEC);
+			pid = fork();
+			if (pid < 0)
+				return (perror_msg(0));
+			if (pid == 0)
+			{
+				if (e_t.token->cmd[0] && is_builtin(e_t.token->cmd[0]) != 0)
+					choose_process_bltn(&e_t, pipeline, pipetmp, i);
+				else
+					choose_process(&e_t, pipeline, pipetmp, i);
+			}
 		}
 		close_pipes_norm(pipeline, pipetmp, &i);
 		e_t.token = e_t.token->next;

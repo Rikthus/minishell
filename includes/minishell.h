@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 18:11:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 19:06:38 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,14 @@ typedef struct s_env_token
 	char		**env;
 }	t_env_token;
 
-int	g_exit_status;
-int 	g_herestop;
+//GLOBAL
+typedef struct s_global
+{
+	int	exit_status;
+	int	herestop;
+}	t_global;
+
+t_global	g_shell;
 
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
@@ -270,5 +276,7 @@ int			ft_cd(char **argv, t_envlist **env_list);
 int			err_no_cmd(t_token *token, char *raw_line);
 int			err_minishell_usage(void);
 int			err_bad_envp_malloc(void);
+int			perror_msg(int err);
+int			error_malloc(int err);
 
 #endif
