@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 00:46:56 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 17:22:06 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_expan
 	int		left_end;
 	int		right_begin;
 	int		var_name_index;
+	int		*cmd_index;
 	char	*left_dup;
 	char	*right_dup;
 	char	*var_name_dup;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:13:35 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/27 17:52:47 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 17:02:47 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_exp(char **str, t_expan *exp)
 	if (!(exp->left_dup))
 		return (0);
 	exp->right_dup = malloc(sizeof(char)
-			* (ft_strlen(str[0]) - 1 - exp->right_begin + 1));
+			* (ft_strlen(str[0]) - exp->right_begin + 1));
 	if (!(exp->right_dup))
 	{
 		free(exp->left_dup);

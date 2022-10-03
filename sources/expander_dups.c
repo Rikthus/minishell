@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_dups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:26:02 by maxperei          #+#    #+#             */
-/*   Updated: 2022/09/27 17:51:54 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 17:25:08 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	dup_var(char *env_var, t_expan *exp)
 		j++;
 	if (env_var[j] == '\0')
 		return (0);
+	*(exp->cmd_index) = *(exp->cmd_index) + ft_strlen(&env_var[j + 1]);
 	exp->var_dup = malloc(sizeof(char) * (ft_strlen(&env_var[j + 1]) + 1));
 	if (!exp->var_dup)
 		return (free_expan(exp));
