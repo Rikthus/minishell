@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:57:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 16:33:47 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:16:56 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//DONE
-//NO VERIF
-// bad when removing first env_var
 static	int	is_valid_env_name(char *str)
 {
 	int	i;
@@ -40,7 +37,7 @@ static	int	is_var_to_remove(char *str, char *to_rm)
 			return (0);
 		i++;
 	}
-	if ((str[i] == '\0'|| str[i] == '=') && to_rm[i] == '\0')
+	if ((str[i] == '\0' || str[i] == '=') && to_rm[i] == '\0')
 		return (1);
 	return (0);
 }

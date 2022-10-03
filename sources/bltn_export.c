@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 01:10:11 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:15:53 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	int	print_export(t_envlist *env_list)
 
 	if (!env_list->env_var)
 		return (EXIT_SUCCESS);
-	while(env_list)
+	while (env_list)
 	{
 		i = 0;
 		ft_putstr_fd("declare -x ", 1);
@@ -103,7 +103,7 @@ static	char	**var_to_unset(char *full_var)
 	char	**big;
 
 	i = 0;
-	while(full_var[i] && full_var[i] != '=')
+	while (full_var[i] && full_var[i] != '=')
 		i++;
 	target = malloc(sizeof(char) * i);
 	if (!target)

@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/03 18:06:45 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:25:10 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static	int	is_builtin(char *str)
 	else
 		return (0);
 }
-
-
 
 int	exec(t_token *token, t_envlist **envp)
 {

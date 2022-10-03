@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rplc_exit_status.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:25:10 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 04:35:37 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:24:06 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:15:22 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 02:20:55 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:13:34 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//DONE
-//VERIF
 static	int	check_option(char *str)
 {
 	int	i;
@@ -36,7 +34,7 @@ static	int	print_start(char **argv, int *option)
 {
 	int	i;
 	int	j;
-	
+
 	i = 1;
 	while (argv[i])
 	{
@@ -45,7 +43,7 @@ static	int	print_start(char **argv, int *option)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (argv[i][0] != '-' || 
+			if (argv[i][0] != '-' ||
 				(j > 0 && argv[i][0] == '-' && argv[i][j] != 'n'))
 				return (i);
 			j++;

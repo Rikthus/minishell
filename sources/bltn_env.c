@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:47:19 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/02 16:30:55 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:15:25 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// DONE
-// NO VERIF
 static	int	is_empty_var(char *var)
 {
 	int	i;
@@ -27,13 +25,12 @@ static	int	is_empty_var(char *var)
 	}
 	return (1);
 }
+
 int	ft_env(char **argv, t_envlist *env_list)
 {
-	int			i;
+	int	i;
 
 	i = 0;
-	// while (argv[i])
-	// 	i++;
 	(void) argv;
 	if (i > 1)
 	{

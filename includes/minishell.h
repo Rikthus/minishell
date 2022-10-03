@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 18:05:58 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:11:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_env_token
 }	t_env_token;
 
 int	g_exit_status;
-int	g_herestop;
+int 	g_herestop;
 
 ////////////////////////////////////////////////////////////////
 //////////    FUNCTION    //////////////////////////////////////
@@ -240,7 +240,8 @@ char		**ft_split_mod(char const *s, char c);
 char		*ft_strjoin_mini(char const *s1, char const *s2);
 
 // PIPES
-void		choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i);
+void		choose_process(t_env_token *e_t,
+				int *pipeline, int *pipetmp, int i);
 
 // REDIRECTION
 void		redirection(t_env_token *e_t);
@@ -252,10 +253,11 @@ char		*exec_cmd(char **cmds, char *enc_path);
 char		*prepare_commands(t_token *token, t_envlist *envp);
 
 // REPLACE EXIT STATUS
-int			replace_exit_status(char ** str, t_expan exp);
+int			replace_exit_status(char **str, t_expan exp);
 
 ///////////  BUILTINS  //////////
-void		choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int i);
+void		choose_process_bltn(t_env_token *env_token,
+				int *pipeline, int *pipetmp, int i);
 int			choose_builtin(char *str, t_env_token *env_token);
 int			ft_pwd(char **argv, t_envlist *env_list);
 int			ft_env(char **argv, t_envlist *env_list);

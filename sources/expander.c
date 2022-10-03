@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:09:44 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 17:26:33 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:22:31 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static	int	launch_expand(char **str, t_envlist *env_list, int *i)
 		return (1);
 	}
 	while (str[0][j] && (ft_isalnum(str[0][j]) || str[0][j] == '_'))
-		j++;;
+		j++;
 	exp.right_begin = j;
 	exp.cmd_index = i;
 	if (!expand(str, env_list, exp))

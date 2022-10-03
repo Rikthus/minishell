@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 03:19:25 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:24:47 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ int	cmd_part_len(int *i, char *cmd, int type)
 	else
 	{
 		while (cmd[len] && ((!ft_isspace(cmd[len]) && cmd[len] != '<'
-				&& cmd[len] != '>') || (state.sq == ON || state.dq == ON)))
+					&& cmd[len] != '>') || (state.sq == ON || state.dq == ON)))
 		{
 			if (cmd[len] == '\'' || cmd[len] == '\"')
 				change_quote_state(cmd[len], &state);
 			len++;
 		}
 	}
-	//dprintf(1, "part len: %d\n", len - *i);
 	return (len - *i);
 }
 

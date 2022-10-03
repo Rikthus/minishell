@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 13:12:45 by tulipe            #+#    #+#             */
-/*   Updated: 2022/09/30 13:41:59 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:18:52 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static	void	cpy_cmd_part(int *i, char *cmd, char **dup)
 		*i += 1;
 		j++;
 	}
-	while (cmd[*i] && !((cmd[*i] == '<' || cmd[*i] == '>' || ft_isspace(cmd[*i])) && state.sq == OFF && state.dq == OFF))
+	while (cmd[*i] && !((cmd[*i] == '<' || cmd[*i] == '>'
+				|| ft_isspace(cmd[*i]))
+			&& state.sq == OFF && state.dq == OFF))
 	{
 		if (cmd[*i] == '\'' || cmd[*i] == '\"')
 			change_quote_state(cmd[*i], &state);

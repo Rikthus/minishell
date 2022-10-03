@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 02:31:23 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:13:11 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	int	change_env_vars(char *new_pwd, t_envlist **env_list)
 	return (EXIT_SUCCESS);
 }
 
-static	char *ret_home_path(t_envlist *env_list)
+static	char	*ret_home_path(t_envlist *env_list)
 {
 	if (env_list->env_var)
 	{
@@ -93,7 +93,7 @@ static	char *ret_home_path(t_envlist *env_list)
 static	int	move_dir(char *path, t_envlist **env_list)
 {
 	char	*new_pwd;
-	
+
 	if (chdir(path) == 0)
 	{
 		new_pwd = getcwd(NULL, 0);
@@ -131,7 +131,7 @@ int	ft_cd(char **argv, t_envlist **env_list)
 		return (move_dir(home_path, env_list));
 	}
 	else if (i == 2)
-		return(move_dir(argv[1], env_list));
+		return (move_dir(argv[1], env_list));
 	else
 	{
 		ft_putstr_fd("Maxine ❤️: cd: too many arguments\n", 2);

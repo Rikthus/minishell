@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:07:18 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:20:37 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	choose_builtin(char *str, t_env_token *env_token)
 	return (ret);
 }
 
-static	void	inter_process_bltn(t_env_token *e_t, int *pipeline, int *pipetmp)
+static	void	inter_process_bltn(t_env_token *e_t,
+		int *pipeline, int *pipetmp)
 {
 	if (dup2(pipetmp[0], STDIN_FILENO) == -1)
 		exit (-1);
@@ -90,7 +91,8 @@ static	void	first_process_bltn(t_env_token *e_t, int *pipeline)
 	exit (0);
 }
 
-void	choose_process_bltn(t_env_token *env_token, int *pipeline, int *pipetmp, int i)
+void	choose_process_bltn(t_env_token *env_token,
+		int *pipeline, int *pipetmp, int i)
 {
 	if (i == 0)
 		first_process_bltn(env_token, pipeline);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 02:57:36 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 18:24:21 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	void	handle_heredoc(int signum)
 	ft_putstr_fd("\n", 1);
 }
 
-void	signal_mini(int	type)
+void	signal_mini(int type)
 {
 	if (type == BASIC)
 	{
