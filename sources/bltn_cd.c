@@ -6,31 +6,38 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 01:13:07 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 02:31:23 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// not working for creating good pwd
 static	int	update_env_list(char *new_pwd, char *old_pwd, t_envlist **env_list)
 {
 	char	**args;
+	char	*full_newpwd;
 	int		ret;
 
-	args = malloc(sizeof(char *) * 4);
-	if (!args)
+	full_newpwd = ft_strjoin("PWD=", new_pwd);
+	free(new_pwd);
+	if (!full_newpwd)
 	{
-		free(new_pwd);
 		free(old_pwd);
 		return (-1);
 	}
-	args[0] = new_pwd;
-	args[1] = new_pwd;
+	args = malloc(sizeof(char *) * 4);
+	if (!args)
+	{
+		free(full_newpwd);
+		free(old_pwd);
+		return (-1);
+	}
+	args[0] = full_newpwd;
+	args[1] = full_newpwd;
 	args[2] = old_pwd;
 	args[3] = NULL;
 	ret = ft_export(args, env_list);
-	free(new_pwd);
+	free(full_newpwd);
 	free(old_pwd);
 	free(args);
 	return (ret);
@@ -89,7 +96,7 @@ static	int	move_dir(char *path, t_envlist **env_list)
 	
 	if (chdir(path) == 0)
 	{
-		new_pwd = ft_strjoin("PWD=", path);
+		new_pwd = getcwd(NULL, 0);
 		if (!new_pwd || change_env_vars(new_pwd, env_list) == -1)
 			return (-1);
 	}

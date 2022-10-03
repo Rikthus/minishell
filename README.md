@@ -42,9 +42,9 @@
 - pb  **DONE** pb not replicable
 
 ## FINALISATION
-1. Finish 2 builtins
+1. Finish 1 builtins
 2. BUILTIN PIPES et check fd leaks
-3. HEREDOC signals ctrl-d new line to remove and segfault with multiple heredocs and signals
+3. (optionnel)HEREDOC signals ctrl-d new line to remove and (WARNING)segfault with multiple heredocs and signals
 4. Make error messages and good g_exit_status update
 5. Fix quotes with redir inside and multiple env var replacing
 6. Test Builtins
