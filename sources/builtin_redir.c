@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 19:25:46 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 01:07:49 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	choose_builtin(char *str, t_env_token *env_token)
 		ret = ft_cd(env_token->token->cmd, env_token->envp);
 	if (ft_strcmp(str, "pwd") == 0)
 		ret = ft_pwd(env_token->token->cmd, env_token->envp[0]);
-	// else if (ft_strcmp(str, "exit") == 0)
-	// 	ret = ft_exit();
+	else if (ft_strcmp(str, "exit") == 0)
+	 	ret = ft_exit(env_token->token->cmd);
 	else if (ft_strcmp(str, "env") == 0)
 		ret = ft_env(env_token->token->cmd, env_token->envp[0]);
 	else if (ft_strcmp(str, "export") == 0)
@@ -31,12 +31,12 @@ int	choose_builtin(char *str, t_env_token *env_token)
 		ret = ft_unset(env_token->token->cmd, env_token->envp);
 	else if (ft_strcmp(str, "echo") == 0)
 		ret = ft_echo(env_token->token->cmd);
-	if (ret == -1)
-		g_shell.exit_status = -1;
-	else if (ret == 1)
-		g_shell.exit_status = 1;
-	else
-		g_shell.exit_status = 0;
+	if (ret == EXIT_SUCCESS)
+		g_shell.exit_status = EXIT_SUCCESS;
+	else if (ret == EXIT_FAILURE)
+		g_shell.exit_status = EXIT_FAILURE;
+	else if (ret != -1)
+		g_shell.exit_status = ret;
 	return (ret);
 }
 

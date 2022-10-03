@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 19:06:38 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 01:05:24 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ int			ft_unset(char **argv, t_envlist **env_list);
 int			ft_echo(char **argv);
 int			ft_export(char **argv, t_envlist **env_list);
 int			ft_cd(char **argv, t_envlist **env_list);
+int			ft_exit(char **argv);
 
 ///////////  ERROR  //////////
 int			err_no_cmd(t_token *token, char *raw_line);

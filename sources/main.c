@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 23:13:12 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 00:25:24 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_env(env_list);
 	rl_clear_history();
-	return (0);
+	return (g_shell.exit_status);
 }
