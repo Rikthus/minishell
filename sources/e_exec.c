@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/03 19:23:26 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 21:26:17 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	exec(t_token *token, t_envlist **envp)
 			redirection(&e_t);
 			if (choose_builtin(e_t.token->cmd[0], &e_t) == -1)
 				return (-1);
+			if (dup2(e_t.old_stdout, STDOUT_FILENO) == -1)
+				return (perror_msg(0));
 		}
 		else
 		{
