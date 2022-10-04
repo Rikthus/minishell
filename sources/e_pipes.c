@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 02:15:14 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 02:37:40 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	void	inter_process(t_env_token *e_t,
 	redirection(e_t);
 	if (e_t->token->cmd[0] && execve(g_p, e_t->token->cmd, e_t->env) == -1)
 		perror("");
-	exit(0);
+	exit(255);
 }
 
 static	void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
@@ -39,7 +39,7 @@ static	void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 	if (e_t->token->cmd[0]
 		&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
 		perror("");
-	exit(0);
+	exit(255);
 }
 
 static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
@@ -62,7 +62,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 			&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
 			perror("");
 	}
-	exit(0);
+	exit(255);
 }
 
 void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
