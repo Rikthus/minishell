@@ -6,7 +6,7 @@
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 16:03:49 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:39:06 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ static	void	close_heredoc_pipes(t_token *token)
 				nb_heredoc++;
 			i++;
 		}
-		nb_heredoc--;
 		if (token->hd_pipe)
 		{
-			while (nb_heredoc != -1)
+			i = 0;
+			while (i < nb_heredoc)
 			{
-				close(token->hd_pipe[nb_heredoc][0]);
-				nb_heredoc--;
+				close(token->hd_pipe[i][0]);
+				i++;
 			}
 		}
 		token = token->next;
