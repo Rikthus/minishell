@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 19:46:27 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 20:53:26 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ int			exec(t_token *token, t_envlist **envp);
 void		close_remaining_fd(int i, int *pipeline,
 				int *pipetmp, t_token *token);
 void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
+void		execve_error(t_env_token *e_t);
 
 // FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);

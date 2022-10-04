@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 19:48:36 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 21:23:08 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ int	exec(t_token *token, t_envlist **envp)
 			return (0);
 		close_pipes_norm(pipeline, pipetmp, &i);
 		e_t.token = e_t.token->next;
+		if (!(e_t.token))
+		{
+			if (dup2(e_t.old_stdout, 1) == -1)
+				perror("");
+		}
 	}
 	close_remaining_fd(i, pipeline, pipetmp, token);
 	return (1);

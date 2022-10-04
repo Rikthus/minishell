@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 19:07:35 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 19:49:18 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 20:57:01 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ static	void	wait_exec(int i)
 			g_shell.exit_status = WEXITSTATUS(status);
 		i--;
 	}
+}
+
+void	execve_error(t_env_token *e_t)
+{
+	ft_putstr_fd("Maxine ❤️: ", 2);
+	ft_putstr_fd(e_t->token->cmd[0], 2);
+	perror(" ");
+	exit(127);
 }
 
 void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)

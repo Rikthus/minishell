@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 19:35:34 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 21:19:26 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	inter_process(t_env_token *e_t,
 	close(pipeline[0]);
 	redirection(e_t);
 	if (e_t->token->cmd[0] && execve(g_p, e_t->token->cmd, e_t->env) == -1)
-		perror("");
+		execve_error(e_t);
 	else
 		exit(0);
 	exit(255);
@@ -36,11 +36,9 @@ static	void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 		exit(1);
 	close(pipetmp[0]);
 	redirection(e_t);
-	if (dup2(e_t->old_stdout, 1) == -1)
-		return (perror(""));
 	if (e_t->token->cmd[0]
 		&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-		perror("");
+		execve_error(e_t);
 	else
 		exit(0);
 	exit(255);
@@ -53,9 +51,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 		redirection(e_t);
 		if (e_t->token->cmd[0]
 			&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-			perror("");
-		else
-			exit(0);
+			execve_error(e_t);
 	}
 	else
 	{
@@ -66,7 +62,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 		redirection(e_t);
 		if (e_t->token->cmd[0]
 			&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-			perror("");
+			execve_error(e_t);
 		else
 			exit(255);
 	}

@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 20:02:44 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 20:23:22 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	int	syntax_err(char *raw_line)
 {
-	ft_putstr_fd("Maxine ❤️ : syntax error\n", 2);
+	ft_putstr_fd("Maxine ❤️: syntax error\n", 2);
 	g_shell.exit_status = 258;
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }

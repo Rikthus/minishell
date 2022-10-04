@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:18:11 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 13:58:17 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 20:23:15 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_exit(char **argv)
 		i++;
 	if (argv[1] && is_valid_exit(argv[1]) == EXIT_FAILURE)
 	{
-		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd("Maxine ❤️: exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_value = 255;
@@ -50,7 +50,7 @@ int	ft_exit(char **argv)
 	else if (i > 2)
 	{
 		exit_value = 1;
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("Maxine ❤️: exit: too many arguments\n", 2);
 	}
 	else if (i == 2)
 		exit_value = (unsigned char) ft_atoi(argv[1]);
