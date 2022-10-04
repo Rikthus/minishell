@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 01:24:34 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 15:27:31 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,7 @@ int			ft_echo(char **argv);
 int			ft_export(char **argv, t_envlist **env_list);
 int			ft_cd(char **argv, t_envlist **env_list);
 int			ft_exit(char **argv);
+int			built_redirection(t_env_token *e_t);
 
 ///////////  ERROR  //////////
 int			err_no_cmd(t_token *token, char *raw_line);

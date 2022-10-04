@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:54:14 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:45:56 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 16:13:58 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,22 @@ static	void	handle_shell(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_shell.exit_status = 1;
 	}
 }
 
 static	void	handle_exec(int signum)
 {
 	if (signum == SIGINT)
+	{
+		g_shell.exit_status = 130;
 		ft_putstr_fd("\n", 1);
+	}
 	else
+	{
+		g_shell.exit_status = 131;
 		ft_putstr_fd("Quit: 3\n", 1);
+	}
 }
 
 static	void	handle_pstop(int signum)
@@ -41,6 +48,7 @@ static	void	handle_heredoc(int signum)
 {
 	(void)signum;
 	g_shell.herestop = 1;
+	g_shell.exit_status = 1;
 	close(0);
 	ft_putstr_fd("\n", 1);
 }
