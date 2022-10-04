@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:00 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 19:33:57 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 20:02:44 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ static	int	syntax_err(char *raw_line)
 	return (free_rd_line(raw_line, GOOD_EXIT));
 }
 
-static	int	controler(char *raw_line, t_envlist **env_list)
+static	int	parsing_ctrl(char *raw_line)
 {
-	t_base	*basic_token;
-	t_token	*token;
-
 	if (!raw_line)
 		return (free_rd_line(raw_line, EOF));
 	if (raw_line[0] == '\0')
@@ -33,13 +30,34 @@ static	int	controler(char *raw_line, t_envlist **env_list)
 		return (syntax_err(raw_line));
 	if (is_line_whitespace(raw_line) == EXIT_FAILURE)
 		return (free_rd_line(raw_line, GOOD_EXIT));
+	return (42);
+}
+
+static	int	token_ctrl(char *raw_line, t_token **token)
+{
+	t_base	*basic_token;
+
 	basic_token = tokenizer(raw_line);
 	if (!basic_token)
 		return (free_rd_line(raw_line, BAD_EXIT));
-	token = lexer(basic_token);
+	*token = lexer(basic_token);
 	free_basic_token(basic_token);
-	if (!token)
+	if (!*token)
 		return (free_rd_line(raw_line, BAD_EXIT));
+	return (42);
+}
+
+static	int	controler(char *raw_line, t_envlist **env_list)
+{
+	t_token	*token;
+	int		ret;
+
+	ret = parsing_ctrl(raw_line);
+	if (ret != 42)
+		return (ret);
+	ret = token_ctrl(raw_line, &token);
+	if (ret != 42)
+		return (ret);
 	if (!expander(&token, *env_list) || !heredoc_init(token))
 	{
 		free_token(token);
