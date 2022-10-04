@@ -73,7 +73,7 @@ all	:	make_libft $(NAME)
 $(NAME)	:	$(AR_LIBFT) $(OBJS)
 			$(CC) $(CFLAGS) $(RDFLAGS) $(RLFLAGS) $^ -o $@ -lreadline
 
-$(DIR_OBJS)/%.o	:	$(DIR_SRCS)/%.c $(INCS) Makefile | $(DIR_OBJS)
+$(DIR_OBJS)/%.o	:	$(DIR_SRCS)/%.c $(INCS) Makefile $(AR_LIBFT) | $(DIR_OBJS)
 					$(CC) $(CFLAGS) $(RDFLAGS) -I $(LST_INCS) -c $< -o $@
 
 $(AR_LIBFT)	:
