@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 13:54:53 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:35:06 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ static	void	first_process_bltn(t_env_token *e_t, int *pipeline)
 }
 
 void	choose_process_bltn(t_env_token *env_token,
-		int *pipeline, int *pipetmp, int i)
+		int *pipeline, int *pipetmp, int *i)
 {
-	if (i == 0)
+	if (*i == 0)
 		first_process_bltn(env_token, pipeline);
 	else if (env_token->token->next == NULL)
 		last_process_bltn(env_token, pipetmp);

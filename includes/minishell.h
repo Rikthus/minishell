@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 19:02:25 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 19:46:27 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,9 @@ char		**pipe_split(char *str);
 
 // EXEC
 int			exec(t_token *token, t_envlist **envp);
+void		close_remaining_fd(int i, int *pipeline,
+				int *pipetmp, t_token *token);
+void		close_pipes_norm(int *pipeline, int *pipetmp, int *i);
 
 // FIND_ABSOLUTE_PATH
 int			find_absolute_path(char **cmd);
@@ -253,7 +256,7 @@ char		*ft_strjoin_mini(char const *s1, char const *s2);
 
 // PIPES
 void		choose_process(t_env_token *e_t,
-				int *pipeline, int *pipetmp, int i);
+				int *pipeline, int *pipetmp, int *i);
 
 // REDIRECTION
 void		redirection(t_env_token *e_t);
@@ -269,7 +272,7 @@ int			replace_exit_status(char **str, t_expan exp);
 
 ///////////  BUILTINS  //////////
 void		choose_process_bltn(t_env_token *env_token,
-				int *pipeline, int *pipetmp, int i);
+				int *pipeline, int *pipetmp, int *i);
 int			choose_builtin(char *str, t_env_token *env_token);
 int			ft_pwd(char **argv, t_envlist *env_list);
 int			ft_env(char **argv, t_envlist *env_list);

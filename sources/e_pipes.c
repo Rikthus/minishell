@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 16:39:57 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:35:34 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 	exit(0);
 }
 
-void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
+void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int *i)
 {
 	t_envlist	*env_cpy;
 	char		*good_path;
@@ -92,7 +92,7 @@ void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
 	}
 	else
 		good_path = NULL;
-	if (i == 0)
+	if (*i == 0)
 		first_process(e_t, pipeline, good_path);
 	else if (e_t->token->next == NULL)
 		last_process(e_t, pipetmp, good_path);

@@ -39,6 +39,7 @@ LST_SRCS	:=	main.c				\
 				heredoc_init.c		\
 				heredoc_utils.c		\
 				e_exec.c			\
+				e_exec_dlc.c		\
 				e_find_absolute_path.c	\
 				e_ft_split_mod.c	\
 				e_ft_strjoin.c		\
