@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 17:11:26 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:18:01 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,7 @@ static	char	**var_to_unset(char *full_var)
 		free(target);
 		return (NULL);
 	}
-	big[0] = target;
-	big[1] = target;
-	big[2] = NULL;
+	init_big(&big, target);
 	return (big);
 }
 
@@ -134,10 +132,7 @@ int	ft_export(char **argv, t_envlist **env_list)
 
 	i = 1;
 	if (argv[1] && argv[1][0] == '-')
-	{
-		ft_putstr_fd("export: no options handled\n", 2);
-		return (EXIT_FAILURE);
-	}
+		return (export_no_option());
 	else if (!argv[1])
 		return (print_export(*env_list));
 	while (argv[i])

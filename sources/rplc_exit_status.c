@@ -6,7 +6,7 @@
 /*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:25:10 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:53:59 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 18:29:46 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,27 @@ static	int	status_len(void)
 	return (len);
 }
 
+static	void	cpy_exit(char **str_exit, int tmp_status, int i)
+{
+	str_exit[0][i] = '\0';
+	if (tmp_status == 0)
+		str_exit[0][0] = '0';
+	if (tmp_status < 0)
+	{
+		tmp_status *= -1;
+		str_exit[0][0] = '-';
+	}
+	if (tmp_status > 0)
+	{
+		while (tmp_status != 0)
+		{
+			i--;
+			str_exit[0][i] = tmp_status % 10 + 48;
+			tmp_status /= 10;
+		}
+	}
+}
+
 static	char	*fill_str_exit(void)
 {
 	int		tmp_status;
@@ -42,23 +63,7 @@ static	char	*fill_str_exit(void)
 	str_exit = malloc(sizeof(char) * (i + 1));
 	if (!str_exit)
 		return (NULL);
-	str_exit[i] = '\0';
-	if (tmp_status == 0)
-		str_exit[0] = '0';
-	if (tmp_status < 0)
-	{
-		tmp_status *= -1;
-		str_exit[0] = '-';
-	}
-	if (tmp_status > 0)
-	{
-		while (tmp_status != 0)
-		{
-			i--;
-			str_exit[i] = tmp_status % 10 + 48;
-			tmp_status /= 10;
-		}
-	}
+	cpy_exit(&str_exit, tmp_status, i);
 	return (str_exit);
 }
 

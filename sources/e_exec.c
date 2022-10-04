@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 16:39:06 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:54:52 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ static	void	close_heredoc_pipes(t_token *token)
 	int	i;
 	int	nb_heredoc;
 
-	nb_heredoc = 0;
 	while (token)
 	{
 		i = 0;
+		nb_heredoc = 0;
 		while (token->redir[i] != NO_REDIR)
 		{
 			if (token->redir[i] == HEREDOC)
 				nb_heredoc++;
 			i++;
 		}
-		if (token->hd_pipe)
+		if (nb_heredoc > 0)
 		{
 			i = 0;
 			while (i < nb_heredoc)

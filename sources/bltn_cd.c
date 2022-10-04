@@ -3,45 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 17:05:19 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:04:18 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static	int	update_env_list(char *new_pwd, char *old_pwd, t_envlist **env_list)
-{
-	char	**args;
-	char	*full_newpwd;
-	int		ret;
-
-	full_newpwd = ft_strjoin("PWD=", new_pwd);
-	free(new_pwd);
-	if (!full_newpwd)
-	{
-		free(old_pwd);
-		return (-1);
-	}
-	args = malloc(sizeof(char *) * 4);
-	if (!args)
-	{
-		free(full_newpwd);
-		free(old_pwd);
-		return (-1);
-	}
-	args[0] = full_newpwd;
-	args[1] = full_newpwd;
-	args[2] = old_pwd;
-	args[3] = NULL;
-	ret = ft_export(args, env_list);
-	free(full_newpwd);
-	free(old_pwd);
-	free(args);
-	return (ret);
-}
 
 static	int	change_env_vars(char *new_pwd, t_envlist **env_list)
 {

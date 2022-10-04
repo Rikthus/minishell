@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 01:21:05 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 18:24:11 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ static	int	check_pipe(char *redir)
 {
 	int	i;
 
-	i = 1;
-	if (redir[i] == '|')
-		return (0);
-	while (redir[i] && ft_isspace(redir[i]))
-		i++;
-	if (!redir[i] || redir[i] == '|')
-		return (0);
+	if (redir[0] == '|')
+	{
+		i = 1;
+		if (redir[i] == '|')
+			return (0);
+		while (redir[i] && ft_isspace(redir[i]))
+			i++;
+		if (!redir[i] || redir[i] == '|')
+			return (0);
+	}
 	return (1);
 }
 
@@ -43,11 +46,8 @@ static	int	is_redir(char *redir)
 
 	redir_char = redir[0];
 	i = 1;
-	if (redir_char == '|')
-	{
-		if (!check_pipe(redir))
-			return (0);
-	}
+	if (!check_pipe(redir))
+		return (0);
 	else if (redir_char == '<' || redir_char == '>')
 	{
 		if ((redir_char == '<' && redir[i] == '>')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_builtin_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 15:27:17 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:21:28 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static	int	redir_infile(t_env_token *e_t, int i)
 		g_shell.exit_status = 1;
 		return (-1);
 	}
-	// if (dup2(fd, STDIN_FILENO) < 0)
-	// 	return (perror(""));
 	close(fd);
 	return (0);
 }

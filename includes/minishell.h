@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 15:27:31 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:02:25 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ int			trim_quotes(char **str);
 
 // HEREDOC_INIT
 int			heredoc_init(t_token *token);
+int			count_heredocs(t_token *token);
+int			read_heredoc(int fd, char *eof);
+int			forked_heredoc(t_token **token, char *eof, int pipe_i, int *fd);
 
 /////////////////////////////////////
 /////////     SIGNALS     ///////////
@@ -273,7 +276,10 @@ int			ft_env(char **argv, t_envlist *env_list);
 int			ft_unset(char **argv, t_envlist **env_list);
 int			ft_echo(char **argv);
 int			ft_export(char **argv, t_envlist **env_list);
+void		init_big(char ***big, char *target);
+int			export_no_option(void);
 int			ft_cd(char **argv, t_envlist **env_list);
+int			update_env_list(char *new_pwd, char *old_pwd, t_envlist **env_list);
 int			ft_exit(char **argv);
 int			built_redirection(t_env_token *e_t);
 

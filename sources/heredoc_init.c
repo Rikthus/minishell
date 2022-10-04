@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 13:57:50 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:03:24 by maxperei         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	int	malloc_heredocs(t_token *token)
 	return (1);
 }
 
-static	int	read_heredoc(int fd, char *eof)
+int	read_heredoc(int fd, char *eof)
 {
 	char	*line;
 
@@ -66,14 +66,7 @@ static	int	add_heredoc(t_token *token, int pipe_i, char *eof)
 	if (pid == -1)
 		return (perror_msg(0));
 	if (pid == 0)
-	{
-		signal_mini(HEREDOC);
-		if (!read_heredoc(token->hd_pipe[pipe_i][1], eof))
-			exit(EXIT_FAILURE);
-		close(fd[0]);
-		close(fd[1]);
-		exit(EXIT_SUCCESS);
-	}
+		exit(forked_heredoc(&token, eof, pipe_i, fd));
 	close(fd[1]);
 	wait(NULL);
 	signal_mini(BASIC);
@@ -86,9 +79,7 @@ int	heredoc_init(t_token *token)
 
 	while (token)
 	{
-		i = 0;
-		while (token->redir[i] != NO_REDIR)
-			i++;
+		i = count_heredocs(token);
 		if (i > 0)
 		{
 			if (!malloc_heredocs(token))

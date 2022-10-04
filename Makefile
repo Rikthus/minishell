@@ -6,12 +6,12 @@ CC	:= gcc
 CFLAGS	:=	-Wall -Wextra -Werror #$(CSAN)
 # RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #max_home
 # RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #max_home
-# RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
-# RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
+RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
+RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
 # RLFLAGS	:=	-L /usr/local/opt/readline/lib #cha_home
 # RDFLAGS	:=	-I /usr/local/opt/readline/include #cha_home
-RLFLAGS	:=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
-RDFLAGS	:=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
+# RLFLAGS	:=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
+# RDFLAGS	:=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
 
 DIR_SRCS	:=	sources
 DIR_INCS	:=	includes
@@ -37,6 +37,7 @@ LST_SRCS	:=	main.c				\
 				expander_dups.c		\
 				signals.c			\
 				heredoc_init.c		\
+				heredoc_utils.c		\
 				e_exec.c			\
 				e_find_absolute_path.c	\
 				e_ft_split_mod.c	\
@@ -47,10 +48,12 @@ LST_SRCS	:=	main.c				\
 				error_msg.c			\
 				rplc_exit_status.c	\
 				bltn_cd.c			\
+				bltn_cd_utils.c		\
 				bltn_echo.c			\
 				bltn_env.c			\
 				bltn_exit.c			\
 				bltn_export.c		\
+				bltn_export_utils.c	\
 				bltn_pwd.c			\
 				bltn_unset.c		\
 				builtin_redir.c		\
