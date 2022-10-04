@@ -72,7 +72,7 @@ OBJS = $(SRCS:.c=.o)
 
 NAME = libft.a
 
-all : $(NAME)
+all : $(NAME) $(OBJS) $(INCS)
 
 bonus : all
 
