@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:36:26 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 00:33:21 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 16:39:06 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,22 @@ static	void	close_pipes_norm(int *pipeline, int *pipetmp, int *i)
 static	void	close_heredoc_pipes(t_token *token)
 {
 	int	i;
+	int	nb_heredoc;
 
+	nb_heredoc = 0;
 	while (token)
 	{
 		i = 0;
+		while (token->redir[i] != NO_REDIR)
+		{
+			if (token->redir[i] == HEREDOC)
+				nb_heredoc++;
+			i++;
+		}
 		if (token->hd_pipe)
 		{
-			while (token->hd_pipe[i])
+			i = 0;
+			while (i < nb_heredoc)
 			{
 				close(token->hd_pipe[i][0]);
 				i++;
@@ -95,13 +104,14 @@ int	exec(t_token *token, t_envlist **envp)
 	i = 0;
 	while (e_t.token)
 	{
-		if (i == 0 && !e_t.token->next && is_builtin(e_t.token->cmd[0]) != 0)
+		if (e_t.token->cmd[0] && i == 0 && !e_t.token->next && is_builtin(e_t.token->cmd[0]) != 0)
 		{
-			redirection(&e_t);
+			if (built_redirection(&e_t) == -1)
+				return (1);
 			if (choose_builtin(e_t.token->cmd[0], &e_t) == -1)
 			{
 				g_shell.exit_status = -1;
-				return (-1);
+				return (0);
 			}
 			if (dup2(e_t.old_stdout, STDOUT_FILENO) == -1)
 				return (perror_msg(0));

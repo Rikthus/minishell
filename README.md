@@ -19,6 +19,7 @@
 **ERRORS**
 - if removing path and try to execute commands **DONE**
 - message when trying to use an unknown command **DONE**
+- heredoc on cmd 3 or more if piped cmds
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)

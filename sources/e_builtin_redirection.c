@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_redirection.c                                    :+:      :+:    :+:   */
+/*   e_builtin_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:16:07 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 16:28:05 by cdutel-l         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:27:17 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void	redir_infile(t_env_token *e_t, int i)
+static	int	redir_infile(t_env_token *e_t, int i)
 {
 	int	fd;
 
@@ -22,11 +22,13 @@ static	void	redir_infile(t_env_token *e_t, int i)
 		ft_putstr_fd("Maxine ❤️: ", 2);
 		ft_putstr_fd(e_t->token->target[i], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		exit(EXIT_FAILURE);
+		g_shell.exit_status = 1;
+		return (-1);
 	}
-	if (dup2(fd, STDIN_FILENO) < 0)
-		return (perror(""));
+	// if (dup2(fd, STDIN_FILENO) < 0)
+	// 	return (perror(""));
 	close(fd);
+	return (0);
 }
 
 static	void	redir_append(t_env_token *e_t, int i)
@@ -53,21 +55,13 @@ static	void	redir_outfile(t_env_token *e_t, int i)
 	close(fd);
 }
 
-static	void	redir_heredoc(t_env_token *e_t, int *nb_heredoc)
-{
-	if (dup2(e_t->token->hd_pipe[*nb_heredoc][0], STDIN_FILENO) < 0)
-		return (perror(""));
-	close(e_t->token->hd_pipe[*nb_heredoc][0]);
-	*nb_heredoc += 1;
-}
-
-void	redirection(t_env_token *e_t)
+int	built_redirection(t_env_token *e_t)
 {
 	int	i;
-	int	nb_heredoc;
+	int	ret;
 
 	i = 0;
-	nb_heredoc = 0;
+	ret = 0;
 	while (e_t->token->redir[i] != NO_REDIR)
 	{
 		if (e_t->token->redir[i] == OUTFILE)
@@ -75,9 +69,8 @@ void	redirection(t_env_token *e_t)
 		else if (e_t->token->redir[i] == APPEND)
 			redir_append(e_t, i);
 		else if (e_t->token->redir[i] == INFILE)
-			redir_infile(e_t, i);
-		else if (e_t->token->redir[i] == HEREDOC)
-			redir_heredoc(e_t, &nb_heredoc);
+			ret = redir_infile(e_t, i);
 		i++;
 	}
+	return (ret);
 }
