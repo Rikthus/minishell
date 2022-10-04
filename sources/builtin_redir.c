@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 03:02:46 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 02:38:46 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 14:03:10 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	choose_builtin(char *str, t_env_token *env_token)
 	if (ft_strcmp(str, "pwd") == 0)
 		ret = ft_pwd(env_token->token->cmd, env_token->envp[0]);
 	else if (ft_strcmp(str, "exit") == 0)
-	 	ret = ft_exit(env_token->token->cmd);
+		ret = ft_exit(env_token->token->cmd);
 	else if (ft_strcmp(str, "env") == 0)
 		ret = ft_env(env_token->token->cmd, env_token->envp[0]);
 	else if (ft_strcmp(str, "export") == 0)
