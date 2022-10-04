@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:52:07 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:23:45 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 01:21:05 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	pre_parsing(char *raw_line)
 	i = 0;
 	while (raw_line[i] && ft_isspace(raw_line[i]))
 		i++;
-	if (raw_line[i] == '|' || raw_line[i] == '\0')
+	if (raw_line[i] == '|')
 		return (0);
 	while (raw_line[i])
 	{

@@ -8,17 +8,17 @@
 **HISTORY**
 
 ## FINALISATION
-1. Finish 1 builtins
-2. Make error messages and good g_exit_status update
-4. Norm everything
-3. Test Builtins
-5. Crash Test Everything
-6. (optional) HEREDOC signals ctrl-d new line to remove
+1. Make error messages and good g_exit_status update **Almost**
+2. Norm everything
+3. Test Builtins **Almost**
+4. Crash Test Everything
+5. (optional) HEREDOC signals ctrl-d new line to remove
 
 **BUILTINS_ERRORS**
 
 **ERRORS**
-- if removing path and try to execute commands
+- if removing path and try to execute commands **DONE**
+- message when trying to use an unknown command **DONE**
 
 **TESTS**
 - while true; do leaks minishell; sleep 1.6; clear; done (test leaks during exec)

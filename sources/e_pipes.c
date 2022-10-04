@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:20:33 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/03 21:32:38 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 02:15:14 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	inter_process(t_env_token *e_t,
 	close(pipeline[0]);
 	redirection(e_t);
 	if (e_t->token->cmd[0] && execve(g_p, e_t->token->cmd, e_t->env) == -1)
-		perror("Could not execute execve middle process");
+		perror("");
 	exit(0);
 }
 
@@ -38,7 +38,7 @@ static	void	last_process(t_env_token *e_t, int *pipetmp, char *good_path)
 		return (perror(""));
 	if (e_t->token->cmd[0]
 		&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-		perror("Could not execute execve last process");
+		perror("");
 	exit(0);
 }
 
@@ -49,7 +49,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 		redirection(e_t);
 		if (e_t->token->cmd[0]
 			&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-			perror("Could not execute execve");
+			perror("");
 	}
 	else
 	{
@@ -60,7 +60,7 @@ static	void	first_process(t_env_token *e_t, int *pipeline, char *good_path)
 		redirection(e_t);
 		if (e_t->token->cmd[0]
 			&& execve(good_path, e_t->token->cmd, e_t->env) == -1)
-			perror("Could not execute execve first process");
+			perror("");
 	}
 	exit(0);
 }
@@ -76,10 +76,10 @@ void	choose_process(t_env_token *e_t, int *pipeline, int *pipetmp, int i)
 	{
 		good_path = prepare_commands(e_t->token, env_cpy);
 		if (!good_path)
-			return (perror(""));
+			exit(127);
 		env = custom_envp(env_cpy);
 		if (!env)
-			return (perror(""));
+			exit(-1);
 		e_t->env = env;
 	}
 	else

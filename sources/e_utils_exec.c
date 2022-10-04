@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/02 01:29:46 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 02:13:12 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*exec_cmd(char	**cmds, char *env_path)
 	int		i;
 
 	i = 0;
+	good_path = NULL;
 	tab_paths = ft_split_mod(env_path, ':');
 	while (tab_paths[i])
 	{
@@ -78,6 +79,12 @@ char	*exec_cmd(char	**cmds, char *env_path)
 		if (access(a_path, X_OK) == 0)
 			good_path = a_path;
 		i++;
+	}
+	if (!good_path)
+	{
+		ft_putstr_fd("Maxine ❤️: ", 2);
+		ft_putstr_fd(cmds[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 	}
 	return (good_path);
 }
@@ -92,7 +99,12 @@ char	*prepare_commands(t_token *token, t_envlist *envp)
 	tab_env = custom_envp(envp);
 	envp_path = env_path(tab_env);
 	if (!envp_path)
+	{
+		ft_putstr_fd("Maxine ❤️: ", 2);
+		ft_putstr_fd(token->cmd[0], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (NULL);
+	}
 	if (find_absolute_path(token->cmd) == -1)
 		good_path = token->cmd[0];
 	else if (find_absolute_path(token->cmd) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:57 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 19:14:12 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 01:29:43 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,15 @@ char	*custom_strdup(char *str, int start, int end)
 	return (dup);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	is_line_whitespace(char *str)
 {
 	int	i;
 
 	i = 0;
-	while ((s1[i] || s2[i]) && s1[i] == s2[i])
+	while (str[i] && ft_isspace(str[i]))
 		i++;
-	return (s1[i] - s2[i]);
+	if (str[i] == '\0')
+		return (EXIT_FAILURE);
+	else
+		return (EXIT_SUCCESS);
 }

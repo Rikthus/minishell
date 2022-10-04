@@ -6,7 +6,7 @@
 /*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:52:55 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/04 01:05:24 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 01:24:34 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,9 @@ int			cmd_part_len(int *i, char *cmd, int type);
 int			free_rd_line(char *line, int ret);
 int			change_quote_state(char quote, t_state *state);
 char		*custon_strdup(char *str, int start, int end);
+int			is_line_whitespace(char *str);
+
+// UTILS_LIB
 int			ft_strcmp(char *s1, char *s2);
 
 // EXPANDER_UTILS

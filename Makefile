@@ -22,6 +22,7 @@ DIR_LIBFT	:=	libft
 LST_SRCS	:=	main.c				\
 				make_env.c			\
 				utils.c				\
+				utils_lib.c			\
 				free_struct.c		\
 				free_memory.c		\
 				pipe_split.c		\
