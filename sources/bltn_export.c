@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:16:26 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/03 18:15:53 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 17:11:26 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	ft_export(char **argv, t_envlist **env_list)
 			ft_unset(target_var, env_list);
 			free(target_var[0]);
 			free(target_var);
-			if (!add_var_to_env(argv[i], env_list))
+			if (add_var_to_env(argv[i], env_list) == 1)
 				return (-1);
 		}
 		i++;
