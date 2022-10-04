@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_utils_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:51:25 by cdutel-l          #+#    #+#             */
-/*   Updated: 2022/10/04 20:44:03 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 01:14:59 by tulipe           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ char	*env_path(char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
-	return (envp[i]);
+	if (envp[i])
+		return (&envp[i][5]);
+	else
+		return (NULL);
 }
 
 int	find_size_env(t_envlist *env)
