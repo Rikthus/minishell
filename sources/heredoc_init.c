@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxperei <maxperei@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:48:36 by maxperei          #+#    #+#             */
-/*   Updated: 2022/10/03 19:09:51 by maxperei         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:57:50 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static	int	read_heredoc(int fd, char *eof)
 	while (1)
 	{
 		line = readline("> ");
-		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0) || g_shell.herestop == 1)
+		if ((line[0] != '\0' && ft_strcmp(line, eof) == 0)
+			|| g_shell.herestop == 1)
 		{
 			free(line);
 			break ;

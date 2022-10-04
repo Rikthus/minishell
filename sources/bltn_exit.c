@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltn_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tulipe <tulipe@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cdutel-l <cdutel-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:18:11 by tulipe            #+#    #+#             */
-/*   Updated: 2022/10/04 01:10:02 by tulipe           ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:58:17 by cdutel-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	int	is_valid_exit(char *exit)
 int	ft_exit(char **argv)
 {
 	int					i;
-	unsigned	char	exit_value;
+	unsigned char		exit_value;
 
 	i = 0;
 	while (argv[i])
