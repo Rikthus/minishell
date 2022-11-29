@@ -1,101 +1,110 @@
-NAME	:= minishell
+##########################
+#    BASIC VARIABLES     #
+##########################
 
-CSAN	:=	-fsanitize=address -g3
+CSAN		:=	-fsanitize=address -g3
 
-CC	:= gcc
-CFLAGS	:=	-Wall -Wextra -Werror #$(CSAN)
-RLFLAGS	:=	-L /opt/homebrew/opt/readline/lib #max_home
-RDFLAGS	:=	-I /opt/homebrew/opt/readline/include #max_home
-# RLFLAGS	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib #max_42
-# RDFLAGS	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
-# RLFLAGS	:=	-L /usr/local/opt/readline/lib #cha_home
-# RDFLAGS	:=	-I /usr/local/opt/readline/include #cha_home
-# RLFLAGS	:=	-L /Users/cdutel-l/.brew/opt/readline/lib #cha_42
-# RDFLAGS	:=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
+NAME		:=	minishell
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Werror #$(CSAN)
 
-DIR_SRCS	:=	sources
-DIR_INCS	:=	includes
-DIR_OBJS	:=	.objs
+RLLIB	:=	-L /opt/homebrew/opt/readline/lib -l readline#max_home
+RLINC	:=	-I /opt/homebrew/opt/readline/include #max_home
+# RLLIB	:=	-L /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/lib -l readline #max_42
+# RLINC	:=	-I /Users/maxperei/Desktop/Logiciels/homebrew/opt/readline/include #max_42
+# RLLIB	:=	-L /usr/local/opt/readline/lib -l readline #cha_home
+# RLINC	:=	-I /usr/local/opt/readline/include #cha_home
+# RLLIB	:=	-L /Users/cdutel-l/.brew/opt/readline/lib -l readline #cha_42
+# RLINC	:=	-I /Users/cdutel-l/.brew/opt/readline/include #cha_42
 
-DIR_LIBFT	:=	libft
+INCFLAGS	=	$(RLINC) -I $(D_INCS)
+LIBFLAGS	=	$(RLLIB)
+AR_LIBFT	=	$(D_LIBFT)libft.a
 
-LST_SRCS	:=	main.c				\
-				make_env.c			\
-				utils.c				\
-				utils_lib.c			\
-				free_struct.c		\
-				free_memory.c		\
-				pipe_split.c		\
-				pre_parsing.c		\
-				tokenizer.c			\
-				lexer.c				\
-				break_cmd.c			\
-				fill_token.c		\
-				trim_quotes.c		\
-				expander.c			\
-				expander_utils.c	\
-				expander_dups.c		\
-				signals.c			\
-				heredoc_init.c		\
-				heredoc_utils.c		\
-				e_exec.c			\
-				e_exec_dlc.c		\
-				e_find_absolute_path.c	\
-				e_ft_split_mod.c	\
-				e_ft_strjoin.c		\
-				e_pipes.c			\
-				e_redirection.c		\
-				e_utils_exec.c		\
-				error_msg.c			\
-				rplc_exit_status.c	\
-				bltn_cd.c			\
-				bltn_cd_utils.c		\
-				bltn_echo.c			\
-				bltn_env.c			\
-				bltn_exit.c			\
-				bltn_export.c		\
-				bltn_export_utils.c	\
-				bltn_pwd.c			\
-				bltn_unset.c		\
-				builtin_redir.c		\
-				e_builtin_redirection.c
-LST_INCS	:=	minishell.h
-LST_OBJS	:=	$(LST_SRCS:.c=.o)
+RM			:=	rm -rf
 
-SRCS	:=	$(addprefix $(DIR_SRCS)/,$(LST_SRCS))
-INCS	:=	$(addprefix $(DIR_INCS)/,$(LST_INCS))
-OBJS	:=	$(addprefix $(DIR_OBJS)/,$(LST_OBJS))
+############################
+#        FILE TREE         #
+############################
 
-AR_LIBFT	:=	$(DIR_LIBFT)/libft.a
+# files
 
-all	:	make_libft $(NAME)
+LST_BUILTINS	:=	bltn_cd_utils.c		bltn_cd.c		bltn_echo.c			\
+					bltn_env.c			bltn_exit.c		bltn_export_utils.c	\
+					bltn_export.c		bltn_pwd.c		bltn_unset.c
 
-$(NAME)	:	$(AR_LIBFT) $(OBJS)
-			$(CC) $(CFLAGS) $(RDFLAGS) $(RLFLAGS) $^ -o $@ -lreadline
+LST_EXEC		:=	builtin_redir.c		e_builtin_redirection.c		e_exec_dlc.c		\
+					e_exec.c			e_find_absolute_path.c		e_ft_split_mod.c	\
+					e_ft_strjoin.c		e_pipes.c					e_redirection.c		\
+					e_utils_exec.c
 
-$(DIR_OBJS)/%.o	:	$(DIR_SRCS)/%.c $(INCS) Makefile $(AR_LIBFT) | $(DIR_OBJS)
-					$(CC) $(CFLAGS) $(RDFLAGS) -I $(LST_INCS) -c $< -o $@
+LST_PARSING		:=	break_cmd.c			error_msg.c			expander_dups.c		\
+					expander_utils.c	expander.c			fill_token.c		\
+					free_memory.c		free_struct.c		heredoc_init.c		\
+					heredoc_utils.c		lexer.c				make_env.c			\
+					pipe_split.c		pre_parsing.c		rplc_exit_status.c	\
+					signals.c			tokenizer.c			trim_quotes.c		\
+					utils_lib.c			utils.c
 
-$(AR_LIBFT)	:
-				$(MAKE) -C $(DIR_LIBFT)
+LST_MAIN		:=	main.c
 
-$(DIR_OBJS)	:
-				mkdir -p $(DIR_OBJS)
+LST_INCS		:=	minishell.h
+LST_OBJS		=	$(SRCS:.c=.o)
 
-make_libft	:
-				$(MAKE) -C $(DIR_LIBFT)
+# directories
+
+D_LIBFT	:=	libft/
+
+D_SRCS	:=	sources/
+D_INCS	:=	includes/
+D_OBJS	:=	.objs/
+
+D_BUILTINS	:=	builtins/
+D_EXEC		:=	exec/
+D_PARSING	:=	parsing/
+
+# full paths
+
+SRCS	=	$(addprefix $(D_SRCS)$(D_BUILTINS),$(LST_BUILTINS))	\
+			$(addprefix $(D_SRCS)$(D_EXEC),$(LST_EXEC))			\
+			$(addprefix $(D_SRCS)$(D_PARSING),$(LST_PARSING))	\
+			$(addprefix $(D_SRCS),$(LST_MAIN))
+INCS	=	$(addprefix $(D_INCS),$(LST_INCS))
+OBJS	=	$(subst $(D_SRCS),$(D_OBJS),$(LST_OBJS))
+
+##########################
+#         RULES          #
+##########################
+
+all	:	makelibft $(NAME)
+
+$(NAME)	:	$(OBJS) $(AR_LIBFT) $(INCS) Makefile
+			$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $(AR_LIBFT) $(OBJS) -o $@
+
+$(D_OBJS)%.o	:	$(D_SRCS)%.c $(INCS) $(AR_LIBFT) Makefile | $(D_OBJS)
+					$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+
+$(D_OBJS)		:
+					mkdir -p $(D_OBJS)	\
+					$(D_OBJS)$(D_BUILTINS)	$(D_OBJS)$(D_EXEC)	$(D_OBJS)$(D_PARSING)
+
+$(AR_LIBFT)		:
+					$(MAKE) -C $(D_LIBFT)
+
+makelibft		:
+					$(MAKE) -C $(D_LIBFT)
 
 clean	:
-			rm -rf $(DIR_OBJS)
-			$(MAKE) clean -C $(DIR_LIBFT)
+			$(RM) $(OBJS)
+			$(RM) $(D_OBJS)
 
 fclean	:
 			$(MAKE) clean
-			rm -rf $(NAME)
-			$(MAKE) fclean -C $(DIR_LIBFT)
+			$(RM) $(NAME)
+			$(MAKE) fclean -C $(D_LIBFT)
 
 re	:
 		$(MAKE) fclean
 		$(MAKE) all
 
-.PHONY	:	all make_libft clean fclean re
+.PHONY	:	all makelibft clean fclean re
